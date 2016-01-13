@@ -1,11 +1,20 @@
 <ion-view view-title="Todo">
-    <ion-content>
-        <button class="button button-icon" ng-click="newTask()">
+    <ion-nav-buttons side="secondary">
+        <button class="button button button-icon" ng-click="newTask()">
             <i class="icon ion-compose"></i>
         </button>
-        <ion-list show-delete="true" show-reorder="true">
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list delegate-handle="task-list">
             <ion-item ng-repeat="task in tasks">
-                {{task.title}}
+                <h2>{{task.name}}</h2>
+                <p>{{task.hoursWorkedOn}}</p>
+                <ion-option-button class="button-info" ng-click="edit(task)">
+                    Edit
+                </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="delete($index, task)">
+                    Delete
+                </ion-option-button>
             </ion-item>
         </ion-list>
     </ion-content>
