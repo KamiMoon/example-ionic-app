@@ -1,5 +1,13 @@
-angular.module('starter').controller('TodoCtrl', function($scope, $ionicModal) {
+angular.module('starter')
 
+.controller('TodoCtrl', function($scope, $ionicModal, PropertyService) {
+
+    PropertyService.query().$promise.then(function(properties) {
+        $scope.properties = properties;
+
+    });
+
+    // No need for testing data anymore
     $scope.tasks = [];
 
     // Create and load the Modal
