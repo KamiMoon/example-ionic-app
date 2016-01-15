@@ -7,6 +7,10 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngResource'])
 
+.constant('CONSTANTS', {
+    'REST_API_URL': 'http://192.168.1.3:9000/api'
+})
+
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

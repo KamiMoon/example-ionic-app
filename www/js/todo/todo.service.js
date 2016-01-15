@@ -1,6 +1,6 @@
 angular.module('starter')
-    .factory('PropertyService', function($resource) {
-        return $resource('/api/properties/:id/:controller', {
+    .factory('PropertyService', function($resource, CONSTANTS) {
+        return $resource(CONSTANTS.REST_API_URL + '/properties/:id/:controller', {
             id: '@_id'
         }, {
             update: {
