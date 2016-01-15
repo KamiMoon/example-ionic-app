@@ -16,6 +16,15 @@ angular.module('starter')
 
     var listView = $ionicListDelegate.$getByHandle('task-list');
 
+    $scope.doRefresh = function() {
+        Task.query().$promise.then(function(tasks) {
+            $scope.tasks = tasks;
+        }).finally(function() {
+            // Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
+
     // Called when the form is submitted
     $scope.saveTask = function() {
 

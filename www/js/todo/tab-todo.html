@@ -5,6 +5,8 @@
         </button>
     </ion-nav-buttons>
     <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+        </ion-refresher>
         <ion-list delegate-handle="task-list">
             <ion-item ng-repeat="task in tasks">
                 <h2>{{task.name}}</h2>
