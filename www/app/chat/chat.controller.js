@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('preserveusMobile')
     .controller('ChatsCtrl', function($scope, Chats) {
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -18,8 +18,13 @@ angular.module('starter')
     $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, User) {
     $scope.settings = {
         enableFriends: true
     };
+
+    User.profile('56524e5f5435d775906b7cb5');
+
+
+
 });

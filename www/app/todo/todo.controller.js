@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('preserveusMobile')
 
 .controller('TodoCtrl', function($scope, $ionicModal, $ionicListDelegate, Task) {
     // No need for testing data anymore
@@ -7,7 +7,7 @@ angular.module('starter')
     $scope.modalMode = 'Add';
 
     // Create and load the Modal
-    $ionicModal.fromTemplateUrl('js/todo/new-task.html', function(modal) {
+    $ionicModal.fromTemplateUrl('app/todo/new-task.html', function(modal) {
         $scope.taskModal = modal;
     }, {
         scope: $scope,

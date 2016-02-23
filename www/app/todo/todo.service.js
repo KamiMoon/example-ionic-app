@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('preserveusMobile')
     .factory('PropertyService', function($resource, CONSTANTS) {
         return $resource(CONSTANTS.REST_API_URL + '/properties/:id/:controller', {
             id: '@_id'

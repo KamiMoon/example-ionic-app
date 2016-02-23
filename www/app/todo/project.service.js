@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('preserveusMobile')
     /**
      * The Projects factory handles saving and loading projects
      * from local storage, and also lets us save and load the

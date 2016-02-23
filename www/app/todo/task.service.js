@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter')
+angular.module('preserveusMobile')
     .factory('Task', function($resource, CONSTANTS) {
         return $resource(CONSTANTS.REST_API_URL + '/tasks/:id', {
             id: '@_id'

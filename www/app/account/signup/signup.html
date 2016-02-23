@@ -1,0 +1,52 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal" name="form" ng-submit="register(form)" novalidate>
+                <fieldset>
+                    <legend>Register</legend>
+                    <b-input type="email" model="user.email" required="true"></b-input>
+                    <b-input type="password" model="user.password" required="true"></b-input>
+                    <b-input type="password" label="Confirm Password" model="user.confirmPassword" required="true"></b-input>
+                    <div class="form-group required">
+                        <label for="UserConfirmPassword" class="col-lg-2 control-label">
+                            Agree to <a href="/terms" target="_blank">Terms and Conditions</a>
+                        </label>
+                        <div class="col-lg-10" ng-class="{ 'has-success': form.terms.$valid && submitted, 
+                                'has-error': (form.terms.$invalid && submitted) || errors.terms }">
+                            <input type="checkbox" required="true" ng-model="terms" name="terms" class="form-control" style="width: 32px" value="1">
+                            <p class="help-block" ng-show="form.terms.$error.required && submitted">
+                                Please accept the terms and conditions
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"></label>
+                        <div class="col-lg-10">
+                            <div vc-recaptcha key="'6Le_ghATAAAAAMM48AswiVMZleNQhJ27w8deJD7j'"></div>
+                        </div>
+                    </div>
+                </fieldset>
+                <br>
+                <div align="center">
+                    <button class="btn btn-lg btn-success" type="submit">
+                        Register
+                    </button>
+                    <a style="margin-left: 15px" class="btn btn-lg btn-info" href="/login">Login</a>
+                </div>
+                <br>
+                <hr>
+                <div align="center">
+                    <h5>OR</h5>
+                </div>
+                <div align="center">
+                    <a class="btn btn-facebook btn-lg" href="" ng-click="loginOauth('facebook')">
+                        <i class="fa fa-facebook"></i> Register with Facebook
+                    </a>
+                </div>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+Login
+	Authentication 
+	Authorization
+
+Profile
+	Links
+
+Invest
+
+
+Rent
+
+Search Properties
+

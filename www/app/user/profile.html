@@ -1,0 +1,186 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Basic Info</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="text-center">
+                        <b-img public-id="{{user.photo}}" transformation="w_100,h_100,c_thumb,g_face" alt="Profile Picture" class="img-thumbnail"></b-img>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4">
+                            <label>Name:</label>
+                        </div>
+                        <div class="col-xs-8 col-md-8" ng-bind="user.name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4">
+                            <label>Email:</label>
+                        </div>
+                        <div class="col-xs-8 col-md-8">
+                            <a href="mailto:{{user.email}}" ng-bind="user.email">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4">
+                            <label>Address:</label>
+                        </div>
+                        <div class="col-xs-8 col-md-8" style="vertical-align: top;">
+                            {{::user.address}}
+                            <br /> {{::user.city}} <span ng-if="user.state">,</span> {{::user.state}} {{::user.zip}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4">
+                            <label>Phone:</label>
+                        </div>
+                        <div class="col-xs-8 col-md-8" ng-bind="user.phone | tel">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4">
+                            <label>Joined:</label>
+                        </div>
+                        <div class="col-xs-8 col-md-8" ng-bind="user.createdAt | date:'MM/dd/yyyy'">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4">
+                            <a href="/user/edit/{{::user._id}}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="col-xs-8 col-md-8">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4">
+                            <a href="/settings" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pencil"></span>Change Password</a>
+                        </div>
+                        <div class="col-xs-8 col-md-8">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" ng-if="Auth.isAdmin() && Auth.isMine(user._id)">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i>Actions</h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li><a href="/user">Administer Users</a></li>
+                        <li><a href="/propertyTotalReport">All Property Income</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="user.receipts && user.receipts.length > 0">
+        <div class="col-md-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-stats"></i> All  Investments</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- Registartions for events table -->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Description</th>
+                                    <th>Confirmation</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="receipt in user.receipts">
+                                    <td>
+                                        {{::receipt.createdAt | date:"M/d/yy h:mm a"}}
+                                    </td>
+                                    <td>
+                                        {{receipt.amount | currency:"$"}}
+                                    </td>
+                                    <td>
+                                        <a href="/property/{{receipt.model_id}}">{{::receipt.description}}</a>
+                                    </td>
+                                    <td>
+                                        {{::receipt.confirmation}}
+                                    </td>
+                                    <td>
+                                        <a href="/propertyInvestment/view/{{receipt.model_id}}" class="btn btn-default btn-lg">Invest Again</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>Total</td>
+                                    <td colspan="4">{{::user.receiptsTotal[0].total | currency:"$"}}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="user.rentalPayments && user.rentalPayments.length > 0">
+        <div class="col-md-12">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-calendar"></i> All  Rental Payments</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- Registartions for events table -->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Description</th>
+                                    <th>Confirmation</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="rentalPayment in user.rentalPayments">
+                                    <td>
+                                        {{::rentalPayment.createdAt | date:"M/d/yy h:mm a"}}
+                                    </td>
+                                    <td>
+                                        {{rentalPayment.amount | currency:"$"}}
+                                    </td>
+                                    <td>
+                                        <a href="/property/{{rentalPayment.model_id}}">{{::rentalPayment.description}}</a>
+                                    </td>
+                                    <td>
+                                        {{::rentalPayment.confirmation}}
+                                    </td>
+                                    <td>
+                                        <a href="/propertyRent/{{rentalPayment.model_id}}" class="btn btn-default btn-lg">Pay Rent Again</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>Total</td>
+                                    <td colspan="4">{{::user.rentalPaymentsTotal[0].total| currency:"$"}}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
