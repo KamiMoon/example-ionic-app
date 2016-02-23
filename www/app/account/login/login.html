@@ -1,4 +1,4 @@
-<br>
+<!-- <br>
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
@@ -28,12 +28,13 @@
         </div>
     </div>
 </div>
+ -->
 <ion-view class="login-view auth-view" cache-view="false">
     <ion-content scroll="false">
         <div class="row">
             <div class="col col-center">
                 <div class="card login-container" content-tabs tabsdata='tabsdata'>
-                    <form name="login_form" class="" novalidate ng-cloak>
+                    <form name="form" ng-submit="login(form)" class="" novalidate ng-cloak>
                         <div class="list">
                             <label class="item item-input">
                                 <input type="email" placeholder="Email" name="user_email" ng-model="user.email" required>
