@@ -1,1 +1,32 @@
 /* Empty. Add your own CSS if you like */
+
+.has-error {
+    border-color: #a94442;
+    border-width: 3px
+}
+
+.has-error:focus {
+    border-color: #843534;
+}
+
+.error {
+    color: #a94442;
+}
+
+
+/* Ionic overrides */
+
+.card {
+    padding-top: 0px;
+}
+
+.card .item:first-child {
+    border-top: 1px solid #ddd;
+}
+
+.card .item:first-child,
+.list-inset .item:first-child,
+.padding > .list .item:first-child {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}

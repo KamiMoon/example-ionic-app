@@ -7,6 +7,8 @@ angular.module('preserveusMobile')
         $scope.login = function(form) {
             $scope.submitted = true;
 
+            console.log('login called');
+
             if (form.$valid) {
                 Auth.login({
                         email: $scope.user.email,
