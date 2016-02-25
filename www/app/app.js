@@ -9,6 +9,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource'])
 
 .constant('CONSTANTS', {
     'REST_API_URL': '/api',
+    //'REST_API_URL': 'http://192.168.1.3:9000/api',
     'LOCAL_TOKEN_KEY': 'preserveusMobile_token',
     'EVENTS': {
         'NOT_AUTHENTICATED': 'NOT_AUTHENTICATED',
@@ -83,7 +84,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource'])
 
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/dash');
+    $urlRouterProvider.otherwise('login');
 
 })
 

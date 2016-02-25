@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col col-center">
                 <div class="card login-container">
-                    <form name="form" ng-submit="login(form)" novalidate>
+                    <form name="form" ng-submit="login(form)" novalidate ng-cloak>
                         <div class="list">
                             <b-input type="email" model="user.email" required="true"></b-input>
                             <b-input type="password" model="user.password" required="true"></b-input>
@@ -47,9 +47,10 @@
                     </form>
                 </div>
                 <div class="alternative-actions">
-                    <a class="forgot-password button button-small button-clear button-light" ui-sref="auth.forgot-password">
+                    <!-- <a class="forgot-password button button-small button-clear button-light" ui-sref="auth.forgot-password">
             Forgot Password?
           </a>
+ -->
                     <a class="sign-up button button-small button-clear button-light" ui-sref="auth.signup">
             Sign Up
           </a>

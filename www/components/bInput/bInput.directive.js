@@ -327,11 +327,8 @@ angular.module('preserveusMobile')
                     });
                 }
 
-                console.log(element.parent());
-
-                //element.parent().append(getTemplate(attrs));
-
                 element.html(getTemplate(attrs));
+
                 $compile(element.contents())(scope);
             }
         };

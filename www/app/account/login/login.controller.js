@@ -7,15 +7,13 @@ angular.module('preserveusMobile')
         $scope.login = function(form) {
             $scope.submitted = true;
 
-            console.log('login called');
-
             if (form.$valid) {
                 Auth.login({
                         email: $scope.user.email,
                         password: $scope.user.password
                     })
                     .then(function() {
-                        ValidationService.success('Logged In');
+                        //ValidationService.success('Logged In');
                         // Logged in, redirect to home
                         Auth.getUser().$promise.then(function(user) {
                             $location.path('/profile/' + user._id);

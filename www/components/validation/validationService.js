@@ -31,19 +31,19 @@ angular.module('preserveusMobile')
         };
 
         this.info = function(text) {
-            displayBootsrapFeedback(text || 'Info:', 'info');
+            displayBootsrapFeedback(text || 'Info:', 'bar-calm');
         };
 
         this.warn = function(text) {
-            displayBootsrapFeedback(text || 'Warning:', 'warning');
+            displayBootsrapFeedback(text || 'Warning:', 'bar-energized');
         };
 
         this.error = function(text) {
-            displayBootsrapFeedback(text || 'Error!', 'danger');
+            displayBootsrapFeedback(text || 'Error!', 'bar-assertive');
         };
 
         this.success = function(text) {
-            displayBootsrapFeedback(text || 'Success!', 'success');
+            displayBootsrapFeedback(text || 'Success!', 'bar-balanced');
         };
 
     });
