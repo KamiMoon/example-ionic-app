@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .controller('LoginCtrl', function($scope, Auth, $location, $window, ValidationService) {
+    .controller('LoginCtrl', function($scope, Auth, $location, ValidationService) {
         $scope.user = {};
 
         $scope.login = function(form) {
@@ -26,7 +26,7 @@ angular.module('preserveusMobile')
             }
         };
 
-        $scope.loginOauth = function(provider) {
-            $window.location.href = '/auth/' + provider;
-        };
+        //$scope.loginOauth = function(provider) {
+        //    $window.location.href = '/auth/' + provider;
+        //};
     });

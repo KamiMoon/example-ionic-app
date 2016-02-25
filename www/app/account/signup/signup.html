@@ -1,4 +1,4 @@
-<br>
+<!-- <br>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -49,4 +49,35 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
+<ion-view cache-view="false">
+    <ion-content scroll="false">
+        <div class="row">
+            <div class="col col-center">
+                <div class="card">
+                    <form name="form" ng-submit="register(form)" novalidate ng-cloak>
+                        <div class="list">
+                            <b-input type="email" model="user.email" required="true"></b-input>
+                            <b-input type="password" model="user.password" required="true"></b-input>
+                            <b-input type="password" label="Confirm Password" model="user.confirmPassword" required="true"></b-input>
+                            <div class="item item-body bottom-content">
+                                <button type="submit" class="button button-positive button-block" ng-disabled="">
+                                    Log In
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="alternative-actions">
+                    <!-- <a class="forgot-password button button-small button-clear button-light" ui-sref="auth.forgot-password">
+            Forgot Password?
+          </a>
+ -->
+                    <a class="sign-up button button-small button-clear button-light" ui-sref="login">
+            Login
+          </a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

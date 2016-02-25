@@ -279,6 +279,7 @@ angular.module('preserveusMobile')
 
                 //default values
                 attrs.label = attrs.label || '';
+                attrs.placeholder = attrs.label;
                 attrs.type = attrs.type || 'text';
 
                 var nameLabel = '';

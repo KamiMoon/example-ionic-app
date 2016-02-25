@@ -23,6 +23,10 @@ angular.module('preserveusMobile')
             profile: {
                 method: 'GET',
                 url: 'api/users/:id/profile'
+            },
+            save: {
+                method: 'POST',
+                url: 'api/users/mobile'
             }
         });
     });
