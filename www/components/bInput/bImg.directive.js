@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .directive('bImg', function() {
+    .directive('bImg', function(CONSTANTS) {
         return {
             //transclude: true,
             scope: {
@@ -12,7 +12,7 @@ angular.module('preserveusMobile')
             template: '<img ng-src="{{url}}">',
             restrict: 'E',
             link: function postLink(scope, element, attrs) {
-                var url = 'https://res.cloudinary.com/ddovrks1z/image/upload/';
+                var url = CONSTANTS.CLOUDINARY_IMAGE_URL;
 
                 var oldValue = null;
 

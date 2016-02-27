@@ -2,13 +2,25 @@ Login
 	Authentication 
 	Authorization
 
-Profile
-	Links
 
-Invest
+-Header
 
 
-Rent
+Actions:
 
-Search Properties
 
+-Search Properties
+	-Properties List
+		-Properties Profile
+			-Etc
+
+-News
+	-Contact
+
+-Messages
+
+-Me
+	-Profile
+	-Settings
+	-My Investments
+	-My Rent

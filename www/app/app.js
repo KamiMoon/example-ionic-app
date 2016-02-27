@@ -14,12 +14,15 @@ angular.module('preserveusMobile', ['ionic', 'ngResource'])
     'EVENTS': {
         'NOT_AUTHENTICATED': 'NOT_AUTHENTICATED',
         'NOT_AUTHORIZED': 'NOT_AUTHORIZED',
-    }
+    },
+    'CLOUDINARY_IMAGE_URL': 'http://res.cloudinary.com/ddovrks1z/image/upload/',
+    'CLOUDINARY_UPLOAD_URL': 'https://api.cloudinary.com/v1_1/ddovrks1z/upload',
+    'CLOUDINARY_UPLOAD_PRESET': 'saogp2ap'
 })
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
-    $httpProvider.interceptors.push('authInterceptor');
+    //$httpProvider.interceptors.push('authInterceptor');
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -84,11 +87,15 @@ angular.module('preserveusMobile', ['ionic', 'ngResource'])
 
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('login');
+    //$urlRouterProvider.otherwise('/todo');
+    $urlRouterProvider.otherwise('/tab/dash');
 
 })
 
 .run(function($ionicPlatform, $rootScope, Auth, $timeout, $state, CONSTANTS) {
+    $rootScope.Auth = Auth;
+    $rootScope.CONSTANTS = CONSTANTS;
+
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -104,7 +111,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource'])
     });
 
     // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$stateChangeStart', function(event, next, toParams, fromState, fromParams) {
+    /*$rootScope.$on('$stateChangeStart', function(event, next, toParams, fromState, fromParams) {
         Auth.isLoggedInAsync(function(loggedIn) {
             if ((next.authenticate || next.roles) && !loggedIn) {
                 event.preventDefault();
@@ -119,7 +126,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource'])
                 });
             }
         });
-    });
+    });*/
 
     $rootScope.$on(CONSTANTS.EVENTS.NOT_AUTHENTICATED, function() {
         Auth.logout();
