@@ -1,72 +1,11 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .controller('PropertyCtrl', function($scope, PropertyService, uiGmapGoogleMapApi) {
-
-        $scope.loaded = false;
-
-        var buildMap = function() {
-            if ($scope.properties.length) {
-
-                var firstLocation = $scope.properties[0].geoLocation;
-
-                $scope.map = {
-                    center: {
-                        latitude: firstLocation.lat,
-                        longitude: firstLocation.lng
-                    },
-                    zoom: 14
-                };
-
-                $scope.mapMarkers = $scope.properties.map(function(property) {
-
-                    var photo = '';
-
-                    if (property.photo) {
-                        photo = 'https://res.cloudinary.com/ddovrks1z/image/upload/w_100,h_100,c_fill/' + property.photo + '.jpg';
-                    }
-
-                    return {
-                        latitude: property.geoLocation.lat,
-                        longitude: property.geoLocation.lng,
-                        id: property._id,
-                        title: property.name,
-                        show: false,
-                        address: property.fullAddress,
-                        description: property.description,
-                        photo: photo
-                    };
-                });
-
-                $scope.markerClick = function(marker, eventName, model) {
-                    model.show = !model.show;
-                };
-
-                $scope.zoomToLocation = function(property) {
-                    $scope.map = {
-                        center: {
-                            latitude: property.geoLocation.lat,
-                            longitude: property.geoLocation.lng
-                        },
-                        zoom: 14
-                    };
-
-                    $('#mapTop')[0].scrollIntoView();
-                };
-
-                $scope.loaded = true;
-
-            }
-        };
+    .controller('PropertyCtrl', function($scope, PropertyService) {
 
         PropertyService.query().$promise.then(function(properties) {
             $scope.properties = properties;
-
-            uiGmapGoogleMapApi.then(function(maps) {
-                buildMap();
-            });
         });
-
 
     }).controller('PropertyAddEditCtrl', function($scope, $stateParams, $location, PropertyService, ValidationService) {
 
@@ -146,7 +85,7 @@ angular.module('preserveusMobile')
 
         };
 
-    }).controller('PropertyViewCtrl', function($scope, $stateParams, SEOService, $location, Auth, PropertyService, ValidationService, ControllerUtil) {
+    }).controller('PropertyViewCtrl', function($scope, $stateParams, $location, Auth, PropertyService, ValidationService, ControllerUtil) {
 
         var id = $stateParams.id;
 
@@ -156,12 +95,6 @@ angular.module('preserveusMobile')
             $scope.property = property;
             //photoRows
             $scope.property.photoRows = _.chunk($scope.property.photos, 4);
-
-            SEOService.setSEO({
-                title: property.name,
-                description: property.fullAddress,
-                image: property.photo
-            });
         });
 
         $scope.delete = function() {

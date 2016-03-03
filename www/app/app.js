@@ -5,7 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'preserveusMobile.services' is found in services.js
 // 'preserveusMobile.controllers' is found in controllers.js
-angular.module('preserveusMobile', ['ionic', 'ngResource'])
+angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
+        'ngStorage', 'chart.js'
+    ]) //, 'uiGmapgoogle-maps'])
 
 .constant('CONSTANTS', {
     'REST_API_URL': '/api',
@@ -17,74 +19,83 @@ angular.module('preserveusMobile', ['ionic', 'ngResource'])
     },
     'CLOUDINARY_IMAGE_URL': 'http://res.cloudinary.com/ddovrks1z/image/upload/',
     'CLOUDINARY_UPLOAD_URL': 'https://api.cloudinary.com/v1_1/ddovrks1z/upload',
-    'CLOUDINARY_UPLOAD_PRESET': 'saogp2ap'
+    'CLOUDINARY_UPLOAD_PRESET': 'saogp2ap' //,
+        //'GOOGLEMAPS_KEY': 'AIzaSyAH097-AkYDvIY7AAU42AlvFbxmUs69CRM'
 })
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) { //uiGmapGoogleMapApiProvider, CONSTANTS) {
 
     //$httpProvider.interceptors.push('authInterceptor');
+
+    //uiGmapGoogleMapApiProvider.configure({
+    //    key: CONSTANTS.GOOGLEMAPS_KEY,
+    //v: '3.20', //defaults to latest 3.X anyhow
+    //libraries: 'weather,geometry,visualization'
+    //});
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
-    $stateProvider
 
     // setup an abstract state for the tabs directive
+
+    $stateProvider
         .state('tab', {
-        url: '/tab',
-        abstract: true,
-        templateUrl: 'components/tabs.html'
-    })
-
-    // Each tab has its own nav history stack:
-
-    .state('tab.dash', {
-        url: '/dash',
-        views: {
-            'tab-dash': {
-                templateUrl: 'app/dash/tab-dash.html'
-            }
-        }
-    })
-
-    .state('tab.chats', {
-            url: '/chats',
-            views: {
-                'tab-chats': {
-                    templateUrl: 'app/chat/tab-chats.html',
-                    controller: 'ChatsCtrl'
-                }
-            }
-        })
-        .state('tab.chat-detail', {
-            url: '/chats/:chatId',
-            views: {
-                'tab-chats': {
-                    templateUrl: 'app/chat/chat-detail.html',
-                    controller: 'ChatDetailCtrl'
-                }
-            }
-        })
-        .state('tab.account', {
-            url: '/account',
-            views: {
-                'tab-account': {
-                    templateUrl: 'app/account/tab-account.html',
-                    controller: 'AccountCtrl'
-                }
-            }
-        })
-        .state('tab.todo', {
-            url: '/todo',
-            views: {
-                'tab-todo': {
-                    templateUrl: 'app/todo/tab-todo.html',
-                    controller: 'TodoCtrl'
-                }
-            }
+            url: '/tab',
+            abstract: true,
+            templateUrl: 'components/navbar/tabs.html'
         });
 
+    // Each tab has its own nav history stack:
+    /*
+        .state('tab.property', {
+            url: '/property',
+            views: {
+                'tab-property': {
+                    controller: 'PropertyCtrl',
+                    templateUrl: 'app/property/propertyList.html'
+                }
+            }
+        })
+
+        .state('tab.chats', {
+                url: '/chats',
+                views: {
+                    'tab-chats': {
+                        templateUrl: 'app/chat/tab-chats.html',
+                        controller: 'ChatsCtrl'
+                    }
+                }
+            })
+            .state('tab.chat-detail', {
+                url: '/chats/:chatId',
+                views: {
+                    'tab-chats': {
+                        templateUrl: 'app/chat/chat-detail.html',
+                        controller: 'ChatDetailCtrl'
+                    }
+                }
+            })
+            .state('tab.account', {
+                url: '/account',
+                views: {
+                    'tab-account': {
+                        templateUrl: 'app/account/tab-account.html',
+                        controller: 'AccountCtrl'
+                    }
+                }
+            })
+            .state('tab.todo', {
+                url: '/todo',
+                views: {
+                    'tab-todo': {
+                        templateUrl: 'app/todo/tab-todo.html',
+                        controller: 'TodoCtrl'
+                    }
+                }
+            });
+        */
 
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/todo');

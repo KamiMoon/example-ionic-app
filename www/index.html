@@ -7,12 +7,25 @@
     <title></title>
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/angular-chart.js/dist/angular-chart.css" />
+    <link rel="stylesheet" href="lib/swipebox/src/css/swipebox.css">
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
     <!-- ionic/angularjs js -->
+    <script src="lib/jquery/dist/jquery.js"></script>
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="lib/angular-simple-logger/dist/angular-simple-logger.js"></script>
+    <script src="lib/lodash/lodash.js"></script>
+    <script src="lib/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="lib/ng-file-upload/ng-file-upload.js"></script>
+    <script src="lib/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+    <script src="lib/ngstorage/ngStorage.js"></script>
+    <script src="lib/Chart.js/Chart.js"></script>
+    <script src="lib/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="lib/swipebox/src/js/jquery.swipebox.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
     <!-- your app's js -->
@@ -24,6 +37,7 @@
     <script src="components/bInput/bInput.directive.js"></script>
     <script src="components/bInput/filters.js"></script>
     <script src="components/bInput/bImg.directive.js"></script>
+    <script src="components/controllerUtil/controllerUtil.js"></script>
     <script src="app/chat/chat.controller.js"></script>
     <script src="app/chat/chat.service.js"></script>
     <script src="app/todo/project.service.js"></script>
@@ -37,6 +51,11 @@
     <script src="app/account/login/login.controller.js"></script>
     <script src="app/account/settings/settings.controller.js"></script>
     <script src="app/account/signup/signup.controller.js"></script>
+    <script src="app/property/property.js"></script>
+    <script src="app/property/property.controller.js"></script>
+    <script src="app/property/property.service.js"></script>
+    <script src="app/property/propertyGraph.directive.js"></script>
+    <script src="app/property/propertyFinancialSummary.directive.js"></script>
 </head>
 
 <body ng-app="preserveusMobile">

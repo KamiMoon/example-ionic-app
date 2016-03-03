@@ -1,3 +1,4 @@
+<!--
 <div class="container-fluid table-container">
     <div class="row table-row">
         <div class="col-xs-12 col-md-4 col-lg-4 table-cell" id="left-column">
@@ -128,3 +129,20 @@
     }
 }
 </style>
+
+-->
+<ion-view>
+    <ion-nav-title>
+        <span>Property</span>
+    </ion-nav-title>
+    <ion-content>
+        <div class="list">
+            <a ng-repeat="property in properties" class="item item-thumbnail-left" href="#/property/{{property._id}}">
+                <b-img public-id="{{property.photo}}" transformation="w_100,h_100,c_fill" alt="{{property.name}}" class="media-object img-property"></b-img>
+                <h2>{{::property.name}}</h2>
+                <p>{{::property.fullAddress}}</p>
+                <p>{{::property.description | limitTo:200}}...</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

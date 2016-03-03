@@ -1,3 +1,4 @@
+<!--
 <br>
 <div class="container">
     <div class="row">
@@ -122,3 +123,81 @@ $(document).ready(function() {
     $('.swipebox').swipebox();
 });
 </script>
+-->
+<ion-view>
+    <ion-nav-title>
+        <span>{{::property.name}}</span>
+    </ion-nav-title>
+    <ion-content>
+        <div class="row">
+            <div class="col">
+                <b-img public-id="{{property.photo}}" transformation="w_300,h_300,c_fill" alt="{{property.name}}" class="img-responsive"></b-img>
+            </div>
+        </div>
+        <div ng-if="property.allowInvest" class="row">
+            <div class="col">
+                <h4>Invest in this property</h4>
+                <a href="/propertyInvestment/view/{{property._id}}" class="button button-block button-balanced" role="button">Invest</a>
+            </div>
+        </div>
+        <div ng-if="property.allowRent && property.projectedMonthlyRentalRevenue" class="row">
+            <div class="col">
+                <h4>Apply to become a renter at this property</h4>
+                <a href="/propertyRent/{{property._id}}" class="button button-block button-energized" role="button">Rent</a>
+            </div>
+        </div>
+        <div>
+            <!-- TODO - mobile share -->
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>{{::property.fullAddress}}
+            </h2>
+                <h3><span ng-if="property.beds">{{::property.beds}} beds,</span> <span ng-if="property.baths">{{::property.baths}} baths,</span> <span ng-if="property.sqft">{{::property.sqft}} sqft</span></h3>
+                <p>
+                    {{::property.description}}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2 ng-if="property.cost">{{::property.cost | currency:"$"}}</h2>
+                <h3 ng-if="property.mortgagePrinciple">Est. Mortgage</h3>
+                <h4 ng-if="property.mortgagePrinciple">{{::property.mortgagePrinciple | currency:"$"}}</h4>
+            </div>
+        </div>
+        <div class="row responsive-sm" ng-repeat="featureRow in property.features">
+            <div class="col">
+                {{::featureRow[0].text}}
+            </div>
+            <div class="col">
+                {{::featureRow[1].text}}
+            </div>
+            <div class="col">
+                {{::featureRow[2].text}}
+            </div>
+        </div>
+        <div class="row" ng-if="property.projectedReturnsByYear && property.projectedReturnsByYear.length > 0">
+            <div class="col">
+                <property-graph projected-returns-by-year="property.projectedReturnsByYear"></property-graph>
+            </div>
+        </div>
+        <div class="row" ng-if="property.irr">
+            <div class="col">
+                <property-financial-summary></property-financial-summary>
+            </div>
+        </div>
+        <div class="row" ng-repeat="row in property.photoRows">
+            <div class="col" ng-repeat="photo in row">
+                <a href="https://res.cloudinary.com/ddovrks1z/image/upload/w_500,h_500,c_fill/{{photo}}.jpg" class="thumbnail swipebox" target="_self">
+                    <img ng-src="https://res.cloudinary.com/ddovrks1z/image/upload/w_300,h_300,c_fill/{{photo}}.jpg" class="image-property-property" alt="image">
+                </a>
+            </div>
+        </div>
+        <script>
+        $(document).ready(function() {
+            $('.swipebox').swipebox();
+        });
+        </script>
+    </ion-content>
+</ion-view>
