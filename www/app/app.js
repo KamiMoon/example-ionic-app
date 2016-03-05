@@ -6,8 +6,8 @@
 // 'preserveusMobile.services' is found in services.js
 // 'preserveusMobile.controllers' is found in controllers.js
 angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
-        'ngStorage', 'chart.js'
-    ]) //, 'uiGmapgoogle-maps'])
+    'ngStorage', 'chart.js', 'uiGmapgoogle-maps'
+])
 
 .constant('CONSTANTS', {
     'REST_API_URL': '/api',
@@ -19,19 +19,19 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
     },
     'CLOUDINARY_IMAGE_URL': 'http://res.cloudinary.com/ddovrks1z/image/upload/',
     'CLOUDINARY_UPLOAD_URL': 'https://api.cloudinary.com/v1_1/ddovrks1z/upload',
-    'CLOUDINARY_UPLOAD_PRESET': 'saogp2ap' //,
-        //'GOOGLEMAPS_KEY': 'AIzaSyAH097-AkYDvIY7AAU42AlvFbxmUs69CRM'
+    'CLOUDINARY_UPLOAD_PRESET': 'saogp2ap',
+    'GOOGLEMAPS_KEY': 'AIzaSyAH097-AkYDvIY7AAU42AlvFbxmUs69CRM'
 })
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider) { //uiGmapGoogleMapApiProvider, CONSTANTS) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider, uiGmapGoogleMapApiProvider, CONSTANTS) {
 
     //$httpProvider.interceptors.push('authInterceptor');
 
-    //uiGmapGoogleMapApiProvider.configure({
-    //    key: CONSTANTS.GOOGLEMAPS_KEY,
-    //v: '3.20', //defaults to latest 3.X anyhow
-    //libraries: 'weather,geometry,visualization'
-    //});
+    uiGmapGoogleMapApiProvider.configure({
+        key: CONSTANTS.GOOGLEMAPS_KEY,
+        //v: '3.20', //defaults to latest 3.X anyhow
+        libraries: 'weather,geometry,visualization'
+    });
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -45,61 +45,52 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
             url: '/tab',
             abstract: true,
             templateUrl: 'components/navbar/tabs.html'
-        });
+        })
 
     // Each tab has its own nav history stack:
-    /*
-        .state('tab.property', {
-            url: '/property',
+
+
+    .state('tab.chats', {
+            url: '/chats',
             views: {
-                'tab-property': {
-                    controller: 'PropertyCtrl',
-                    templateUrl: 'app/property/propertyList.html'
+                'tab-chats': {
+                    templateUrl: 'app/chat/tab-chats.html',
+                    controller: 'ChatsCtrl'
                 }
             }
         })
+        .state('tab.chat-detail', {
+            url: '/chats/:chatId',
+            views: {
+                'tab-chats': {
+                    templateUrl: 'app/chat/chat-detail.html',
+                    controller: 'ChatDetailCtrl'
+                }
+            }
+        })
+        .state('tab.account', {
+            url: '/account',
+            views: {
+                'tab-account': {
+                    templateUrl: 'app/account/tab-account.html',
+                    controller: 'AccountCtrl'
+                }
+            }
+        })
+        .state('tab.todo', {
+            url: '/todo',
+            views: {
+                'tab-todo': {
+                    templateUrl: 'app/todo/tab-todo.html',
+                    controller: 'TodoCtrl'
+                }
+            }
+        });
 
-        .state('tab.chats', {
-                url: '/chats',
-                views: {
-                    'tab-chats': {
-                        templateUrl: 'app/chat/tab-chats.html',
-                        controller: 'ChatsCtrl'
-                    }
-                }
-            })
-            .state('tab.chat-detail', {
-                url: '/chats/:chatId',
-                views: {
-                    'tab-chats': {
-                        templateUrl: 'app/chat/chat-detail.html',
-                        controller: 'ChatDetailCtrl'
-                    }
-                }
-            })
-            .state('tab.account', {
-                url: '/account',
-                views: {
-                    'tab-account': {
-                        templateUrl: 'app/account/tab-account.html',
-                        controller: 'AccountCtrl'
-                    }
-                }
-            })
-            .state('tab.todo', {
-                url: '/todo',
-                views: {
-                    'tab-todo': {
-                        templateUrl: 'app/todo/tab-todo.html',
-                        controller: 'TodoCtrl'
-                    }
-                }
-            });
-        */
 
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/todo');
-    $urlRouterProvider.otherwise('/tab/dash');
+    $urlRouterProvider.otherwise('/tab/property');
 
 })
 

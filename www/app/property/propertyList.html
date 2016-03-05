@@ -136,8 +136,24 @@
         <span>Property</span>
     </ion-nav-title>
     <ion-content>
+        <div>
+            <ui-gmap-google-map id="map" center="map.center" zoom="map.zoom">
+                <ui-gmap-markers models="mapMarkers" coords="'self'" icon="'icon'" click="markerClick">
+                    <ui-gmap-windows show="show">
+                        <div class="map-window">
+                            <a ng-non-bindable href="#/tab/property/{{id}}">
+                                <img ng-non-bindable class="media-object img-property" src="{{photo}}" alt="{{title}}">
+                            </a>
+                            <h4 ng-non-bindable>{{title}}</h4>
+                            <h6 ng-non-bindable>{{address}}</h6>
+                            <p ng-non-bindable>{{description | limitTo: 200}}</p>
+                        </div>
+                    </ui-gmap-windows>
+                </ui-gmap-markers>
+            </ui-gmap-google-map>
+        </div>
         <div class="list">
-            <a ng-repeat="property in properties" class="item item-thumbnail-left" href="#/property/{{property._id}}">
+            <a ng-repeat="property in properties" class="item item-thumbnail-left" href="#/tab/property/{{property._id}}">
                 <b-img public-id="{{property.photo}}" transformation="w_100,h_100,c_fill" alt="{{property.name}}" class="media-object img-property"></b-img>
                 <h2>{{::property.name}}</h2>
                 <p>{{::property.fullAddress}}</p>

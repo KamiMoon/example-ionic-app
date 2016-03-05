@@ -4,10 +4,12 @@ angular.module('preserveusMobile')
     .controller('PropertyInvestmentCtrl', function($scope, $stateParams, $location, PropertyService, ValidationService, PropertyInvestmentService, Auth) {
         $scope.action = $stateParams.action;
 
+        $scope.action = 'edit';
+
         var id = $stateParams.id;
 
         if ($scope.action === 'edit' && !Auth.isAdmin()) {
-            $location.path('/notAuthorized').replace();
+            //$location.path('/notAuthorized').replace();
         }
 
         //in all cases a property must exist before adding

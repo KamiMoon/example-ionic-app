@@ -19,6 +19,16 @@
     border-color: #ddd;
 }
 
+.panel-info {
+    border-color: #bce8f1;
+}
+
+.panel-info>.panel-heading {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
 .panel-heading {
     padding: 10px 15px;
     border-bottom: 1px solid transparent;
