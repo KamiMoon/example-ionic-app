@@ -1,3 +1,62 @@
+<ion-view>
+    <ion-nav-title>
+        <span>Income Report</span>
+    </ion-nav-title>
+    <ion-content>
+        <div class="row">
+            <div class="col">
+                <a href="#/app/property/{{property._id}}">{{::property.name}}</a>
+                <h4>{{::property.fullAddress}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><i class="icon ion-stats-bars"></i> All Investments</h4>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list">
+                            <li class="item" ng-repeat="receipt in property.receipts">
+                                <p>{{::receipt.createdAt | date:"M/d/yy h:mm a"}}</p>
+                                <h2>{{receipt.amount | currency:"$"}}</h2>
+                                <p>{{::receipt.confirmation}}</p>
+                                <p><a href="#/app/profile/{{receipt.user_id}}">{{::receipt.user_name}}</a></p>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col">Total: {{::property.receiptsTotal[0].total | currency:"$"}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><i class="icon ion-calendar"></i> All Rental Payments</h4>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list">
+                            <li class="item" ng-repeat="rentalPayment in property.rentalPayments">
+                                <p>{{::rentalPayment.createdAt | date:"M/d/yy h:mm a"}}</p>
+                                <h2>{{rentalPayment.amount | currency:"$"}}</h2>
+                                <p>{{::rentalPayment.confirmation}}</p>
+                                <p><a href="#/app/profile/{{rentalPayment.user_id}}">{{::rentalPayment.user_name}}</a></p>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col">Total: {{::property.rentalPaymentsTotal[0].total| currency:"$"}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<!--
+
 <br>
 <div class="container">
     <div class="row">
@@ -24,7 +83,6 @@
                     <h3 class="panel-title"><i class="glyphicon glyphicon-stats"></i> All  Investments</h3>
                 </div>
                 <div class="panel-body">
-                    <!-- Registartions for events table -->
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -74,7 +132,6 @@
                     <h3 class="panel-title"><i class="glyphicon glyphicon-calendar"></i> All  Rental Payments</h3>
                 </div>
                 <div class="panel-body">
-                    <!-- Registartions for events table -->
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -118,3 +175,4 @@
         </div>
     </div>
 </div>
+-->
