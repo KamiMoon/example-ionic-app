@@ -22,5 +22,14 @@ angular.module('preserveusMobile')
                     }
                 },
                 authenticate: true
+            }).state('app.changePassword', {
+                url: '/changePassword',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'app/account/settings/changePassword.html',
+                        controller: 'SettingsCtrl',
+                    }
+                },
+                authenticate: true
             });
     });
