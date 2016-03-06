@@ -1,22 +1,20 @@
-<div class="container">
-    <h1>Create Property Listing</h1>
-    <form name="form" ng-submit="save(form)" novalidate>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel-heading">
-                    <h3><span class="glyphicon glyphicon-globe"></span> Basic Info:</h3>
-                </div>
-                <div class="form-horizontal">
+<ion-view>
+    <ion-nav-title>
+        <span>Add/Edit Property</span>
+    </ion-nav-title>
+    <ion-content>
+        <form name="form" ng-submit="save(form)" novalidate>
+            <div class="row">
+                <div class="col">
+                    <h3><i class="icon ion-earth"></i> Basic Info:</h3>
                     <b-input model="property.name" required="true"></b-input>
                     <b-input type="file" model="property.photo" transformation="w_100,h_100,c_fill"></b-input>
                     <b-input type="textarea" rows="6" cols="5" model="property.description"></b-input>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="panel-heading">
-                    <h3><span class="glyphicon glyphicon-home"></span> Address:</h3>
-                </div>
-                <div class="form-horizontal">
+            <div class="row">
+                <div class="col">
+                    <h3><i class="icon ion-home"></i> Address:</h3>
                     <b-input model="property.address" required="true"></b-input>
                     <b-input model="property.city" required="true"></b-input>
                     <b-input type="select" source="states" label="State" model="property.state" require="true">
@@ -24,13 +22,9 @@
                     <b-input model="property.zip" required="true"></b-input>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel-heading">
-                    <h3><span class="glyphicon glyphicon-lamp"></span> Property Features:</h3>
-                </div>
-                <div class="form-horizontal">
+            <div class="row">
+                <div class="col">
+                    <h3><i class="icon ion-ios-list-outline"></i> Property Features:</h3>
                     <b-input type="number" model="property.beds"></b-input>
                     <b-input type="number" model="property.baths"></b-input>
                     <b-input type="number" model="property.sqft" required="true"></b-input>
@@ -38,105 +32,65 @@
                     <b-input type="number" model="property.garages"></b-input>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="panel-heading">
-                    <h3><span class="glyphicon glyphicon-stats"></span> Investment Features:</h3>
-                </div>
-                <div class="form-horizontal">
+            <div class="row">
+                <div class="col">
+                    <h3><i class="icon ion-stats-bars"></i> Investment Features:</h3>
                     <b-input type="number" model="property.cost" required="true"></b-input>
                     <b-input type="number" model="property.mortgagePrinciple" label="Mortgage" required="true"></b-input>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel-heading">
-                    <h3><span class="glyphicon glyphicon-list"></span> Additional Features:</h3>
-                </div>
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr ng-repeat="featureRow in property.features">
-                            <td>
-                                <input type="text" ng-model="featureRow[0].text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" ng-model="featureRow[1].text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" ng-model="featureRow[2].text" class="form-control">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" type="button" ng-click="deleteFeature(featureRow)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" ng-model="featureToAddRow[0].text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" ng-model="featureToAddRow[1].text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" ng-model="featureToAddRow[2].text" class="form-control">
-                            </td>
-                            <td>
-                                <button class="btn btn-info" type="button" ng-click="addMoreFeatures()">Add</button>
-                            </td>
-                        </tr>
-                    </table>
+            <div class="row">
+                <div class="col">
+                    <h3><i class="icon ion-ios-list"></i> Additional Features:</h3>
                 </div>
             </div>
-        </div>
-        <!--<div class="row">
-            <div class="col-md-8">
-                <div class="panel-heading">
-                    <h3><span class="glyphicon glyphicon-cog"></span> Settings:</h3>
-                </div>
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">
-                            Allow Rent:
+            <div class="row" ng-repeat="featureRow in property.features">
+                <div class="col">
+                    <div class="list">
+                        <label class="item item-input">
+                            <input type="text" ng-model="featureRow[0].text">
                         </label>
-                        <div class="col-md-10">
-                            <input type="checkbox" ng-model="property.allowRent" class="form-control">
-                        </div>
-                    </div>
-                    <div ng-if="property.allowRent">
-                        <b-input type="number" model="property.totalRenters" label="Total Renters Possible"></b-input>
-                        <b-input type="number" model="property.totalRentersAvailable" label="Total Currently Available"></b-input>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">
-                            Allow Investments:
+                        <label class="item item-input">
+                            <input type="text" ng-model="featureRow[1].text">
                         </label>
-                        <div class="col-md-10">
-                            <input type="checkbox" ng-model="property.allowInvest" class="form-control">
-                        </div>
+                        <label class="item item-input">
+                            <input type="text" ng-model="featureRow[2].text">
+                        </label>
                     </div>
+                    <button class="button button-assertive" type="button" ng-click="deleteFeature(featureRow)">Delete</button>
                 </div>
             </div>
-            <div class="col-md-4">
-            </div>
-        </div>
-        -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel-heading">
-                    <h3><span class="glyphicon glyphicon-camera"></span> Photo Gallery:</h3>
+            <div class="row">
+                <div class="col">
+                    <div class="list">
+                        <label class="item item-input">
+                            <input type="text" ng-model="featureToAddRow[0].text">
+                        </label>
+                        <label class="item item-input">
+                            <input type="text" ng-model="featureToAddRow[1].text">
+                        </label>
+                        <label class="item item-input">
+                            <input type="text" ng-model="featureToAddRow[2].text">
+                        </label>
+                    </div>
+                    <button class="button button-calm" type="button" ng-click="addMoreFeatures()">Add</button>
                 </div>
-                <div class="form-horizontal">
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h3><i class="icon ion-camera"></i> Photo Gallery:</h3>
                     <b-upload-multiple ng-model="property.photos" transformation="w_100,h_100,c_thumb,g_face"></b-upload-multiple>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div align="right">
-                    <b-input type="submit"></b-input>
+            <div class="row">
+                <div class="col">
+                    <div align="right">
+                        <b-input type="submit"></b-input>
+                    </div>
+                    <br>
+                    <br>
                 </div>
-                <br>
-                <br>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </ion-content>
+</ion-view>

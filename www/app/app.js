@@ -11,6 +11,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
 
 .constant('CONSTANTS', {
     'REST_API_URL': '/api',
+    //'REST_API_URL': 'https://www.preservedfw.com/api',
     //'REST_API_URL': 'http://192.168.1.3:9000/api',
     'LOCAL_TOKEN_KEY': 'preserveusMobile_token',
     'EVENTS': {
