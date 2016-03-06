@@ -15,10 +15,10 @@ angular.module('preserveusMobile')
                 }
 
                 Auth.createUser($scope.user)
-                    .then(function() {
+                    .then(function(user) {
                         ValidationService.success('You have been registered. Check your email to verify.');
                         // Account created, redirect to home
-                        $location.path('/thanks');
+                        $location.path('#/app/profile/' + user._id);
                     }, function(err) {
                         ValidationService.displayErrors(form, err);
                     });

@@ -6,7 +6,7 @@ Wrapper directive over angular and ionic form elements because they are way too 
 */
 
 angular.module('preserveusMobile')
-    .directive('bInput', function($compile) { //, InputService) {
+    .directive('bInput', function($compile, InputService) {
 
         function getNameFromModelString(modelString) {
             var index = modelString.indexOf('.');
@@ -51,6 +51,9 @@ angular.module('preserveusMobile')
             var html = '';
 
             html += '<label class="item item-input ';
+            if (attrs.type === 'select') {
+                html += ' item-select';
+            }
             if (attrs.required) {
                 html += ' required';
             }
@@ -63,7 +66,7 @@ angular.module('preserveusMobile')
                 html += ' ng-class="' + someClass + '"';
             }
             html += '>';
-            //html += '<span class="input-label">' + attrs.label + '</span>';
+            html += '<span class="input-label">' + attrs.label + '</span>';
             html += inputHtml;
             html += '</label>';
             html += getErrorHandlingHTML(attrs);
@@ -117,7 +120,7 @@ angular.module('preserveusMobile')
             return ' ' + name + '="' + value + '" ';
         };
 
-        var getBasicAttributes = function(attrs, doNotAddFormControl) {
+        var getBasicAttributes = function(attrs) {
             var html = '';
 
             if (attrs.required) {
@@ -226,50 +229,50 @@ angular.module('preserveusMobile')
             return html;
         };
 
-        /*
-                var populateDefault = function(key, scope) {
-                    scope[key] = [];
 
-                    InputService.get(key, 'api/constants/' + key).then(function(objs) {
-                        scope[key] = objs;
-                    });
+        var populateDefault = function(key, scope) {
+            scope[key] = [];
 
-                    //TODO - this would be cool - but plurals
-                    // if (attrs) {
-                    //     attrs.options = key + "._id as " + key + ".name for " + key + "in " + key + "s";
-                    // }
-                };
+            InputService.get(key, 'api/constants/' + key).then(function(objs) {
+                scope[key] = objs;
+            });
 
-                var populateSelect = function(attrs, scope) {
-                    switch (attrs.source) {
-                        case 'states':
-                            scope[attrs.source] = InputService.getStates();
-                            attrs.options = "state.abbrev as state.abbrev for state in states";
-                            break;
-                        case 'categories':
-                            populateDefault(attrs.source, scope);
-                            attrs.options = "category.name as category.name for category in categories";
-                            break;
-                        case 'statuses':
-                            populateDefault(attrs.source, scope);
-                            attrs.options = "status.name as status.name for status in statuses";
-                            break;
-                        case 'schools':
-                            populateDefault(attrs.source, scope);
-                            attrs.options = "school.name as school.name for school in schools";
-                            break;
-                        case 'roles':
-                            scope[attrs.source] = InputService.getRoles();
-                            attrs.options = "role as role.role for role in roles track by role.role";
-                            break;
-                        case 'interests':
-                            populateDefault(attrs.source, scope);
-                            attrs.options = "interest.name as interest.name for interest in interests";
-                            break;
-                    }
+            //TODO - this would be cool - but plurals
+            // if (attrs) {
+            //     attrs.options = key + "._id as " + key + ".name for " + key + "in " + key + "s";
+            // }
+        };
 
-                };
-                */
+        var populateSelect = function(attrs, scope) {
+            switch (attrs.source) {
+                case 'states':
+                    scope[attrs.source] = InputService.getStates();
+                    attrs.options = "state.abbrev as state.abbrev for state in states";
+                    break;
+                case 'categories':
+                    populateDefault(attrs.source, scope);
+                    attrs.options = "category.name as category.name for category in categories";
+                    break;
+                case 'statuses':
+                    populateDefault(attrs.source, scope);
+                    attrs.options = "status.name as status.name for status in statuses";
+                    break;
+                case 'schools':
+                    populateDefault(attrs.source, scope);
+                    attrs.options = "school.name as school.name for school in schools";
+                    break;
+                case 'roles':
+                    scope[attrs.source] = InputService.getRoles();
+                    attrs.options = "role as role.role for role in roles track by role.role";
+                    break;
+                case 'interests':
+                    populateDefault(attrs.source, scope);
+                    attrs.options = "interest.name as interest.name for interest in interests";
+                    break;
+            }
+
+        };
+
 
         return {
             restrict: 'E',
@@ -303,9 +306,9 @@ angular.module('preserveusMobile')
                 }
 
                 //lookup Data based on source if needed
-                //if (attrs.type === 'select' && attrs.source) {
-                //populateSelect(attrs, scope);
-                //}
+                if (attrs.type === 'select' && attrs.source) {
+                    populateSelect(attrs, scope);
+                }
 
                 //Server date strings convert them to date objects since that is required by angular
                 if (attrs.type === 'datetime-local' && attrs.model) {

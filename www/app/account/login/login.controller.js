@@ -16,7 +16,7 @@ angular.module('preserveusMobile')
                         //ValidationService.success('Logged In');
                         // Logged in, redirect to home
                         Auth.getUser().$promise.then(function(user) {
-                            $location.path('/profile/' + user._id);
+                            $location.path('#/app/profile/' + user._id);
                         });
 
                     })

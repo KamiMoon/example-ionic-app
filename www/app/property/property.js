@@ -2,71 +2,64 @@
 
 angular.module('preserveusMobile')
     .config(function($stateProvider) {
-        $stateProvider.state('propertyList', {
+        $stateProvider.state('app.propertyList', {
             url: '/property',
             views: {
-                'tab-property': {
+                'menuContent': {
                     templateUrl: 'app/property/propertyList.html',
                     controller: 'PropertyCtrl',
                 }
-            },
-            parent: 'tab'
-        }).state('propertyAddEdit', {
+            }
+        }).state('app.propertyAddEdit', {
             url: '/property/:action/:id',
             views: {
-                'tab-property': {
+                'menuContent': {
                     templateUrl: 'app/property/propertyAdd.html',
                     controller: 'PropertyAddEditCtrl',
                 }
             },
-            roles: ['admin'],
-            parent: 'tab'
-        }).state('propertyView', {
+            roles: ['admin']
+        }).state('app.propertyView', {
             url: '/property/:id',
             views: {
-                'tab-property': {
+                'menuContent': {
                     templateUrl: 'app/property/propertyView.html',
                     controller: 'PropertyViewCtrl',
                 }
-            },
-            parent: 'tab'
-        }).state('propertyInvestment', {
+            }
+        }).state('app.propertyInvestment', {
             url: '/propertyInvestment/:action/:id',
             views: {
-                'tab-property': {
+                'menuContent': {
                     templateUrl: 'app/property/propertyInvestment.html',
                     controller: 'PropertyInvestmentCtrl',
                 }
-            },
-            parent: 'tab'
-        }).state('propertyRent', {
+            }
+        }).state('app.propertyRent', {
             url: '/propertyRent/:id',
             views: {
-                'tab-property': {
+                'menuContent': {
                     templateUrl: 'app/property/propertyRent.html',
                     controller: 'PropertyRentCtrl',
                 }
-            },
-            parent: 'tab'
-        }).state('propertyIncomeReport', {
+            }
+        }).state('app.propertyIncomeReport', {
             url: '/propertyIncomeReport/:id',
             views: {
-                'tab-property': {
+                'menuContent': {
                     templateUrl: 'app/property/propertyIncomeReport.html',
                     controller: 'PropertyIncomeReportCtrl',
                 }
             },
-            roles: ['admin'],
-            parent: 'tab'
-        }).state('propertyTotalReport', {
+            roles: ['admin']
+        }).state('app.propertyTotalReport', {
             url: '/propertyTotalReport',
             views: {
-                'tab-property': {
+                'menuContent': {
                     templateUrl: 'app/property/propertyTotalReport.html',
                     controller: 'PropertyTotalReportCtrl',
                 }
             },
-            roles: ['admin'],
-            parent: 'tab'
+            roles: ['admin']
         });
     });

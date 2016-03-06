@@ -25,7 +25,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider, uiGmapGoogleMapApiProvider, CONSTANTS) {
 
-    //$httpProvider.interceptors.push('authInterceptor');
+    $httpProvider.interceptors.push('authInterceptor');
 
     uiGmapGoogleMapApiProvider.configure({
         key: CONSTANTS.GOOGLEMAPS_KEY,
@@ -40,57 +40,64 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
 
     // setup an abstract state for the tabs directive
 
-    $stateProvider
-        .state('tab', {
-            url: '/tab',
-            abstract: true,
-            templateUrl: 'components/navbar/tabs.html'
-        })
+    // $stateProvider
+    //     .state('tab', {
+    //         url: '/tab',
+    //         abstract: true,
+    //         templateUrl: 'components/navbar/tabs.html'
+    //     })
 
-    // Each tab has its own nav history stack:
+    // // Each tab has its own nav history stack:
 
 
-    .state('tab.chats', {
-            url: '/chats',
-            views: {
-                'tab-chats': {
-                    templateUrl: 'app/chat/tab-chats.html',
-                    controller: 'ChatsCtrl'
-                }
-            }
-        })
-        .state('tab.chat-detail', {
-            url: '/chats/:chatId',
-            views: {
-                'tab-chats': {
-                    templateUrl: 'app/chat/chat-detail.html',
-                    controller: 'ChatDetailCtrl'
-                }
-            }
-        })
-        .state('tab.account', {
-            url: '/account',
-            views: {
-                'tab-account': {
-                    templateUrl: 'app/account/tab-account.html',
-                    controller: 'AccountCtrl'
-                }
-            }
-        })
-        .state('tab.todo', {
-            url: '/todo',
-            views: {
-                'tab-todo': {
-                    templateUrl: 'app/todo/tab-todo.html',
-                    controller: 'TodoCtrl'
-                }
-            }
-        });
+    // .state('tab.chats', {
+    //         url: '/chats',
+    //         views: {
+    //             'tab-chats': {
+    //                 templateUrl: 'app/chat/tab-chats.html',
+    //                 controller: 'ChatsCtrl'
+    //             }
+    //         }
+    //     })
+    //     .state('tab.chat-detail', {
+    //         url: '/chats/:chatId',
+    //         views: {
+    //             'tab-chats': {
+    //                 templateUrl: 'app/chat/chat-detail.html',
+    //                 controller: 'ChatDetailCtrl'
+    //             }
+    //         }
+    //     })
+    //     .state('tab.account', {
+    //         url: '/account',
+    //         views: {
+    //             'tab-account': {
+    //                 templateUrl: 'app/account/tab-account.html',
+    //                 controller: 'AccountCtrl'
+    //             }
+    //         }
+    //     })
+    //     .state('tab.todo', {
+    //         url: '/todo',
+    //         views: {
+    //             'tab-todo': {
+    //                 templateUrl: 'app/todo/tab-todo.html',
+    //                 controller: 'TodoCtrl'
+    //             }
+    //         }
+    //     })
+
+
+    $stateProvider.state('app', {
+        url: "/app",
+        abstract: true,
+        templateUrl: "components/navbar/slide-menu.html"
+    });
 
 
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/todo');
-    $urlRouterProvider.otherwise('/tab/property');
+    $urlRouterProvider.otherwise('/app/property');
 
 })
 
@@ -113,7 +120,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
     });
 
     // Redirect to login if route requires auth and you're not logged in
-    /*$rootScope.$on('$stateChangeStart', function(event, next, toParams, fromState, fromParams) {
+    $rootScope.$on('$stateChangeStart', function(event, next, toParams, fromState, fromParams) {
         Auth.isLoggedInAsync(function(loggedIn) {
             if ((next.authenticate || next.roles) && !loggedIn) {
                 event.preventDefault();
@@ -128,7 +135,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
                 });
             }
         });
-    });*/
+    });
 
     $rootScope.$on(CONSTANTS.EVENTS.NOT_AUTHENTICATED, function() {
         Auth.logout();

@@ -1,0 +1,18 @@
+<ion-view view-title="User Investments">
+    <ion-nav-title>
+        <span>Investments for {{user.name}}</span>
+    </ion-nav-title>
+    <ion-content>
+        <ul class="list">
+            <li class="item" ng-repeat="receipt in user.receipts">
+                <p>{{::receipt.createdAt | date:"M/d/yy h:mm a"}}</p>
+                <h2>{{receipt.amount | currency:"$"}}</h2>
+                <p>{{::receipt.confirmation}}</p>
+                <p><a href="#/app/property/{{receipt.model_id}}">{{::receipt.description}}</a></p>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="col">Total: {{::user.receiptsTotal[0].total | currency:"$"}}</div>
+        </div>
+    </ion-content>
+</ion-view>

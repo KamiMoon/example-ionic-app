@@ -1,31 +1,12 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-10">
-            <h1>Edit Profile</h1>
-        </div>
-    </div>
-    <form name="form" ng-submit="save(form)" novalidate>
-        <div class="row">
-            <div class="panel-heading">
-                <h3><span class="glyphicon glyphicon-globe"></span> Basic Info:</h3></div>
-            <div class="col-md-12">
-                <div class="form-horizontal">
+<ion-view view-title="Edit Profile">
+    <ion-content>
+        <form name="form" ng-submit="save(form)" novalidate>
+            <div class="row">
+                <div class="col">
                     <b-input model="user.name"></b-input>
                     <b-input type="file" model="user.photo" transformation="w_100,h_100,c_thumb,g_face"></b-input>
                     <b-input type="tel" model="user.phone"></b-input>
-                    <div ng-if="Auth.isAdmin()">
-                        <b-input type="select" multiple="true" source="roles" label="Roles" model="user.roles"></b-input>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel-heading">
-                    <h3><span class="glyphicon glyphicon-home"></span> Address:</h3>
-                </div>
-                <div class="form-horizontal">
+                    <b-input ng-if="Auth.isAdmin()" type="select" multiple="true" source="roles" label="Roles" model="user.roles"></b-input>
                     <b-input model="user.address"></b-input>
                     <b-input model="user.city"></b-input>
                     <b-input type="select" source="states" label="State" model="user.state">
@@ -33,14 +14,11 @@
                     <b-input model="user.zip"></b-input>
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col">
-                <b-input type="submit"></b-input>
-                <br>
-                <br>
+            <div class="row">
+                <div class="col">
+                    <b-input type="submit"></b-input>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </ion-content>
+</ion-view>

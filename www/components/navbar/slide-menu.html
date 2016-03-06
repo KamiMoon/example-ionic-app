@@ -1,0 +1,47 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content class="post-size-14px">
+        <ion-nav-bar class="bar app-top-bar">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" class="main-menu" expose-aside-when="large">
+        <ion-content>
+            <ion-list>
+                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.propertyList">
+                    <i class="icon ion-home"></i>
+                    <h2 class="menu-text">View Property</h2>
+                </ion-item>
+                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.userView({id: Auth.getCurrentUser()._id})">
+                    <i class="icon ion-person"></i>
+                    <h2 class="menu-text">Profile</h2>
+                </ion-item>
+                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.userInvest({id: Auth.getCurrentUser()._id})">
+                    <i class="icon ion-stats-bars"></i>
+                    <h2 class="menu-text">My Investments</h2>
+                </ion-item>
+                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.userRent({id: Auth.getCurrentUser()._id})">
+                    <i class="icon ion-calendar"></i>
+                    <h2 class="menu-text">My Rent</h2>
+                </ion-item>
+                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.settings">
+                    <i class="icon ion-gear-a"></i>
+                    <h2 class="menu-text">Settings</h2>
+                </ion-item>
+                <ion-item ng-if="Auth.isAdmin()" class="item-icon-left" nav-clear menu-close ui-sref="app.userList">
+                    <i class="icon ion-person-stalker"></i>
+                    <h2 class="menu-text">Administer Users</h2>
+                </ion-item>
+                <ion-item ng-if="Auth.isAdmin()" class="item-icon-left" nav-clear menu-close ui-sref="app.propertyTotalReport">
+                    <i class="icon ion-pie-graph"></i>
+                    <h2 class="menu-text">All Property Income</h2>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

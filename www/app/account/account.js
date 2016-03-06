@@ -13,10 +13,14 @@ angular.module('preserveusMobile')
                 templateUrl: 'app/account/signup/signup.html',
                 controller: 'SignupCtrl'
             })
-            .state('settings', {
+            .state('app.settings', {
                 url: '/settings',
-                templateUrl: 'app/account/settings/settings.html',
-                controller: 'SettingsCtrl',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'app/account/settings/settings.html',
+                        controller: 'SettingsCtrl',
+                    }
+                },
                 authenticate: true
             });
     });
