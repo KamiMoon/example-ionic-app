@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .factory('Auth', function Auth($location, $rootScope, $http, User, $q, CONSTANTS) {
+    .factory('Auth', function Auth($rootScope, $http, User, $q, CONSTANTS) {
         var currentUser = {};
 
         if (window.localStorage.getItem(CONSTANTS.LOCAL_TOKEN_KEY)) {

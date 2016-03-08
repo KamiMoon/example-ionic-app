@@ -43,16 +43,16 @@ angular.module('preserveusMobile')
                 };
 
                 // $scope.zoomToLocation = function(property) {
-        //     $scope.map = {
-        //         center: {
-        //             latitude: property.geoLocation.lat,
-        //             longitude: property.geoLocation.lng
-        //         },
-        //         zoom: 14
-        //     };
+                //     $scope.map = {
+                //         center: {
+                //             latitude: property.geoLocation.lat,
+                //             longitude: property.geoLocation.lng
+                //         },
+                //         zoom: 14
+                //     };
 
-        //     $('#mapTop')[0].scrollIntoView();
-        // };
+                //     $('#mapTop')[0].scrollIntoView();
+                // };
 
                 $scope.loaded = true;
 
@@ -67,7 +67,7 @@ angular.module('preserveusMobile')
             });
         });
 
-    }).controller('PropertyAddEditCtrl', function($scope, $stateParams, $location, PropertyService, ValidationService) {
+    }).controller('PropertyAddEditCtrl', function($scope, $stateParams, $state, PropertyService, ValidationService) {
 
         var action = $stateParams.action;
         var id = $stateParams.id;
@@ -127,7 +127,7 @@ angular.module('preserveusMobile')
                         id: $scope.property._id
                     }, $scope.property).$promise.then(function() {
                         ValidationService.success();
-                        $location.path('/property/' + id);
+                        $state.go('app.propertyView', { id: id });
                     }, function(err) {
                         ValidationService.displayErrors(form, err);
                     });
@@ -135,7 +135,7 @@ angular.module('preserveusMobile')
                     //add
                     PropertyService.save($scope.property).$promise.then(function(property) {
                         ValidationService.success();
-                        $location.path('/property/' + property._id);
+                        $state.go('app.propertyView', { id: property._id });
                     }, function(err) {
                         ValidationService.displayErrors(form, err);
                     });
@@ -145,7 +145,7 @@ angular.module('preserveusMobile')
 
         };
 
-    }).controller('PropertyViewCtrl', function($scope, $stateParams, $location, Auth, PropertyService, ValidationService, ControllerUtil) {
+    }).controller('PropertyViewCtrl', function($scope, $stateParams, Auth, PropertyService, ValidationService, ControllerUtil) {
 
         var id = $stateParams.id;
 
@@ -157,6 +157,7 @@ angular.module('preserveusMobile')
             $scope.property.photoRows = _.chunk($scope.property.photos, 4);
         });
 
+        //TODO 
         $scope.delete = function() {
             ControllerUtil.delete(id, PropertyService, '/property');
         };

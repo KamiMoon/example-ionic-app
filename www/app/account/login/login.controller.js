@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .controller('LoginCtrl', function($scope, Auth, $location, ValidationService) {
+    .controller('LoginCtrl', function($scope, Auth, $state, ValidationService) {
         $scope.user = {};
 
         $scope.login = function(form) {
@@ -16,7 +16,7 @@ angular.module('preserveusMobile')
                         //ValidationService.success('Logged In');
                         // Logged in, redirect to home
                         Auth.getUser().$promise.then(function(user) {
-                            $location.path('#/app/profile/' + user._id);
+                            $state.go('app.userView', { id: user._id });
                         });
 
                     })

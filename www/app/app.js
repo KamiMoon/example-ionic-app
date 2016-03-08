@@ -24,7 +24,11 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
     'GOOGLEMAPS_KEY': 'AIzaSyAH097-AkYDvIY7AAU42AlvFbxmUs69CRM'
 })
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider, uiGmapGoogleMapApiProvider, CONSTANTS) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider, uiGmapGoogleMapApiProvider, $compileProvider, CONSTANTS) {
+
+    //required by camera and using ng-src
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+
 
     $httpProvider.interceptors.push('authInterceptor');
 
@@ -93,6 +97,10 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
         url: "/app",
         abstract: true,
         templateUrl: "components/navbar/slide-menu.html"
+    }).state('cameraTest', {
+        url: "/cameratest",
+        controller: 'CameraCtrl',
+        templateUrl: "components/camera/test.html"
     });
 
 
@@ -132,7 +140,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
             } else if (next.roles && !Auth.hasRoles(next.roles)) {
                 event.preventDefault();
                 $timeout(function() {
-                    $state.go('/notAuthorized').replace();
+                    $state.go('notAuthorized').replace();
                 });
             }
         });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .controller('SettingsCtrl', function($scope, User, Auth, $location, ValidationService) {
+    .controller('SettingsCtrl', function($scope, User, Auth, $state, ValidationService) {
         $scope.errors = {};
 
         $scope.changePassword = function(form) {
@@ -10,7 +10,7 @@ angular.module('preserveusMobile')
                 Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
                     .then(function() {
                         ValidationService.success('Password successfully changed.');
-                        $location.path('/profile/' + Auth.getCurrentUser()._id);
+                        $state.go('app.userView', { id: Auth.getCurrentUser()._id });
                     })
                     .catch(function() {
                         form.password.$setValidity('mongoose', false);

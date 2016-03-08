@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .controller('PropertyInvestmentCtrl', function($scope, $stateParams, $location, PropertyService, ValidationService, PropertyInvestmentService, Auth) {
+    .controller('PropertyInvestmentCtrl', function($scope, $stateParams, $state, PropertyService, ValidationService, PropertyInvestmentService, Auth) {
         $scope.action = $stateParams.action;
 
         $scope.action = 'edit';
@@ -9,7 +9,8 @@ angular.module('preserveusMobile')
         var id = $stateParams.id;
 
         if ($scope.action === 'edit' && !Auth.isAdmin()) {
-            //$location.path('/notAuthorized').replace();
+            $state.go('notAuthorized');
+            return;
         }
 
         //in all cases a property must exist before adding
@@ -50,7 +51,7 @@ angular.module('preserveusMobile')
                     id: $scope.property._id
                 }, $scope.property).$promise.then(function() {
                     ValidationService.success();
-                    $location.path('/property/' + id);
+                    $state.go('app.propertyView', { id: id });
                 }, function(err) {
                     ValidationService.error(err);
                 });

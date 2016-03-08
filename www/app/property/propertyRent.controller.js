@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .controller('PropertyRentCtrl', function($scope, $stateParams, $location, PropertyService, ValidationService, PropertyInvestmentService, Auth) {
+    .controller('PropertyRentCtrl', function($scope, $stateParams, PropertyService) {
         var id = $stateParams.id;
 
         PropertyService.get({
@@ -12,5 +12,5 @@ angular.module('preserveusMobile')
         });
 
 
-
+        //TODO
     });

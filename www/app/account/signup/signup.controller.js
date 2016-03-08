@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .controller('SignupCtrl', function($scope, Auth, $location, ValidationService) {
+    .controller('SignupCtrl', function($scope, Auth, $state, ValidationService) {
         $scope.user = {};
 
         $scope.register = function(form) {
@@ -17,8 +17,8 @@ angular.module('preserveusMobile')
                 Auth.createUser($scope.user)
                     .then(function(user) {
                         ValidationService.success('You have been registered. Check your email to verify.');
-                        // Account created, redirect to home
-                        $location.path('#/app/profile/' + user._id);
+                        // Account created, redirect to home                        
+                        $state.go('app.userView', { id: user._id });
                     }, function(err) {
                         ValidationService.displayErrors(form, err);
                     });
