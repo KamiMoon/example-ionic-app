@@ -5,27 +5,28 @@
     <ion-content>
         <div class="card">
             <div class="item item-divider">
-                <h2>{{::property.fullAddress}}
-                        </h2>
+                <h2>{{::property.fullAddress}}</h2>
             </div>
             <div class="item item-image">
                 <b-img public-id="{{property.photo}}" transformation="w_380,h_380,c_fill" alt="{{property.name}}"></b-img>
             </div>
-            <div class="item">
+            <a class="item item-icon-right">
                 <h3><span ng-if="property.beds">{{::property.beds}} beds,</span> <span ng-if="property.baths">{{::property.baths}} baths,</span> <span ng-if="property.sqft">{{::property.sqft}} sqft</span></h3>
                 <p>
                     {{::property.description}}
                 </p>
-            </div>
-            <div class="item">
+                <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <a class="item item-icon-right" href="#/app/propertyInvestment/view/{{property._id}}">
                 <h2 ng-if="property.cost">Cost:  {{::property.cost | currency:"$"}}</h2>
                 <h3 ng-if="property.mortgagePrinciple">Est. Mortgage: {{::property.mortgagePrinciple | currency:"$"}}</h3>
-            </div>
-            <a ng-if="property.allowInvest" href="#/app/propertyInvestment/view/{{property._id}}" class="item item-icon-left item-icon-right" role="button">
+                <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <a ng-if="property.allowInvest" class="item item-icon-left item-icon-right" href="#/app/propertyInvest/{{property._id}}">
                 <i class="icon ion-stats-bars"></i> Invest
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
-            <a ng-if="property.allowRent && property.projectedMonthlyRentalRevenue" href="#/app/propertyRent/{{property._id}}" class="item item-icon-left item-icon-right" role="button">
+            <a ng-if="property.allowRent && property.projectedMonthlyRentalRevenue" href="#/app/propertyRent/{{property._id}}" class="item item-icon-left item-icon-right">
                 <i class="icon ion-calendar"></i> Pay Rent
                 <i class="icon ion-ios-arrow-right"></i>
             </a>

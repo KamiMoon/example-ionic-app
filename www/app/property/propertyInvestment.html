@@ -296,6 +296,7 @@
                 </div>
             </div>
         </div>
+        <property-financial-summary></property-financial-summary>
         <div class="item item-divider">Cash Flow</div>
         <div class="item item-text-wrap">
             <div class="table-striping">
@@ -333,17 +334,10 @@
                 </div>
             </div>
         </div>
-        <property-financial-summary></property-financial-summary>
         <property-graph projected-returns-by-year="property.projectedReturnsByYear"></property-graph>
         <div class="item" ng-if="action === 'edit'">
             <button class="button button-block button-balanced" ng-click="save()">Save</button>
         </div>
         </div>
-        <!-- <div class="row">
-    <div class="col">
-        <stripe-payment-form ng-if="property._id && Auth.getCurrentUser()._id" model="{{property._id}}" user="{{Auth.getCurrentUser()._id}}" url="/api/stripe/investInProperty" redirect-url="/profile/{{Auth.getCurrentUser()._id}}"></stripe-payment-form>
-    </div>
-</div>
- -->
     </ion-content>
 </ion-view>

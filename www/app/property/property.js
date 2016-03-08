@@ -43,6 +43,14 @@ angular.module('preserveusMobile')
                     controller: 'PropertyRentCtrl',
                 }
             }
+        }).state('app.propertyInvest', {
+            url: '/propertyInvest/:id',
+            views: {
+                'menuContent': {
+                    templateUrl: 'app/property/propertyInvest.html',
+                    controller: 'PropertyRentCtrl',
+                }
+            }
         }).state('app.propertyIncomeReport', {
             url: '/propertyIncomeReport/:id',
             views: {

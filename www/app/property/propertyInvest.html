@@ -1,6 +1,6 @@
 <ion-view>
     <ion-nav-title>
-        <span>Pay Rent</span>
+        <span>Invest</span>
     </ion-nav-title>
     <ion-content>
         <div class="card">
@@ -8,9 +8,9 @@
                 <i class="icon ion-ios-arrow-left"></i>
                 <h2>{{::property.name}}</h2>
                 <p>{{::property.fullAddress}}</p>
-                <h4>Onetime Rental Payment</h4>
+                <h4>Onetime Investment</h4>
             </a>
         </div>
-        <stripe-payment-form ng-if="property._id && Auth.getCurrentUser()._id" model="{{property._id}}" user="{{Auth.getCurrentUser()._id}}" url="/api/stripe/payRentForPropertyOnce" redirect-url="#/app/profile/{{Auth.getCurrentUser()._id}}" amount="{{property.projectedMonthlyRentalRevenue}}"></stripe-payment-form>
+        <stripe-payment-form ng-if="property._id && Auth.getCurrentUser()._id" model="{{property._id}}" user="{{Auth.getCurrentUser()._id}}" url="/api/stripe/investInProperty" redirect-url="#/app/profile/{{Auth.getCurrentUser()._id}}"></stripe-payment-form>
     </ion-content>
 </ion-view>
