@@ -1,73 +1,71 @@
 <ion-view view-title="Profile">
     <ion-content>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><i class="icon ion-person"></i> Basic Info</h4>
+        <div class="row">
+            <div class="col">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><i class="icon ion-person"></i> Basic Info</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <b-img public-id="{{user.photo}}" transformation="w_100,h_100,c_thumb,g_face" alt="Profile Picture" class="img-thumbnail"></b-img>
                         </div>
-                        <div class="panel-body">
-                            <div class="text-center">
-                                <b-img public-id="{{user.photo}}" transformation="w_100,h_100,c_thumb,g_face" alt="Profile Picture" class="img-thumbnail"></b-img>
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <label>Name:</label>
                             </div>
-                            <br>
-                            <div class="row">
-                                <div class="col">
-                                    <label>Name:</label>
-                                </div>
-                                <div class="col" ng-bind="user.name">
-                                </div>
+                            <div class="col" ng-bind="user.name">
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label>Email:</label>
-                                </div>
-                                <div class="col">
-                                    <a href="mailto:{{user.email}}" ng-bind="user.email">
-                                    </a>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Email:</label>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label>Address:</label>
-                                </div>
-                                <div class="col">
-                                    {{::user.address}}
-                                    <br /> {{::user.city}} <span ng-if="user.state">,</span> {{::user.state}} {{::user.zip}}
-                                </div>
+                            <div class="col">
+                                <a href="mailto:{{user.email}}" ng-bind="user.email">
+                                </a>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label>Phone:</label>
-                                </div>
-                                <div class="col" ng-bind="user.phone | tel">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Address:</label>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label>Joined:</label>
-                                </div>
-                                <div class="col" ng-bind="user.createdAt | date:'MM/dd/yyyy'">
-                                </div>
+                            <div class="col">
+                                {{::user.address}}
+                                <br /> {{::user.city}} <span ng-if="user.state">,</span> {{::user.state}} {{::user.zip}}
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <a ui-sref="app.userEdit({id: user._id})" class="button button-block button-calm">Edit</a>
-                                    <a ui-sref="app.userInvest({id: user._id})" class="button button-block button-balanced">Investments</a>
-                                    <a ui-sref="app.userRent({id: user._id})" class="button button-block button-assertive">Rents</a>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Phone:</label>
                             </div>
-                            <!-- <div class="row">
-    <div class="col">
-        <a href="#/app/settings" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pencil"></span>Change Password</a>
-    </div>
-    <div class="col">
-    </div>
-</div>
- -->
+                            <div class="col" ng-bind="user.phone | tel">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Joined:</label>
+                            </div>
+                            <div class="col" ng-bind="user.createdAt | date:'MM/dd/yyyy'">
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="list">
+                    <a ui-sref="app.userEdit({id: user._id})" class="item item-icon-right">
+                        <i class="icon ion-ios-arrow-right"></i> Edit
+                    </a>
+                    <a ui-sref="app.userInvest({id: user._id})" class="item item-icon-right">
+                        <i class="icon ion-ios-arrow-right"></i> Investments
+                    </a>
+                    <a ui-sref="app.userRent({id: user._id})" class="item item-icon-right">
+                        <i class="icon ion-ios-arrow-right"></i> Rents
+                    </a>
                 </div>
             </div>
         </div>

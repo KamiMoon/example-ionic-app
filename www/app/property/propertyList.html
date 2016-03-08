@@ -25,11 +25,12 @@
             </ui-gmap-google-map>
         </div>
         <div class="list">
-            <a ng-repeat="property in properties" class="item item-thumbnail-left" href="#/app/property/{{property._id}}">
+            <a ng-repeat="property in properties" class="item item-thumbnail-left item-icon-right" href="#/app/property/{{property._id}}">
                 <b-img public-id="{{property.photo}}" transformation="w_100,h_100,c_fill" alt="{{property.name}}" class="media-object img-property"></b-img>
                 <h2>{{::property.name}}</h2>
                 <p>{{::property.fullAddress}}</p>
                 <p>{{::property.description | limitTo:200}}...</p>
+                <i class="icon ion-ios-arrow-right"></i>
             </a>
         </div>
     </ion-content>

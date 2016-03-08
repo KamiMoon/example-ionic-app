@@ -5,174 +5,53 @@
     <ion-content>
         <div class="row">
             <div class="col">
-                <a href="#/app/property/{{property._id}}">{{::property.name}}</a>
-                <h4>{{::property.fullAddress}}</h4>
+                <div class="list">
+                    <a class="item item-icon-right" href="#/app/property/{{property._id}}">
+                        <i class="icon ion-ios-arrow-right"></i>
+                        <h2>{{::property.name}}</h2>
+                        <p>{{::property.fullAddress}}</p>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><i class="icon ion-stats-bars"></i> All Investments</h4>
+                <div class="list">
+                    <div class="item item-divider">
+                        All Investments
                     </div>
-                    <div class="panel-body">
-                        <ul class="list">
-                            <li class="item" ng-repeat="receipt in property.receipts">
-                                <p>{{::receipt.createdAt | date:"M/d/yy h:mm a"}}</p>
-                                <h2>{{receipt.amount | currency:"$"}}</h2>
-                                <p>{{::receipt.confirmation}}</p>
-                                <p><a href="#/app/profile/{{receipt.user_id}}">{{::receipt.user_name}}</a></p>
-                            </li>
-                        </ul>
-                        <div class="row">
-                            <div class="col">Total: {{::property.receiptsTotal[0].total | currency:"$"}}</div>
-                        </div>
+                    <a class="item item-icon-right" ng-repeat="receipt in property.receipts" href="#/app/profile/{{receipt.user_id}}">
+                        <i class="icon ion-ios-arrow-right"></i>
+                        <h2>{{::receipt.amount | currency:"$"}}</h2>
+                        <p>{{::receipt.createdAt | date:"M/d/yy h:mm a"}}</p>
+                        <p>{{::receipt.confirmation}}</p>
+                        <p>{{::receipt.user_name}}</p>
+                        <p>{{::recepti.email}}</p>
+                    </a>
+                    <div class="item item-divider">
+                        Total: {{::property.receiptsTotal[0].total | currency:"$"}}
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <div class="panel panel-warning">
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><i class="icon ion-calendar"></i> All Rental Payments</h4>
+                <div class="list">
+                    <div class="item item-divider">
+                        All Rental Payments
                     </div>
-                    <div class="panel-body">
-                        <ul class="list">
-                            <li class="item" ng-repeat="rentalPayment in property.rentalPayments">
-                                <p>{{::rentalPayment.createdAt | date:"M/d/yy h:mm a"}}</p>
-                                <h2>{{rentalPayment.amount | currency:"$"}}</h2>
-                                <p>{{::rentalPayment.confirmation}}</p>
-                                <p><a href="#/app/profile/{{rentalPayment.user_id}}">{{::rentalPayment.user_name}}</a></p>
-                            </li>
-                        </ul>
-                        <div class="row">
-                            <div class="col">Total: {{::property.rentalPaymentsTotal[0].total| currency:"$"}}</div>
-                        </div>
+                    <a class="item item-icon-right" ng-repeat="rentalPayment in property.rentalPayments" href="#/app/profile/{{rentalPayment.user_id}}">
+                        <i class="icon ion-ios-arrow-right"></i>
+                        <h2>{{::rentalPayment.amount | currency:"$"}}</h2>
+                        <p>{{::rentalPayment.createdAt | date:"M/d/yy h:mm a"}}</p>
+                        <p>{{::rentalPayment.confirmation}}</p>
+                        <p>{{::rentalPayment.email}}</p>
+                    </a>
+                    <div class="item item-divider">
+                        Total: {{::property.rentalPaymentsTotal[0].total| currency:"$"}}
                     </div>
                 </div>
             </div>
         </div>
     </ion-content>
 </ion-view>
-<!--
-
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <a href="/property/{{property._id}}" class="btn btn-default btn-lg" role="button"> ← Back to {{::property.name}}</a>
-            <br>
-            <br>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="page-header">
-                <h1>Income Report for {{::property.name}}</h1>
-            </div>
-            {{::property.fullAddress}}
-            <br>
-            <br>
-        </div>
-    </div>
-    <div class="row" ng-if="property.receipts && property.receipts.length > 0">
-        <div class="col-md-12">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="glyphicon glyphicon-stats"></i> All  Investments</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>User</th>
-                                    <th>Email</th>
-                                    <th>Confirmation</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="receipt in property.receipts">
-                                    <td>
-                                        {{::receipt.createdAt | date:"M/d/yy h:mm a"}}
-                                    </td>
-                                    <td>
-                                        {{receipt.amount | currency:"$"}}
-                                    </td>
-                                    <td>
-                                        <a href="/profile/{{receipt.user_id}}">{{::receipt.user_name}}</a>
-                                    </td>
-                                    <td>
-                                        {{::receipt.email}}
-                                    </td>
-                                    <td>
-                                        {{::receipt.confirmation}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td>Total</td>
-                                    <td colspan="4">{{::property.receiptsTotal[0].total | currency:"$"}}</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row" ng-if="property.rentalPayments && property.rentalPayments.length > 0">
-        <div class="col-md-12">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="glyphicon glyphicon-calendar"></i> All  Rental Payments</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>User</th>
-                                    <th>Email</th>
-                                    <th>Confirmation</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="rentalPayment in property.rentalPayments">
-                                    <td>
-                                        {{::rentalPayment.createdAt | date:"M/d/yy h:mm a"}}
-                                    </td>
-                                    <td>
-                                        {{rentalPayment.amount | currency:"$"}}
-                                    </td>
-                                    <td>
-                                        <a href="/profile/{{rentalPayment.user_id}}">{{::rentalPayment.user_name}}</a>
-                                    </td>
-                                    <td>
-                                        {{::rentalPayment.email}}
-                                    </td>
-                                    <td>
-                                        {{::rentalPayment.confirmation}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td>Total</td>
-                                    <td colspan="4">{{::property.rentalPaymentsTotal[0].total| currency:"$"}}</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->

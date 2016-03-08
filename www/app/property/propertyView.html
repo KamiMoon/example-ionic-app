@@ -8,14 +8,16 @@
                 <b-img public-id="{{property.photo}}" transformation="w_300,h_300,c_fill" alt="{{property.name}}" class="img-responsive"></b-img>
             </div>
         </div>
-        <div ng-if="property.allowInvest" class="row">
+        <div class="row">
             <div class="col">
-                <a href="#/app/propertyInvestment/view/{{property._id}}" class="button button-block button-balanced" role="button">Invest</a>
-            </div>
-        </div>
-        <div ng-if="property.allowRent && property.projectedMonthlyRentalRevenue" class="row">
-            <div class="col">
-                <a href="#/app/propertyRent/{{property._id}}" class="button button-block button-energized" role="button">Pay Rent</a>
+                <div class="list">
+                    <a ng-if="property.allowInvest" href="#/app/propertyInvestment/view/{{property._id}}" class="item item-icon-right" role="button">
+                        <i class="icon ion-ios-arrow-right"></i> Invest
+                    </a>
+                    <a ng-if="property.allowRent && property.projectedMonthlyRentalRevenue" href="#/app/propertyRent/{{property._id}}" class="item item-icon-right" role="button">
+                        <i class="icon ion-ios-arrow-right"></i>Pay Rent
+                    </a>
+                </div>
             </div>
         </div>
         <div>

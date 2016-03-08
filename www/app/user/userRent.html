@@ -3,14 +3,15 @@
         <span>Rent Payments for {{user.name}}</span>
     </ion-nav-title>
     <ion-content>
-        <ul class="list">
-            <li class="item" ng-repeat="rentalPayment in user.rentalPayments">
+        <div class="list">
+            <a class="item item-icon-right" ng-repeat="rentalPayment in user.rentalPayments" href="#/app/property/{{rentalPayment.model_id}}">
+                <i class="icon ion-ios-arrow-right"></i>
                 <p>{{::rentalPayment.createdAt | date:"M/d/yy h:mm a"}}</p>
                 <h2>{{rentalPayment.amount | currency:"$"}}</h2>
                 <p>{{::rentalPayment.confirmation}}</p>
-                <p><a href="#/app/property/{{rentalPayment.model_id}}">{{::rentalPayment.description}}</a></p>
-            </li>
-        </ul>
+                <p>{{::rentalPayment.description}}</p>
+            </a>
+        </div>
         <div class="row">
             <div class="col">Total: {{::user.rentalPaymentsTotal[0].total| currency:"$"}}</div>
         </div>
