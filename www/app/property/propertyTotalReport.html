@@ -1,37 +1,29 @@
 <ion-view view-title="All Property Income">
     <ion-content>
-        <div class="row">
-            <div class="col">
-                <div class="list">
-                    <div class="item item-divider">
-                        Investment Totals by Property
-                    </div>
-                    <a class="item item-icon-right" ng-repeat="receipt in totals.investmentTotals.propertyReceipts" href="#/app/propertyIncomeReport/{{receipt._id}}">
-                        <i class="icon ion-ios-arrow-right"></i>
-                        <h2>{{::receipt.total | currency:"$"}}</h2>
-                        <p>{{::receipt.description}}</p>
-                    </a>
-                    <div class="item item-divider">
-                        Total: {{::totals.investmentTotals.total[0].total | currency:"$"}}
-                    </div>
-                </div>
+        <div class="list">
+            <div class="item item-divider">
+                Investment Totals by Property
+            </div>
+            <a class="item item-icon-right" ng-repeat="receipt in totals.investmentTotals.propertyReceipts" href="#/app/propertyIncomeReport/{{receipt._id}}">
+                <i class="icon ion-ios-arrow-right"></i>
+                <h2>{{::receipt.total | currency:"$"}}</h2>
+                <p>{{::receipt.description}}</p>
+            </a>
+            <div class="item item-divider">
+                Total: {{::totals.investmentTotals.total[0].total | currency:"$"}}
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="list">
-                    <div class="item item-divider">
-                        Total Rent by Property
-                    </div>
-                    <a class="item item-icon-right" ng-repeat="receipt in totals.rentTotals.propertyReceipts" href="#/app/propertyIncomeReport/{{receipt._id}}">
-                        <i class="icon ion-ios-arrow-right"></i>
-                        <h2>{{::receipt.total | currency:"$"}}</h2>
-                        <p>{{::receipt.description}}</p>
-                    </a>
-                    <div class="item item-divider">
-                        Total: {{::totals.rentTotals.total[0].total | currency:"$"}}
-                    </div>
-                </div>
+        <div class="list">
+            <div class="item item-divider">
+                Total Rent by Property
+            </div>
+            <a class="item item-icon-right" ng-repeat="receipt in totals.rentTotals.propertyReceipts" href="#/app/propertyIncomeReport/{{receipt._id}}">
+                <i class="icon ion-ios-arrow-right"></i>
+                <h2>{{::receipt.total | currency:"$"}}</h2>
+                <p>{{::receipt.description}}</p>
+            </a>
+            <div class="item item-divider">
+                Total: {{::totals.rentTotals.total[0].total | currency:"$"}}
             </div>
         </div>
     </ion-content>

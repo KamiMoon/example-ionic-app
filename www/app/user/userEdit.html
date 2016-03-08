@@ -1,23 +1,17 @@
 <ion-view view-title="Edit Profile">
     <ion-content>
-        <form name="form" ng-submit="save(form)" novalidate>
-            <div class="row">
-                <div class="col">
-                    <b-input model="user.name"></b-input>
-                    <b-input type="file" model="user.photo" transformation="w_100,h_100,c_thumb,g_face"></b-input>
-                    <b-input type="tel" model="user.phone"></b-input>
-                    <b-input ng-if="Auth.isAdmin()" type="select" multiple="true" source="roles" label="Roles" model="user.roles"></b-input>
-                    <b-input model="user.address"></b-input>
-                    <b-input model="user.city"></b-input>
-                    <b-input type="select" source="states" label="State" model="user.state">
-                    </b-input>
-                    <b-input model="user.zip"></b-input>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <b-input type="submit"></b-input>
-                </div>
+        <form name="form" ng-submit="save(form)" novalidate class="list">
+            <b-input model="user.name"></b-input>
+            <b-input type="file" model="user.photo" transformation="w_100,h_100,c_thumb,g_face"></b-input>
+            <b-input type="tel" model="user.phone"></b-input>
+            <b-input ng-if="Auth.isAdmin()" type="select" multiple="true" source="roles" label="Roles" model="user.roles"></b-input>
+            <b-input model="user.address"></b-input>
+            <b-input model="user.city"></b-input>
+            <b-input type="select" source="states" label="State" model="user.state">
+            </b-input>
+            <b-input model="user.zip"></b-input>
+            <div class="item">
+                <b-input type="submit"></b-input>
             </div>
         </form>
     </ion-content>

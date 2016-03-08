@@ -11,9 +11,7 @@
                 <p>{{::receipt.confirmation}}</p>
                 <p>{{::receipt.description}}</p>
             </a>
-        </div>
-        <div class="row">
-            <div class="col">Total: {{::user.receiptsTotal[0].total | currency:"$"}}</div>
+            <div class="item item-divider">Total: {{::user.receiptsTotal[0].total | currency:"$"}}</div>
         </div>
     </ion-content>
 </ion-view>

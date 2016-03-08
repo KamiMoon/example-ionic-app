@@ -3,46 +3,36 @@
         <span>Add/Edit Property</span>
     </ion-nav-title>
     <ion-content>
-        <form name="form" ng-submit="save(form)" novalidate>
-            <div class="row">
-                <div class="col">
-                    <h3><i class="icon ion-earth"></i> Basic Info:</h3>
-                    <b-input model="property.name" required="true"></b-input>
-                    <b-input type="file" model="property.photo" transformation="w_100,h_100,c_fill"></b-input>
-                    <b-input type="textarea" rows="6" cols="5" model="property.description"></b-input>
-                </div>
+        <form name="form" ng-submit="save(form)" class="list" novalidate>
+            <div class="item item-divider">
+                <h3><i class="icon ion-earth"></i> Basic Info:</h3>
             </div>
-            <div class="row">
-                <div class="col">
-                    <h3><i class="icon ion-home"></i> Address:</h3>
-                    <b-input model="property.address" required="true"></b-input>
-                    <b-input model="property.city" required="true"></b-input>
-                    <b-input type="select" source="states" label="State" model="property.state" require="true">
-                    </b-input>
-                    <b-input model="property.zip" required="true"></b-input>
-                </div>
+            <b-input model="property.name" required="true"></b-input>
+            <b-input type="file" model="property.photo" transformation="w_100,h_100,c_fill"></b-input>
+            <b-input type="textarea" rows="6" cols="5" model="property.description"></b-input>
+            <div class="item item-divider">
+                <h3><i class="icon ion-home"></i> Address:</h3>
             </div>
-            <div class="row">
-                <div class="col">
-                    <h3><i class="icon ion-ios-list-outline"></i> Property Features:</h3>
-                    <b-input type="number" model="property.beds"></b-input>
-                    <b-input type="number" model="property.baths"></b-input>
-                    <b-input type="number" model="property.sqft" required="true"></b-input>
-                    <b-input type="number" model="property.units" required="true"></b-input>
-                    <b-input type="number" model="property.garages"></b-input>
-                </div>
+            <b-input model="property.address" required="true"></b-input>
+            <b-input model="property.city" required="true"></b-input>
+            <b-input type="select" source="states" label="State" model="property.state" require="true">
+            </b-input>
+            <b-input model="property.zip" required="true"></b-input>
+            <div class="item item-divider">
+                <h3><i class="icon ion-ios-list-outline"></i> Property Features:</h3>
             </div>
-            <div class="row">
-                <div class="col">
-                    <h3><i class="icon ion-stats-bars"></i> Investment Features:</h3>
-                    <b-input type="number" model="property.cost" required="true"></b-input>
-                    <b-input type="number" model="property.mortgagePrinciple" label="Mortgage" required="true"></b-input>
-                </div>
+            <b-input type="number" model="property.beds"></b-input>
+            <b-input type="number" model="property.baths"></b-input>
+            <b-input type="number" model="property.sqft" required="true"></b-input>
+            <b-input type="number" model="property.units" required="true"></b-input>
+            <b-input type="number" model="property.garages"></b-input>
+            <div class="item item-divider">
+                <h3><i class="icon ion-stats-bars"></i> Investment Features:</h3>
             </div>
-            <div class="row">
-                <div class="col">
-                    <h3><i class="icon ion-ios-list"></i> Additional Features:</h3>
-                </div>
+            <b-input type="number" model="property.cost" required="true"></b-input>
+            <b-input type="number" model="property.mortgagePrinciple" label="Mortgage" required="true"></b-input>
+            <div class="item item-divider">
+                <h3><i class="icon ion-ios-list"></i> Additional Features:</h3>
             </div>
             <div class="row" ng-repeat="featureRow in property.features">
                 <div class="col">
@@ -82,14 +72,8 @@
                     <b-upload-multiple ng-model="property.photos" transformation="w_100,h_100,c_thumb,g_face"></b-upload-multiple>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div align="right">
-                        <b-input type="submit"></b-input>
-                    </div>
-                    <br>
-                    <br>
-                </div>
+            <div class="item">
+                <b-input type="submit"></b-input>
             </div>
         </form>
     </ion-content>

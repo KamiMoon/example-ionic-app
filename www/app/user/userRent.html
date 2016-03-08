@@ -11,9 +11,7 @@
                 <p>{{::rentalPayment.confirmation}}</p>
                 <p>{{::rentalPayment.description}}</p>
             </a>
-        </div>
-        <div class="row">
-            <div class="col">Total: {{::user.rentalPaymentsTotal[0].total| currency:"$"}}</div>
+            <div class="item item-divider">Total: {{::user.rentalPaymentsTotal[0].total| currency:"$"}}</div>
         </div>
     </ion-content>
 </ion-view>

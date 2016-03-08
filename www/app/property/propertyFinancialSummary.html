@@ -1,27 +1,25 @@
-<div class="panel panel-default">
-    <div class="panel-heading">Financial Summary</div>
-    <div class="panel-body">
-        <div class="table-striping">
-            <div class="row">
-                <div class="col">Anticipated hold period</div>
-                <div class="col">{{::property.yearsToHold}} years</div>
-            </div>
-            <div class="row">
-                <div class="col">Average return per year</div>
-                <div class="col">{{property.avgReturnPerYear | currency:"$"}}</div>
-            </div>
-            <div class="row">
-                <div class="col">Internal rate of return</div>
-                <div class="col">{{property.irr}}%</div>
-            </div>
-            <div class="row">
-                <div class="col">Return on investment</div>
-                <div class="col">{{property.returnOnInvestmentPercent}}%</div>
-            </div>
-            <div class="row">
-                <div class="col">Net present value</div>
-                <div class="col">{{property.netPresentValue | currency:"$"}}</div>
-            </div>
+<div class="item item-divider">Financial Summary</div>
+<div class="item item-text-wrap">
+    <div class="table-striping">
+        <div class="row">
+            <div class="col">Anticipated hold period</div>
+            <div class="col">{{::property.yearsToHold}} years</div>
+        </div>
+        <div class="row">
+            <div class="col">Average return per year</div>
+            <div class="col">{{property.avgReturnPerYear | currency:"$"}}</div>
+        </div>
+        <div class="row">
+            <div class="col">Internal rate of return</div>
+            <div class="col">{{property.irr}}%</div>
+        </div>
+        <div class="row">
+            <div class="col">Return on investment</div>
+            <div class="col">{{property.returnOnInvestmentPercent}}%</div>
+        </div>
+        <div class="row">
+            <div class="col">Net present value</div>
+            <div class="col">{{property.netPresentValue | currency:"$"}}</div>
         </div>
     </div>
 </div>

@@ -1,56 +1,44 @@
 <ion-view>
     <ion-nav-title>
-        <span>Income Report</span>
+        <span>Income for Property</span>
     </ion-nav-title>
     <ion-content>
-        <div class="row">
-            <div class="col">
-                <div class="list">
-                    <a class="item item-icon-right" href="#/app/property/{{property._id}}">
-                        <i class="icon ion-ios-arrow-right"></i>
-                        <h2>{{::property.name}}</h2>
-                        <p>{{::property.fullAddress}}</p>
-                    </a>
-                </div>
+        <div class="list">
+            <a class="item item-icon-right" href="#/app/property/{{property._id}}">
+                <i class="icon ion-ios-arrow-right"></i>
+                <h2>{{::property.name}}</h2>
+                <p>{{::property.fullAddress}}</p>
+            </a>
+        </div>
+        <div class="list">
+            <div class="item item-divider">
+                All Investments
+            </div>
+            <a class="item item-icon-right" ng-repeat="receipt in property.receipts" href="#/app/profile/{{receipt.user_id}}">
+                <i class="icon ion-ios-arrow-right"></i>
+                <h2>{{::receipt.amount | currency:"$"}}</h2>
+                <p>{{::receipt.createdAt | date:"M/d/yy h:mm a"}}</p>
+                <p>{{::receipt.confirmation}}</p>
+                <p>{{::receipt.user_name}}</p>
+                <p>{{::recepti.email}}</p>
+            </a>
+            <div class="item item-divider">
+                Total: {{::property.receiptsTotal[0].total | currency:"$"}}
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="list">
-                    <div class="item item-divider">
-                        All Investments
-                    </div>
-                    <a class="item item-icon-right" ng-repeat="receipt in property.receipts" href="#/app/profile/{{receipt.user_id}}">
-                        <i class="icon ion-ios-arrow-right"></i>
-                        <h2>{{::receipt.amount | currency:"$"}}</h2>
-                        <p>{{::receipt.createdAt | date:"M/d/yy h:mm a"}}</p>
-                        <p>{{::receipt.confirmation}}</p>
-                        <p>{{::receipt.user_name}}</p>
-                        <p>{{::recepti.email}}</p>
-                    </a>
-                    <div class="item item-divider">
-                        Total: {{::property.receiptsTotal[0].total | currency:"$"}}
-                    </div>
-                </div>
+        <div class="list">
+            <div class="item item-divider">
+                All Rental Payments
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="list">
-                    <div class="item item-divider">
-                        All Rental Payments
-                    </div>
-                    <a class="item item-icon-right" ng-repeat="rentalPayment in property.rentalPayments" href="#/app/profile/{{rentalPayment.user_id}}">
-                        <i class="icon ion-ios-arrow-right"></i>
-                        <h2>{{::rentalPayment.amount | currency:"$"}}</h2>
-                        <p>{{::rentalPayment.createdAt | date:"M/d/yy h:mm a"}}</p>
-                        <p>{{::rentalPayment.confirmation}}</p>
-                        <p>{{::rentalPayment.email}}</p>
-                    </a>
-                    <div class="item item-divider">
-                        Total: {{::property.rentalPaymentsTotal[0].total| currency:"$"}}
-                    </div>
-                </div>
+            <a class="item item-icon-right" ng-repeat="rentalPayment in property.rentalPayments" href="#/app/profile/{{rentalPayment.user_id}}">
+                <i class="icon ion-ios-arrow-right"></i>
+                <h2>{{::rentalPayment.amount | currency:"$"}}</h2>
+                <p>{{::rentalPayment.createdAt | date:"M/d/yy h:mm a"}}</p>
+                <p>{{::rentalPayment.confirmation}}</p>
+                <p>{{::rentalPayment.email}}</p>
+            </a>
+            <div class="item item-divider">
+                Total: {{::property.rentalPaymentsTotal[0].total| currency:"$"}}
             </div>
         </div>
     </ion-content>
