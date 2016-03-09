@@ -31,47 +31,6 @@
             </div>
             <b-input type="number" model="property.cost" required="true"></b-input>
             <b-input type="number" model="property.mortgagePrinciple" label="Mortgage" required="true"></b-input>
-            <div class="item item-divider">
-                <h3><i class="icon ion-ios-list"></i> Additional Features:</h3>
-            </div>
-            <div class="row" ng-repeat="featureRow in property.features">
-                <div class="col">
-                    <div class="list">
-                        <label class="item item-input">
-                            <input type="text" ng-model="featureRow[0].text">
-                        </label>
-                        <label class="item item-input">
-                            <input type="text" ng-model="featureRow[1].text">
-                        </label>
-                        <label class="item item-input">
-                            <input type="text" ng-model="featureRow[2].text">
-                        </label>
-                    </div>
-                    <button class="button button-assertive" type="button" ng-click="deleteFeature(featureRow)">Delete</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="list">
-                        <label class="item item-input">
-                            <input type="text" ng-model="featureToAddRow[0].text">
-                        </label>
-                        <label class="item item-input">
-                            <input type="text" ng-model="featureToAddRow[1].text">
-                        </label>
-                        <label class="item item-input">
-                            <input type="text" ng-model="featureToAddRow[2].text">
-                        </label>
-                    </div>
-                    <button class="button button-calm" type="button" ng-click="addMoreFeatures()">Add</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h3><i class="icon ion-camera"></i> Photo Gallery:</h3>
-                    <b-upload-multiple ng-model="property.photos" transformation="w_100,h_100,c_thumb,g_face"></b-upload-multiple>
-                </div>
-            </div>
             <div class="item">
                 <b-input type="submit"></b-input>
             </div>

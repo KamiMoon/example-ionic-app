@@ -10,7 +10,7 @@
             <div class="item item-image">
                 <b-img public-id="{{property.photo}}" transformation="w_380,h_380,c_fill" alt="{{property.name}}"></b-img>
             </div>
-            <a class="item item-icon-right">
+            <a class="item item-icon-right" href="#/app/propertyFeatures/{{property._id}}">
                 <h3><span ng-if="property.beds">{{::property.beds}} beds,</span> <span ng-if="property.baths">{{::property.baths}} baths,</span> <span ng-if="property.sqft">{{::property.sqft}} sqft</span></h3>
                 <p>
                     {{::property.description}}
@@ -22,6 +22,10 @@
                 <h3 ng-if="property.mortgagePrinciple">Est. Mortgage: {{::property.mortgagePrinciple | currency:"$"}}</h3>
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
+            <a href="#/app/propertyGallery/{{property._id}}" class="item item-icon-left item-icon-right">
+                <i class="icon ion-images"></i> Gallery
+                <i class="icon ion-ios-arrow-right"></i>
+            </a>
             <a ng-if="property.allowInvest" class="item item-icon-left item-icon-right" href="#/app/propertyInvest/{{property._id}}">
                 <i class="icon ion-stats-bars"></i> Invest
                 <i class="icon ion-ios-arrow-right"></i>
@@ -30,42 +34,11 @@
                 <i class="icon ion-calendar"></i> Pay Rent
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
+            <a ng-if="Auth.isAdmin()" href="#/app/property/edit/{{property._id}}" class="item item-icon-left item-icon-right">
+                <i class="icon ion-edit"></i> Edit
+                <i class="icon ion-ios-arrow-right"></i>
+            </a>
         </div>
         <!-- TODO - mobile share -->
-        <!--
-        <div class="row responsive-sm" ng-repeat="featureRow in property.features">
-            <div class="col">
-                {{::featureRow[0].text}}
-            </div>
-            <div class="col">
-                {{::featureRow[1].text}}
-            </div>
-            <div class="col">
-                {{::featureRow[2].text}}
-            </div>
-        </div>
-        <div class="row" ng-if="property.projectedReturnsByYear && property.projectedReturnsByYear.length > 0">
-            <div class="col">
-                <property-graph projected-returns-by-year="property.projectedReturnsByYear"></property-graph>
-            </div>
-        </div>
-        <div class="row" ng-if="property.irr">
-            <div class="col">
-                <property-financial-summary></property-financial-summary>
-            </div>
-        </div>
-        <div class="row" ng-repeat="row in property.photoRows">
-            <div class="col" ng-repeat="photo in row">
-                <a href="https://res.cloudinary.com/ddovrks1z/image/upload/w_500,h_500,c_fill/{{photo}}.jpg" class="thumbnail swipebox" target="_self">
-                    <img ng-src="https://res.cloudinary.com/ddovrks1z/image/upload/w_300,h_300,c_fill/{{photo}}.jpg" class="image-property-property" alt="image">
-                </a>
-            </div>
-        </div>
-        <script>
-        $(document).ready(function() {
-            $('.swipebox').swipebox();
-        });
-        </script>
-        -->
     </ion-content>
 </ion-view>

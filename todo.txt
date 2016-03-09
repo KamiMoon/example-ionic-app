@@ -24,3 +24,8 @@ Actions:
 	-Settings
 	-My Investments
 	-My Rent
+
+
+
+
+-Pull out features into its own page

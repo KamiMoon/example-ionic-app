@@ -22,6 +22,7 @@ angular.module('preserveusMobile')
                 }
             }).state('app.userView', {
                 url: '/profile/:id',
+                cache: false,
                 views: {
                     'menuContent': {
                         templateUrl: 'app/user/profile.html',

@@ -4,6 +4,7 @@ angular.module('preserveusMobile')
     .config(function($stateProvider) {
         $stateProvider.state('app.propertyList', {
             url: '/property',
+            cache: false,
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyList.html',
@@ -19,8 +20,27 @@ angular.module('preserveusMobile')
                 }
             },
             roles: ['admin']
+        }).state('app.propertyAddEditFeatures', {
+            url: '/propertyAddEditFeatures/:action/:id',
+            views: {
+                'menuContent': {
+                    templateUrl: 'app/property/propertyAddEditFeatures.html',
+                    controller: 'PropertyAddEditCtrl',
+                }
+            },
+            roles: ['admin']
+        }).state('app.propertyAddEditGallery', {
+            url: '/propertyAddEditGallery/:action/:id',
+            views: {
+                'menuContent': {
+                    templateUrl: 'app/property/propertyAddEditGallery.html',
+                    controller: 'PropertyAddEditCtrl',
+                }
+            },
+            roles: ['admin']
         }).state('app.propertyView', {
             url: '/property/:id',
+            cache: false,
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyView.html',
@@ -29,6 +49,7 @@ angular.module('preserveusMobile')
             }
         }).state('app.propertyInvestment', {
             url: '/propertyInvestment/:action/:id',
+            cache: false,
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyInvestment.html',
@@ -49,6 +70,24 @@ angular.module('preserveusMobile')
                 'menuContent': {
                     templateUrl: 'app/property/propertyInvest.html',
                     controller: 'PropertyRentCtrl',
+                }
+            }
+        }).state('app.propertyFeatures', {
+            url: '/propertyFeatures/:id',
+            cache: false,
+            views: {
+                'menuContent': {
+                    templateUrl: 'app/property/propertyFeatures.html',
+                    controller: 'PropertyViewCtrl',
+                }
+            }
+        }).state('app.propertyGallery', {
+            url: '/propertyGallery/:id',
+            cache: false,
+            views: {
+                'menuContent': {
+                    templateUrl: 'app/property/propertyGallery.html',
+                    controller: 'PropertyViewCtrl',
                 }
             }
         }).state('app.propertyIncomeReport', {

@@ -1,0 +1,22 @@
+<ion-view view-title="Gallery">
+    <ion-content>
+        <div class="list">
+            <a ng-if="Auth.isAdmin()" href="#/app/propertyAddEditGallery/edit/{{property._id}}" class="item item-icon-left item-icon-right">
+                <i class="icon ion-edit"></i> Edit
+                <i class="icon ion-ios-arrow-right"></i>
+            </a>
+        </div>
+        <div class="row" ng-repeat="row in property.photoRows">
+            <div class="col" ng-repeat="photo in row">
+                <a href="https://res.cloudinary.com/ddovrks1z/image/upload/w_500,h_500,c_fill/{{photo}}.jpg" class="thumbnail swipebox" target="_self">
+                    <img ng-src="https://res.cloudinary.com/ddovrks1z/image/upload/w_300,h_300,c_fill/{{photo}}.jpg" class="image-property-property" alt="image">
+                </a>
+            </div>
+        </div>
+        <script>
+        $(document).ready(function() {
+            $('.swipebox').swipebox();
+        });
+        </script>
+    </ion-content>
+</ion-view>
