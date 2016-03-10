@@ -1,11 +1,9 @@
 <ion-view>
-    <ion-nav-title>
-    </ion-nav-title>
     <ion-nav-buttons side="right">
-        <button class="button button-light" ng-click="openPopover($event)">
-            Filter
-        </button>
         <div class="item-input-inset">
+            <button class="button button-light" ng-click="openPopover($event)">
+                Filter
+            </button>
             <label class="item-input-wrapper">
                 <i class="icon ion-ios-search placeholder-icon"></i>
                 <input type="search" ng-model="searchText" placeholder="Search">
@@ -14,9 +12,6 @@
                 Cancel
             </button>
         </div>
-        <a class="button button-light" href="#app/propertyMap/all">
-            Map
-        </a>
     </ion-nav-buttons>
     <ion-content>
         <div class="list">

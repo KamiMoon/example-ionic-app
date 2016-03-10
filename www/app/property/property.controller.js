@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .controller('PropertyCtrl', function($scope, PropertyService, uiGmapGoogleMapApi) {
+    .controller('PropertyMapCtrl', function($scope, $stateParams, PropertyService, uiGmapGoogleMapApi) {
+
+        var id = $stateParams.id;
 
         $scope.loaded = false;
 
@@ -65,6 +67,14 @@ angular.module('preserveusMobile')
             uiGmapGoogleMapApi.then(function(maps) {
                 buildMap();
             });
+        });
+
+    }).controller('PropertySearchCtrl', function($scope, PropertyService) {
+
+
+        PropertyService.query().$promise.then(function(properties) {
+            $scope.properties = properties;
+
         });
 
     }).controller('PropertyAddEditCtrl', function($scope, $stateParams, $state, PropertyService, ValidationService) {

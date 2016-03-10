@@ -34,5 +34,6 @@
 .angular-google-map,
 .angular-google-map-container {
     width: 100%;
-    min-height: 300px;
+    /* TODO - no */
+    min-height: 600px;
 }

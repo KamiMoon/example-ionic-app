@@ -1,0 +1,37 @@
+<ion-view>
+    <ion-nav-buttons side="right">
+        <button class="button button-light" ng-click="openPopover($event)">
+            Filter
+        </button>
+        <div class="item-input-inset">
+            <label class="item-input-wrapper">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="search" ng-model="searchText" placeholder="Search">
+            </label>
+            <button class="button button-clear">
+                Cancel
+            </button>
+        </div>
+        <a class="button button-light" href="#app/property">
+            List
+        </a>
+    </ion-nav-buttons>
+    <ion-content>
+        <div>
+            <ui-gmap-google-map id="map" center="map.center" zoom="map.zoom">
+                <ui-gmap-markers models="mapMarkers" coords="'self'" icon="'icon'" click="markerClick">
+                    <ui-gmap-windows show="show">
+                        <div class="map-window">
+                            <a ng-non-bindable href="#/app/property/{{id}}">
+                                <img ng-non-bindable class="media-object img-property" src="{{photo}}" alt="{{title}}">
+                            </a>
+                            <h4 ng-non-bindable>{{title}}</h4>
+                            <h6 ng-non-bindable>{{address}}</h6>
+                            <p ng-non-bindable>{{description | limitTo: 200}}</p>
+                        </div>
+                    </ui-gmap-windows>
+                </ui-gmap-markers>
+            </ui-gmap-google-map>
+        </div>
+    </ion-content>
+</ion-view>

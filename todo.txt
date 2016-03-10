@@ -27,5 +27,18 @@ Actions:
 
 
 
+-Search Property
 
 -Pull out features into its own page
+
+
+-Add/Edit features is broken etc
+
+
+-Image Upload
+-Camera integration
+
+-Blog/News 
+
+-Chat
+

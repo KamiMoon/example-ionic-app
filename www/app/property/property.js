@@ -8,9 +8,18 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyList.html',
-                    controller: 'PropertyCtrl',
+                    controller: 'PropertySearchCtrl',
                 }
             }
+        }).state('app.propertyMap', {
+            url: '/propertyMap/:id',
+            views: {
+                'menuContent': {
+                    templateUrl: 'app/property/propertyMap.html',
+                    controller: 'PropertyMapCtrl',
+                }
+            },
+            roles: ['admin']
         }).state('app.propertyAddEdit', {
             url: '/property/:action/:id',
             views: {

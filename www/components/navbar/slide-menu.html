@@ -1,6 +1,6 @@
 <ion-side-menus enable-menu-with-back-views="false">
     <ion-side-menu-content class="post-size-14px">
-        <ion-nav-bar class="bar app-top-bar">
+        <ion-nav-bar class="bar">
             <ion-nav-back-button>
             </ion-nav-back-button>
             <ion-nav-buttons side="left">
@@ -15,20 +15,24 @@
             <ion-list>
                 <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.propertyList">
                     <i class="icon ion-home"></i>
-                    <h2 class="menu-text">View Property</h2>
+                    <h2 class="menu-text">Search Property</h2>
+                </ion-item>
+                <ion-item ng-if="Auth.isAdmin()" class="item-icon-left" nav-clear menu-close href="#/app/property/add/1">
+                    <i class="icon ion-ios-compose-outline"></i>
+                    <h2 class="menu-text">Add Property</h2>
                 </ion-item>
                 <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.userView({id: Auth.getCurrentUser()._id})">
                     <i class="icon ion-person"></i>
                     <h2 class="menu-text">Profile</h2>
                 </ion-item>
-                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.userInvest({id: Auth.getCurrentUser()._id})">
+                <!-- <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.userInvest({id: Auth.getCurrentUser()._id})">
                     <i class="icon ion-stats-bars"></i>
                     <h2 class="menu-text">My Investments</h2>
                 </ion-item>
                 <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.userRent({id: Auth.getCurrentUser()._id})">
                     <i class="icon ion-calendar"></i>
                     <h2 class="menu-text">My Rent</h2>
-                </ion-item>
+                </ion-item> -->
                 <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.settings">
                     <i class="icon ion-gear-a"></i>
                     <h2 class="menu-text">Settings</h2>
