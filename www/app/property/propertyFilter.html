@@ -1,0 +1,40 @@
+<ion-view>
+    <ion-nav-title>
+        <span>Filter</span>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-clear" ng-click="search()">
+            Search
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list">
+            <div class="item item-divider">
+                <h3><i class="icon ion-earth"></i> Basic Info:</h3>
+            </div>
+            <b-input model="searchParams.name"></b-input>
+            <b-input type="textarea" rows="6" cols="5" model="searchParams.description"></b-input>
+            <div class="item item-divider">
+                <h3><i class="icon ion-home"></i> Address:</h3>
+            </div>
+            <b-input model="searchParams.address"></b-input>
+            <b-input model="searchParams.city"></b-input>
+            <b-input type="select" source="states" label="State" model="searchParams.state">
+            </b-input>
+            <b-input model="searchParams.zip"></b-input>
+            <div class="item item-divider">
+                <h3><i class="icon ion-ios-list-outline"></i> Property Features:</h3>
+            </div>
+            <b-input type="number" model="searchParams.beds"></b-input>
+            <b-input type="number" model="searchParams.baths"></b-input>
+            <b-input type="number" model="searchParams.sqft"></b-input>
+            <b-input type="number" model="searchParams.units"></b-input>
+            <b-input type="number" model="searchParams.garages"></b-input>
+            <div class="item item-divider">
+                <h3><i class="icon ion-stats-bars"></i> Investment Features:</h3>
+            </div>
+            <b-input type="number" model="searchParams.cost"></b-input>
+            <b-input type="number" model="searchParams.mortgagePrinciple" label="Mortgage"></b-input>
+        </div>
+    </ion-content>
+</ion-view>

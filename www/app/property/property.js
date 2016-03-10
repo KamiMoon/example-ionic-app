@@ -10,6 +10,9 @@ angular.module('preserveusMobile')
                     templateUrl: 'app/property/propertyList.html',
                     controller: 'PropertySearchCtrl',
                 }
+            },
+            params: {
+                searchParams: {}
             }
         }).state('app.propertyMap', {
             url: '/propertyMap/:id',
@@ -19,7 +22,20 @@ angular.module('preserveusMobile')
                     controller: 'PropertyMapCtrl',
                 }
             },
-            roles: ['admin']
+            params: {
+                searchParams: {}
+            }
+        }).state('app.propertyFilter', {
+            url: '/propertyFilter',
+            views: {
+                'menuContent': {
+                    templateUrl: 'app/property/propertyFilter.html',
+                    controller: 'PropertyFilterCtrl',
+                }
+            },
+            params: {
+                searchParams: {}
+            }
         }).state('app.propertyAddEdit', {
             url: '/property/:action/:id',
             views: {

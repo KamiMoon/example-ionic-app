@@ -1,6 +1,6 @@
 <ion-view>
     <ion-nav-buttons side="right">
-        <button class="button button-light" ng-click="openPopover($event)">
+        <button class="button button-light" ng-click="filter()">
             Filter
         </button>
         <div class="item-input-inset">
@@ -12,7 +12,7 @@
                 Cancel
             </button>
         </div>
-        <a class="button button-light" href="#app/property">
+        <a class="button button-light" ng-click="list()">
             List
         </a>
     </ion-nav-buttons>

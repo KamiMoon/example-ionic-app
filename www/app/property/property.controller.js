@@ -1,9 +1,17 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .controller('PropertyMapCtrl', function($scope, $stateParams, PropertyService, uiGmapGoogleMapApi) {
+    .controller('PropertyMapCtrl', function($scope, $state, $stateParams, PropertyService, uiGmapGoogleMapApi) {
 
-        var id = $stateParams.id;
+        $scope.searchParams = $stateParams.searchParams;
+
+        $scope.filter = function() {
+            $state.go('app.propertyFilter', { searchParams: $scope.searchParams });
+        };
+
+        $scope.list = function() {
+            $state.go('app.propertyList', { searchParams: $scope.searchParams });
+        };
 
         $scope.loaded = false;
 
@@ -61,21 +69,53 @@ angular.module('preserveusMobile')
             }
         };
 
-        PropertyService.query().$promise.then(function(properties) {
-            $scope.properties = properties;
+        $scope.search = function() {
 
-            uiGmapGoogleMapApi.then(function(maps) {
-                buildMap();
+            PropertyService.query($scope.searchParams).$promise.then(function(properties) {
+                $scope.properties = properties;
+
+                uiGmapGoogleMapApi.then(function(maps) {
+                    buildMap();
+                });
             });
-        });
 
-    }).controller('PropertySearchCtrl', function($scope, PropertyService) {
+        };
 
+        $scope.search();
 
-        PropertyService.query().$promise.then(function(properties) {
-            $scope.properties = properties;
+    }).controller('PropertySearchCtrl', function($scope, $state, $stateParams, PropertyService) {
 
-        });
+        $scope.searchParams = $stateParams.searchParams;
+
+        $scope.search = function() {
+
+            PropertyService.query($scope.searchParams).$promise.then(function(properties) {
+                $scope.properties = properties;
+
+            });
+
+        };
+
+        $scope.search();
+
+        $scope.filter = function() {
+            $state.go('app.propertyFilter', { searchParams: $scope.searchParams });
+        };
+
+        $scope.map = function() {
+            $state.go('app.propertyMap', { searchParams: $scope.searchParams });
+        };
+
+    }).controller('PropertyFilterCtrl', function($scope, $state, $stateParams) {
+
+        $scope.searchParams = $stateParams.searchParams;
+
+        $scope.search = function() {
+
+            //TODO want to go to map too
+            $state.go('app.propertyList', { searchParams: $scope.searchParams });
+        };
+
 
     }).controller('PropertyAddEditCtrl', function($scope, $stateParams, $state, PropertyService, ValidationService) {
 
