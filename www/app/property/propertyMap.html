@@ -3,21 +3,12 @@
         <button class="button button-light" ng-click="filter()">
             Filter
         </button>
-        <div class="item-input-inset">
-            <label class="item-input-wrapper">
-                <i class="icon ion-ios-search placeholder-icon"></i>
-                <input type="search" ng-model="searchText" placeholder="Search">
-            </label>
-            <button class="button button-clear">
-                Cancel
-            </button>
-        </div>
         <a class="button button-light" ng-click="list()">
             List
         </a>
     </ion-nav-buttons>
     <ion-content>
-        <div>
+        <div data-tap-disabled="true">
             <ui-gmap-google-map id="map" center="map.center" zoom="map.zoom">
                 <ui-gmap-markers models="mapMarkers" coords="'self'" icon="'icon'" click="markerClick">
                     <ui-gmap-windows show="show">
