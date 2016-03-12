@@ -66,7 +66,12 @@ angular.module('preserveusMobile')
                 html += ' ng-class="' + someClass + '"';
             }
             html += '>';
-            html += '<span class="input-label">' + attrs.label + '</span>';
+
+            if (attrs.type === 'select' || attrs.type === 'file') {
+                html += '<span class="input-label">' + attrs.label + '</span>';
+            }
+
+            //html += '<span class="input-label">' + attrs.label + '</span>';
             html += inputHtml;
             html += '</label>';
             html += getErrorHandlingHTML(attrs);

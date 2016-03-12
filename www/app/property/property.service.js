@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .factory('PropertyService', function($resource) {
-        return $resource('/api/properties/:id/:controller', {
+    .factory('PropertyService', function($resource, CONSTANTS) {
+        return $resource(CONSTANTS.DOMAIN + '/api/properties/:id/:controller', {
             id: '@_id'
         }, {
             update: {
@@ -11,11 +11,11 @@ angular.module('preserveusMobile')
             },
             getIncomeReport: {
                 method: 'GET',
-                url: 'api/properties/propertyIncomeReport/:id'
+                url: CONSTANTS.DOMAIN + '/api/properties/propertyIncomeReport/:id'
             },
             getPropertyTotalReport: {
                 method: 'GET',
-                url: 'api/properties/propertyTotalReport'
+                url: CONSTANTS.DOMAIN + '/api/properties/propertyTotalReport'
             }
         });
     });

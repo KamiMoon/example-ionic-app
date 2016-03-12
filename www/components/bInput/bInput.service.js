@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .service('InputService', function($q, $http, $localStorage) {
+    .service('InputService', function($q, $http, $localStorage, CONSTANTS) {
 
         var states = [{
             "name": "Alaska",
@@ -216,7 +216,7 @@ angular.module('preserveusMobile')
             if (objs) {
                 deferred.resolve(objs);
             } else {
-                var request = $http.get(url);
+                var request = $http.get(CONSTANTS.DOMAIN + url);
                 request.success(function(serverObjs) {
                     $localStorage[key] = serverObjs;
                     deferred.resolve(serverObjs);

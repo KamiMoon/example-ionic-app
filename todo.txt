@@ -1,35 +1,22 @@
-Login
-	Authentication 
-	Authorization
 
 
--Header
 
 
-Actions:
 
 
--Search Properties
-	-Properties List
-		-Properties Profile
-			-Etc
+
 
 -News
 	-Contact
 
 -Messages
 
--Me
-	-Profile
-	-Settings
-	-My Investments
-	-My Rent
+
 
 
 
 -Search Property
 
--Pull out features into its own page
 
 
 -Add/Edit features is broken etc
@@ -42,3 +29,40 @@ Actions:
 
 -Chat
 
+
+-Better swiping thing for images
+
+
+
+
+Done
+
+
+-Me
+	-Profile
+	-Settings
+	-My Investments
+	-My Rent
+
+-Header
+
+
+Login
+	Authentication 
+	Authorization
+
+
+
+-Search Properties
+	-Properties List
+		-Properties Profile
+			-Etc
+
+-Pull out features into its own page
+
+
+-Switch Map - it is broken/cant click on this in mobile - use codova map - Fixed
+
+-splash and icons - There
+
+http://ionicframework.com/docs/cli/icon-splashscreen.html

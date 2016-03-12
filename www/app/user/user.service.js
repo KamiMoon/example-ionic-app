@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .factory('User', function($resource) {
-        return $resource('/api/users/:id/:controller', {
+    .factory('User', function($resource, CONSTANTS) {
+        return $resource(CONSTANTS.DOMAIN + '/api/users/:id/:controller', {
             id: '@_id'
         }, {
             changePassword: {
@@ -22,11 +22,11 @@ angular.module('preserveusMobile')
             },
             profile: {
                 method: 'GET',
-                url: 'api/users/:id/profile'
+                url: CONSTANTS.DOMAIN + '/api/users/:id/profile'
             },
             save: {
                 method: 'POST',
-                url: 'api/users/mobile'
+                url: CONSTANTS.DOMAIN + '/api/users/mobile'
             }
         });
     });

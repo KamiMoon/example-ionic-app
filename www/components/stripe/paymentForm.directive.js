@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .directive('stripePaymentForm', function($q, $http, $location, ValidationService) {
+    .directive('stripePaymentForm', function($q, $http, $location, ValidationService, CONSTANTS) {
 
 
         var loadScriptIfNeeded = function() {
@@ -52,7 +52,7 @@ angular.module('preserveusMobile')
                             model_id: $scope.model
                         };
 
-                        $http.post($scope.url, messageToPost).then(function(response) {
+                        $http.post(CONSTANTS.DOMAIN + $scope.url, messageToPost).then(function(response) {
                             //success
                             ValidationService.success('Payment Successful.  An email with your receipt has been sent to you.');
 

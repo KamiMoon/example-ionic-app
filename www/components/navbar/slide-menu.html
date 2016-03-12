@@ -13,13 +13,12 @@
     <ion-side-menu side="left" class="main-menu" expose-aside-when="large">
         <ion-content>
             <ion-list>
+                <ion-item class="item">
+                    <img class="centered-image" ng-src="img/Preserve_US_nav_bar.png">
+                </ion-item>
                 <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.propertyList">
                     <i class="icon ion-home"></i>
                     <h2 class="menu-text">Search Property</h2>
-                </ion-item>
-                <ion-item ng-if="Auth.isAdmin()" class="item-icon-left" nav-clear menu-close href="#/app/property/add/1">
-                    <i class="icon ion-ios-compose-outline"></i>
-                    <h2 class="menu-text">Add Property</h2>
                 </ion-item>
                 <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.userView({id: Auth.getCurrentUser()._id})">
                     <i class="icon ion-person"></i>
@@ -36,6 +35,13 @@
                 <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.settings">
                     <i class="icon ion-gear-a"></i>
                     <h2 class="menu-text">Settings</h2>
+                </ion-item>
+                <ion-item class="item item-divider">
+                    Admin
+                </ion-item>
+                <ion-item ng-if="Auth.isAdmin()" class="item-icon-left" nav-clear menu-close href="#/app/property/add/1">
+                    <i class="icon ion-ios-compose-outline"></i>
+                    <h2 class="menu-text">Add Property</h2>
                 </ion-item>
                 <ion-item ng-if="Auth.isAdmin()" class="item-icon-left" nav-clear menu-close ui-sref="app.userList">
                     <i class="icon ion-person-stalker"></i>

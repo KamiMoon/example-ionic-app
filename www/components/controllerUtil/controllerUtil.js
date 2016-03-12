@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .service('ControllerUtil', function(Upload, ValidationService, $q, $http, $localStorage, $location) {
+    .service('ControllerUtil', function(Upload, ValidationService, $q, $http, $localStorage, $location, CONSTANTS) {
 
         this.upload = function(uploadObj) {
             return Upload.upload(uploadObj);
@@ -33,7 +33,7 @@ angular.module('preserveusMobile')
                 console.log('using localstorage');
                 deferred.resolve(states);
             } else {
-                var request = $http.get('/api/states');
+                var request = $http.get(CONSTANTS.DOMAIN + '/api/states');
                 request.success(function(states) {
                     $localStorage.states = states;
                     deferred.resolve(states);
