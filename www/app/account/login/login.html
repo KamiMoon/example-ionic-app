@@ -1,66 +1,36 @@
-<!-- <br>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <form class="form-horizontal" name="form" ng-submit="login(form)" novalidate>
-                <fieldset>
-                    <legend>Login</legend>
-                    <b-input type="email" model="user.email" required="true"></b-input>
-                    <b-input type="password" model="user.password" required="true"></b-input>
-                    <div align="center">
-                        <b-input type="submit" label="Login"></b-input>
-                        <a style="margin-left: 15px" class="btn btn-lg btn-info" href="/signup">Register</a>
-                    </div>
-                    <br>
-                    <hr>
-                    <div align="center">
-                        <h5>OR</h5>
-                    </div>
-                    <div align="center">
-                        <a class="btn btn-lg btn-facebook" href="" ng-click="loginOauth('facebook')">
-                            <i class="fa fa-facebook"></i> Login with Facebook
-                        </a>
-                    </div>
-                    <br>
-                    <br>
-                </fieldset>
-            </form>
-        </div>
-    </div>
-</div>
- -->
-<ion-view class="login-view auth-view" cache-view="false">
+<ion-view cache-view="false" hide-nav-bar="true">
     <ion-content scroll="false">
         <div class="row">
             <div class="col">
-                <img class="centered-image" ng-src="img/Preserve_US_nav_bar.png">
+                <a browse-to="https://www.preservedfw.com">
+                    <img class="centered-image" ng-src="img/Preserve_US.png">
+                </a>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <div class="card login-container">
+                <div class="card">
                     <form name="form" ng-submit="login(form)" novalidate ng-cloak>
                         <div class="list">
                             <b-input type="email" model="user.email" required="true"></b-input>
                             <b-input type="password" model="user.password" required="true"></b-input>
-                            <div class="item item-body bottom-content">
-                                <button type="submit" class="button button-positive button-block" ng-disabled="">
+                            <div class="item item-body">
+                                <button type="submit" class="button button-block button-balanced" ng-disabled="">
                                     Log In
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="alternative-actions">
-                    <!-- <a class="forgot-password button button-small button-clear button-light" ui-sref="auth.forgot-password">
-            Forgot Password?
-          </a>
- -->
-                    <a class="sign-up button button-small button-clear " ui-sref="signup">
-                        Sign Up
-                    </a>
-                </div>
             </div>
+        </div>
+        <div class="row">
+            <a class="col button button-small button-stable button-stable">
+                Forgot Password?
+            </a>
+            <a class="col button button-small button-stable button-calm" ui-sref="signup">
+                Register
+            </a>
         </div>
     </ion-content>
 </ion-view>

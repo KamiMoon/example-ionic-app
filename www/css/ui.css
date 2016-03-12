@@ -103,3 +103,16 @@
     max-width: 100%;
     height: auto;
 }
+
+
+/* swipebox addons for mobile */
+
+@media screen and (orientation:landscape) {
+    #swipebox-close {
+        right: 10px;
+    }
+    #swipebox-arrows {
+        width: 92%;
+        max-width: 800px;
+    }
+}

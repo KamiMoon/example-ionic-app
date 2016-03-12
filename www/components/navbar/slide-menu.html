@@ -14,7 +14,9 @@
         <ion-content>
             <ion-list>
                 <ion-item class="item">
-                    <img class="centered-image" ng-src="img/Preserve_US_nav_bar.png">
+                    <a browse-to="https://www.preservedfw.com">
+                        <img class="centered-image" ng-src="img/Preserve_US.png">
+                    </a>
                 </ion-item>
                 <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.propertyList">
                     <i class="icon ion-home"></i>
@@ -36,7 +38,7 @@
                     <i class="icon ion-gear-a"></i>
                     <h2 class="menu-text">Settings</h2>
                 </ion-item>
-                <ion-item class="item item-divider">
+                <ion-item ng-if="Auth.isAdmin()" class="item item-divider">
                     Admin
                 </ion-item>
                 <ion-item ng-if="Auth.isAdmin()" class="item-icon-left" nav-clear menu-close href="#/app/property/add/1">

@@ -8,7 +8,7 @@
                 <h2>{{::property.fullAddress}}</h2>
             </div>
             <div class="item item-image">
-                <b-img public-id="{{property.photo}}" transformation="w_380,h_380,c_fill" alt="{{property.name}}"></b-img>
+                <b-img public-id="{{property.photo}}" transformation="w_400,h_400,c_fill" alt="{{property.name}}"></b-img>
             </div>
             <a class="item item-icon-right" href="#/app/propertyFeatures/{{property._id}}">
                 <h3><span ng-if="property.beds">{{::property.beds}} beds,</span> <span ng-if="property.baths">{{::property.baths}} baths,</span> <span ng-if="property.sqft">{{::property.sqft}} sqft</span></h3>

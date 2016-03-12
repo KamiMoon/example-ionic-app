@@ -204,7 +204,7 @@ angular.module('preserveusMobile')
         }).$promise.then(function(property) {
             $scope.property = property;
             //photoRows
-            $scope.property.photoRows = _.chunk($scope.property.photos, 4);
+            $scope.property.photoRows = _.chunk($scope.property.photos, 2);
         });
 
         //TODO 
