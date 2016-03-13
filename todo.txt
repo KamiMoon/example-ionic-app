@@ -22,8 +22,7 @@
 -Add/Edit features is broken etc
 
 
--Image Upload
--Camera integration
+
 
 -Blog/News 
 
@@ -32,10 +31,14 @@
 
 -Better swiping thing for images
 
-
+-Image Picker 
+-Uplaod refactor
 
 
 Done
+
+-Image Upload
+-Camera integration
 
 -External links
 

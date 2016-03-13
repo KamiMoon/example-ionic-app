@@ -1,13 +1,13 @@
 //http://thejackalofjavascript.com/getting-started-with-ngcordova/
 
 
-angular.module('preserveusMobile').controller('CameraCtrl', function($ionicPlatform, $scope, $cordovaCamera, $cordovaFileTransfer) {
+angular.module('preserveusMobile').controller('CameraCtrl', function($ionicPlatform, $scope, $cordovaCamera, UploadService) {
     $ionicPlatform.ready(function() {
 
         console.log('code 9');
 
         var options = {
-            quality: 50,
+            quality: 70,
             sourceType: Camera.PictureSourceType.CAMERA,
             destinationType: Camera.DestinationType.FILE_URI,
             targetWidth: 200,
@@ -28,46 +28,15 @@ angular.module('preserveusMobile').controller('CameraCtrl', function($ionicPlatf
                     //show the file image
                     $scope.imgSrc = fileURL;
 
-                    var server = "https://api.cloudinary.com/v1_1/" + "ddovrks1z" + "/upload";
-                    var options = {
-                        fileKey: "file",
-                        fileName: fileURL.substr(fileURL.lastIndexOf('/') + 1),
-                        mimeType: "image/png",
-                        params: {
-                            upload_preset: "saogp2ap"
-                        }
-                    };
+                    UploadService.upload(fileURL).then(function(response) {
+                        //show the server image
+                        $scope.imgSrc = response.serverImageUrl;
 
-                    $cordovaFileTransfer.upload(server, fileURL, options)
-                        .then(function(result) {
-                            var response = JSON.parse(result.response);
-                            var public_id = response.public_id;
-                            var serverImageUrl = 'https://res.cloudinary.com/ddovrks1z/image/upload/';
-                            serverImageUrl += public_id + '.' + response.format;
-
-                            //show the server image
-                            $scope.imgSrc = serverImageUrl;
-
-                            //cleanup file
-                            $cordovaCamera.cleanup().then(function() {
-                                console.log('cleaned up file');
-                            });
-
-                        }, function(error) {
-                            console.error("upload error source " + error.source);
-                            console.error("upload error target " + error.target);
-                        }, function(progress) {
-                            // constant progress updates
-
-                            /*
-
-                            $timeout(function () {
-                                  $scope.downloadProgress = (progress.loaded / progress.total) * 100;
-                                });
-
-                                */
+                        //cleanup file
+                        $cordovaCamera.cleanup().then(function() {
+                            console.log('cleaned up file');
                         });
-
+                    });
 
                 }, function(resp) {
 
