@@ -120,7 +120,8 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
 
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/todo');
-    $urlRouterProvider.otherwise('/camera');
+    //$urlRouterProvider.otherwise('/camera');
+    $urlRouterProvider.otherwise('/app/property');
 
 })
 
@@ -160,10 +161,17 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
         });
     });
 
-    $rootScope.$on(CONSTANTS.EVENTS.NOT_AUTHENTICATED, function() {
+    $rootScope.logout = function() {
         Auth.logout();
         $state.go('login');
+    };
+
+    $rootScope.$on(CONSTANTS.EVENTS.NOT_AUTHENTICATED, function() {
+        $rootScope.logout();
     });
+
+
+
 });
 
 /* Globals */

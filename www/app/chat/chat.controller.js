@@ -5,25 +5,27 @@ angular.module('preserveusMobile')
         // To listen for when this page is active (for example, to refresh data),
         // listen for the $ionicView.enter event:
         //
-        //$scope.$on('$ionicView.enter', function(e) {
-        //});
+        $scope.$on('$ionicView.enter', function(e) {
+            $scope.chats = Chats.all();
+            $scope.remove = function(chat) {
+                Chats.remove(chat);
+            };
 
-        $scope.chats = Chats.all();
-        $scope.remove = function(chat) {
-            Chats.remove(chat);
-        };
+        });
+
+
     })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
     $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope, User) {
+.controller('AccountCtrl', function($scope) {
     $scope.settings = {
         enableFriends: true
     };
 
-    User.profile('56524e5f5435d775906b7cb5');
+    //User.profile('56524e5f5435d775906b7cb5');
 
 
 

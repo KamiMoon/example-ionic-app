@@ -4,8 +4,7 @@ angular.module('preserveusMobile')
     .config(function($stateProvider) {
         $stateProvider
             .state('notAuthorized', {
-                url: '/notAuthorized',
-                templateUrl: 'app/main/notAuthorized.html'
+                url: '/login'
             }).state('paymentSuccess', {
                 url: '/paymentSuccess',
                 templateUrl: 'app/main/paymentSuccess.html'

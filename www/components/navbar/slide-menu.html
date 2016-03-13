@@ -36,9 +36,21 @@
                     <i class="icon ion-calendar"></i>
                     <h2 class="menu-text">My Rent</h2>
                 </ion-item> -->
+                <ion-item class="item-icon-left" nav-clear menu-close>
+                    <i class="icon ion-ios-pulse"></i>
+                    <h2 class="menu-text">News</h2>
+                </ion-item>
+                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.chats">
+                    <i class="icon ion-ios-chatboxes-outline"></i>
+                    <h2 class="menu-text">Messages</h2>
+                </ion-item>
                 <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.settings">
                     <i class="icon ion-gear-a"></i>
                     <h2 class="menu-text">Settings</h2>
+                </ion-item>
+                <ion-item class="item-icon-left" nav-clear menu-close ng-click="logout()">
+                    <i class="icon ion-arrow-return-left"></i>
+                    <h2 class="menu-text">Logout</h2>
                 </ion-item>
                 <ion-item ng-if="Auth.isAdmin()" class="item item-divider">
                     Admin
