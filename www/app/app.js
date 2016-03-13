@@ -6,7 +6,7 @@
 // 'preserveusMobile.services' is found in services.js
 // 'preserveusMobile.controllers' is found in controllers.js
 angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
-    'ngStorage', 'chart.js', 'uiGmapgoogle-maps'
+    'ngStorage', 'chart.js', 'uiGmapgoogle-maps', 'ngCordova'
 ])
 
 .constant('CONSTANTS', {
@@ -96,19 +96,31 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
 
 
     $stateProvider.state('app', {
-        url: "/app",
-        abstract: true,
-        templateUrl: "components/navbar/slide-menu.html"
-    }).state('cameraTest', {
-        url: "/cameratest",
-        controller: 'CameraCtrl',
-        templateUrl: "components/camera/test.html"
-    });
+            url: "/app",
+            abstract: true,
+            templateUrl: "components/navbar/slide-menu.html"
+        })
+        /*.state('cameraTest', {
+            url: "/cameratest",
+            controller: 'CameraCtrl',
+            templateUrl: "components/camera/test.html"
+        })
+        */
+        .state('device', {
+            url: "/device",
+            controller: 'DeviceCtrl',
+            templateUrl: "components/ionic/device/deviceInfo.html"
+        })
+        .state('camera', {
+            url: "/camera",
+            controller: 'CameraCtrl',
+            templateUrl: "components/ionic/camera/camera.html"
+        });
 
 
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/todo');
-    $urlRouterProvider.otherwise('/app/property');
+    $urlRouterProvider.otherwise('/camera');
 
 })
 
@@ -153,3 +165,9 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
         $state.go('login');
     });
 });
+
+/* Globals */
+
+function safeApply(scope, fn) {
+    (scope.$$phase || scope.$root.$$phase) ? fn(): scope.$apply(fn);
+}

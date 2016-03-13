@@ -47,6 +47,7 @@
         <splash src="resources/ios/splash/Default@2x~iphone.png" width="640" height="960" />
         <splash src="resources/ios/splash/Default~iphone.png" width="320" height="480" />
     </platform>
-    <plugin name="cordova-plugin-camera" spec="~2.1.0" />
+    <!--     <plugin name="cordova-plugin-camera" spec="~2.1.0" />
+ -->
     <icon src="resources/ios/icon/icon-small@3x.png" />
 </widget>

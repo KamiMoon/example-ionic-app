@@ -1,8 +1,7 @@
 <div>
-    <button class="btn btn-default btn-lg" role="button" type="file" ngf-select="uploadFile($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="2MB">
-        Select File</button>
-    <br>
-    <br>
+    <button class="button button-stable" role="button" type="file" ngf-select="uploadFile($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="2MB">
+        Select File
+    </button>
     <div>
         <ul class="list-inline">
             <li>{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}</li>
@@ -17,8 +16,7 @@
                 <b-img ng-if="ngModel" public-id="{{ngModel}}" transformation="{{transformation}}" alt="Upload Preview"></b-img>
             </li>
             <li>
-                <button type="button" ng-click="remove()" class="btn btn-default btn-lg" ng-show="ngModel || f.progress === 100">
-                    <span class="glyphicon glyphicon-remove"></span>
+                <button type="button" ng-click="remove()" class="icon ion-ios-close-outline" ng-show="ngModel || f.progress === 100">
                 </button>
             </li>
         </ul>
