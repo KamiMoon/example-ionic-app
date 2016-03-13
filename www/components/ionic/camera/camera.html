@@ -7,5 +7,21 @@
             Take a Picture
         </button>
         <img class="padding" ng-src="{{imgSrc}}">
+        <button class="button button-block button-positive" ng-click="pickPictures()">
+            Select Pictures
+        </button>
+        <div class="list card" ng-repeat="img in images">
+            <div class="item item-image">
+                <img ng-src="{{img}}">
+            </div>
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item image-option" href="#" ng-click="shareImage(img)">
+                    <i class="icon ion-share"></i> Share
+                </a>
+                <a class="tab-item assertive image-option" href="#" ng-click="removeImage(img)">
+                    <i class="icon ion-trash-a assertive"></i> Remove
+                </a>
+            </div>
+        </div>
     </ion-content>
 </ion-view>

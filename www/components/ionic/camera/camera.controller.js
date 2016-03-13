@@ -1,10 +1,10 @@
 //http://thejackalofjavascript.com/getting-started-with-ngcordova/
 
 
-angular.module('preserveusMobile').controller('CameraCtrl', function($ionicPlatform, $scope, $cordovaCamera, UploadService) {
+angular.module('preserveusMobile').controller('CameraCtrl', function($ionicPlatform, $scope, $q, $cordovaCamera, $cordovaImagePicker, UploadService) {
     $ionicPlatform.ready(function() {
 
-        console.log('code 9');
+        console.log('code 10');
 
         var options = {
             quality: 70,
@@ -45,5 +45,49 @@ angular.module('preserveusMobile').controller('CameraCtrl', function($ionicPlatf
                 });
             });
         };
+
+
+        $scope.images = [];
+
+        var pickerOptions = {
+            maximumImagesCount: 10,
+            width: 800,
+            height: 800,
+            quality: 80
+        };
+
+        var doUpload = function(fileURL) {
+
+            var promise = UploadService.upload(fileURL).then(function(response) {
+                //show the server image
+                $scope.images.push(response.serverImageUrl);
+            });
+            return promise;
+        };
+
+        $scope.pickPictures = function() {
+
+            $cordovaImagePicker.getPictures(pickerOptions)
+                .then(function(results) {
+
+                    var promises = [];
+
+                    for (var i = 0; i < results.length; i++) {
+                        promises.push(doUpload(results[i]));
+                    }
+
+                    $q.all(promises).then(function() {
+                        //cleanup file
+                        $cordovaCamera.cleanup().then(function() {
+                            console.log('cleaned up file');
+                        });
+                    });
+
+                }, function(error) {
+                    console.error(error);
+                });
+        };
+
+
     });
 });
