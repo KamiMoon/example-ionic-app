@@ -1,0 +1,58 @@
+<!-- <br>
+<br>
+<div class="container">
+    <div class="row" ng-if="Auth.hasRoles(['admin', 'blogger'])">
+        <div class="col-md-12">
+            <a href="/blog/add/1" class="btn btn-default btn-lg" role="button">Add Post</a>
+            <br>
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9" id="blog-column">
+            <div ng-repeat="post in posts">
+                <blog-post post="post"></blog-post>
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <blog-keywords></blog-keywords>
+        </div>
+    </div>
+</div>
+ -->
+<ion-view view-title="News">
+    <ion-content>
+        <!-- Refresh to get the new posts -->
+        <!-- <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+</ion-refresher>
+ -->
+        <div ng-repeat="post in posts" class="list card">
+            <div class="item item-avatar">
+                <b-img public-id="{{post.photo}}" transformation="w_40,h_40,c_fill" alt="{{post.title}}"></b-img>
+                <h2>{{::post.title}}</h2>
+                <p>
+                    By <span>{{post.user_name}}</span> <span>{{::post.createdAt | date:'MM/dd/yyyy'}}</span>
+                </p>
+            </div>
+            <div class="item item-text-wrap">
+                <p ng-bind-html="post.postHtml.substring(0, 200) | sanitize"></p>
+                <div class="row">
+                    <div class="col col-center col-66">
+                        <!-- <a class="button button-icon icon ion-bookmark" ng-click="bookmarkPost(post)"></a>
+ -->
+                    </div>
+                    <div class="col col-center col-33">
+                        <a ui-sref="app.blogView({id: post._id})" class="button button-small button-block button-assertive">
+                Read more
+              </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Infinit scroll -->
+        <!-- <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="loadMoreData()" distance="1%" icon="ion-loading-c">
+    </ion-infinite-scroll> -->
+    </ion-content>
+</ion-view>

@@ -1,0 +1,57 @@
+<!-- <br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9" id="blog-column">
+            <a href="/blog" class="btn btn-default btn-lg" role="button"> ← Back to Blog</a>
+            <br>
+            <div ng-if="Auth.hasRoles(['admin', 'blogger'])">
+                <br>
+                <a href="/blog/edit/{{post._id}}" class="btn btn-default btn-lg" role="button">Edit</a>
+                <br>
+                <br>
+                <a ng-click="delete(post._id)" class="btn btn-default btn-lg" role="button">Delete</a>
+                <br>
+            </div>
+            <br>
+            <blog-post post="post"></blog-post>
+            <dir-disqus disqus-shortname="preserveus" disqus-identifier="{{post._id}}" disqus-url="https://www.preservedfw.com/blog/{{post._id}}" disqus-title="{{post.title}}" ready-to-bind="{{contentLoaded}}">
+            </dir-disqus>
+        </div>
+        <div class="col-md-3">
+            <blog-keywords></blog-keywords>
+        </div>
+    </div>
+</div> -->
+<ion-view>
+    <ion-content>
+        <div class="item item-text-wrap">
+            <h1>{{::post.title}}</h1>
+            <p>
+                By <span>{{post.user_name}}</span> <span>{{::post.createdAt | date:'MM/dd/yyyy'}}</span>
+            </p>
+        </div>
+        <div class="item item-text-wrap">
+            <p ng-bind-html="post.postHtml | sanitize"></p>
+        </div>
+        <div class="item item-text-wrap">
+            <a class="button button-small button-outline button-stable" href="#/app/blogKeyword
+/{{keyword.text}}" ng-repeat="keyword in post.keywords">{{::keyword.text}}</a>
+        </div>
+    </ion-content>
+    <!-- <ion-footer-bar class="post-footer bar bar-footer bar-dark">
+        <div class="row">
+            <div class="col col-20 col-center">
+                <a class="button button-icon icon icon-right ion-plus" bigger-text=".post-view .post-text">A</a>
+            </div>
+            <div class="col col-20 col-center">
+                <a class="button button-icon icon icon-right ion-minus" smaller-text=".post-view .post-text">A</a>
+            </div>
+            <div class="col col-20 col-offset-20 col-center">
+                <a class="button button-icon icon ion-heart"></a>
+            </div>
+            <div class="col col-20 col-center">
+                <a class="button button-icon icon ion-android-share-alt" ng-click="sharePost(post.url)"></a>
+            </div>
+        </div>
+    </ion-footer-bar> -->
+</ion-view>

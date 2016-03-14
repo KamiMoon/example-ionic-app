@@ -1,40 +1,15 @@
-
-
-
-
-
-
-
-
--News
-	-Contact
-
--Messages
-
-
-
-
-
 -Search Property
-
-
-
 -Add/Edit features is broken etc
-
-
-
-
 -Blog/News 
-
--Chat
-
-
+	-Upgrade Preserve US blog first
+	-Mockup
+	-Real
+-Messages/Chat
 -Better swiping thing for images
-
-
-
-
 -Social sharing
+
+
+
 
 
 Done

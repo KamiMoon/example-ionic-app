@@ -1,0 +1,21 @@
+#blog-column article li {
+    color: rgba(0, 0, 0, .3);
+    display: inline-block;
+    padding-right: 2em;
+}
+
+#blog-column .keywords {
+    margin-left: 20px;
+}
+
+@media(max-width:767px) {
+    #blog-column article li {
+        display: block;
+        margin-top: 15px;
+    }
+}
+
+.post-html pre {
+    background-color: white;
+    border: none;
+}
