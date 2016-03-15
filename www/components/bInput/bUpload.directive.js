@@ -67,7 +67,7 @@ angular.module('preserveusMobile')
 
             }
         };
-    }).directive('bUploadMultiple', function($ionicPlatform, $q, $cordovaCamera, $cordovaImagePicker, UploadService) {
+    }).directive('bUploadMultiple', function($ionicPlatform, $ionicLoading, $q, $cordovaCamera, $cordovaImagePicker, $cordovaActionSheet, UploadService) {
         return {
             templateUrl: 'components/bInput/bUploadMultiple.directive.html',
             scope: {
@@ -81,7 +81,11 @@ angular.module('preserveusMobile')
                     if (ngModel) {
                         //initialize
                         if (scope.ngModel && scope.ngModel.length > 0 && !scope.images) {
-                            scope.images = angular.copy(scope.ngModel);
+                            scope.images = angular.copy(scope.ngModel).map(function(public_id) {
+                                return {
+                                    public_id: public_id
+                                };
+                            });
                         }
 
                         unwatch(); //Remove the watch
@@ -102,13 +106,16 @@ angular.module('preserveusMobile')
 
                     console.log('code 10');
 
+                    var quality = 95;
+                    var width = 500;
+                    var height = 500;
 
                     var options = {
-                        quality: 70,
+                        quality: quality,
                         sourceType: Camera.PictureSourceType.CAMERA,
                         destinationType: Camera.DestinationType.FILE_URI,
-                        targetWidth: 200,
-                        targetHeight: 200,
+                        targetWidth: width,
+                        targetHeight: height,
                         encodingType: Camera.EncodingType.PNG,
                         saveToPhotoAlbum: false,
                         correctOrientation: true,
@@ -120,13 +127,31 @@ angular.module('preserveusMobile')
 
                     var doUpload = function(fileURL) {
 
+                        var image = {
+                            progress: 0
+                        };
+
+                        scope.images.unshift(image);
+
+                        //var index = scope.images.length;
+
                         var promise = UploadService.upload(fileURL).then(function(response) {
                             //show the server image
-                            scope.images.push(response.public_id);
+                            //scope.images.push(response.public_id);
 
                             if (scope.ngModel) {
-                                scope.ngModel.push(response.public_id);
+                                scope.ngModel.unshift(response.public_id);
                             }
+                        }, function(error) {
+                            console.error(error);
+                        }, function(evt) {
+
+                            var progress = Math.min(100, parseInt(100.0 *
+                                evt.loaded / evt.total));
+
+                            console.log(progress);
+
+                            image.progress = progress;
                         });
                         return promise;
                     };
@@ -154,9 +179,9 @@ angular.module('preserveusMobile')
 
                     var pickerOptions = {
                         maximumImagesCount: 10,
-                        width: 800,
-                        height: 800,
-                        quality: 80
+                        width: width,
+                        height: height,
+                        quality: quality
                     };
 
                     scope.pickPictures = function() {
@@ -171,6 +196,8 @@ angular.module('preserveusMobile')
                                 }
 
                                 $q.all(promises).then(function() {
+
+
                                     //cleanup file
                                     $cordovaCamera.cleanup().then(function() {
                                         console.log('cleaned up file');
@@ -180,6 +207,38 @@ angular.module('preserveusMobile')
                             }, function(error) {
                                 console.error(error);
                             });
+                    };
+
+
+                    var buttonLabels = ['Take Photo', 'Choose Existing'];
+                    var sheetOptions = {
+                        //title: 'What do you want with this image?',
+                        buttonLabels: buttonLabels,
+                        addCancelButtonWithLabel: 'Cancel',
+                        androidEnableCancelButton: true,
+                        winphoneEnableCancelButton: true,
+                        //addDestructiveButtonWithLabel: 'Delete it'
+                    };
+
+                    scope.actionSheet = function() {
+                        $cordovaActionSheet.show(sheetOptions)
+                            .then(function(btnIndex) {
+                                console.log(btnIndex);
+
+                                //1-based index
+                                var index = btnIndex - 1;
+                                console.log(buttonLabels[index]);
+
+                                switch (index) {
+                                    case 0:
+                                        scope.takePicture();
+                                        break;
+                                    case 1:
+                                        scope.pickPictures();
+                                        break;
+                                }
+                            });
+
                     };
 
 

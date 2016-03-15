@@ -9,7 +9,7 @@
 -Social sharing
 
 
-
+-See if the old way actually works - for single uplaod it just works out of the box - wtf?
 
 
 Done

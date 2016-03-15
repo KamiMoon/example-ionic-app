@@ -1,11 +1,11 @@
-<button class="button button-block button-positive" ng-click="takePicture()">
-    Take a Picture
-</button>
-<button class="button button-block button-positive" ng-click="pickPictures()">
-    Select Picture(s)
-</button>
+<button class="button button-block button-positive" ng-click="actionSheet()">Test Action Sheet</button>
 <ion-list>
     <ion-item ng-repeat="image in images">
+        <div class="progress file-upload-progress" ng-show="image.progress >= 0">
+            <div class="progress-bar progress-bar-success" ng-class="{'progress-bar-striped active': image.progress < 100}" role="progressbar" aria-valuenow="{{image.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{image.progress}}%;">
+                {{image.progress}}%
+            </div>
+        </div>
         <b-img ng-if="ngModel" public-id="{{ngModel[$index]}}" transformation="{{transformation}}" alt="Upload Preview"></b-img>
         <ion-option-button class="button-assertive" ng-click="remove($index)">
             Delete
