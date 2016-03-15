@@ -10,8 +10,8 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
 ])
 
 .constant('CONSTANTS', {
-    //'DOMAIN': 'https://www.preservedfw.com',
-    'DOMAIN': '',
+    'DOMAIN': 'https://www.preservedfw.com',
+    //'DOMAIN': '',
     //'REST_API_URL': '/api',
     //'REST_API_URL': 'https://www.preservedfw.com/api',
     //'REST_API_URL': 'http://192.168.1.3:9000/api',

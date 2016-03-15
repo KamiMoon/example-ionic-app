@@ -1,34 +1,16 @@
-<!-- <br>
-<div class="container">
-    <div class="row">
-        <div class="col-md-9" id="blog-column">
-            <a href="/blog" class="btn btn-default btn-lg" role="button"> ← Back to Blog</a>
-            <br>
-            <div ng-if="Auth.hasRoles(['admin', 'blogger'])">
-                <br>
-                <a href="/blog/edit/{{post._id}}" class="btn btn-default btn-lg" role="button">Edit</a>
-                <br>
-                <br>
-                <a ng-click="delete(post._id)" class="btn btn-default btn-lg" role="button">Delete</a>
-                <br>
-            </div>
-            <br>
-            <blog-post post="post"></blog-post>
-            <dir-disqus disqus-shortname="preserveus" disqus-identifier="{{post._id}}" disqus-url="https://www.preservedfw.com/blog/{{post._id}}" disqus-title="{{post.title}}" ready-to-bind="{{contentLoaded}}">
-            </dir-disqus>
-        </div>
-        <div class="col-md-3">
-            <blog-keywords></blog-keywords>
-        </div>
-    </div>
-</div> -->
 <ion-view>
+    <ion-nav-title>
+        <span>View Post</span>
+    </ion-nav-title>
     <ion-content>
         <div class="item item-text-wrap">
             <h1>{{::post.title}}</h1>
             <p>
                 By <span>{{post.user_name}}</span> <span>{{::post.createdAt | date:'MM/dd/yyyy'}}</span>
             </p>
+        </div>
+        <div class="item item-image">
+            <b-img public-id="{{post.photo}}" transformation="w_400,h_400,c_fill" alt="{{post.title}}"></b-img>
         </div>
         <div class="item item-text-wrap">
             <p ng-bind-html="post.postHtml | sanitize"></p>

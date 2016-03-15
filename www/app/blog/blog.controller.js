@@ -11,6 +11,7 @@ angular.module('preserveusMobile')
 
         $scope.posts = BlogService.query(searchParams);
 
+
     }).controller('BlogAddEditCtrl', function($scope, $stateParams, $location, BlogService, ValidationService, Auth, Upload, ControllerUtil, $http) {
         var action = $stateParams.action;
         var id = $stateParams.id;

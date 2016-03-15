@@ -29,13 +29,13 @@
 </ion-refresher>
  -->
         <div ng-repeat="post in posts" class="list card">
-            <div class="item item-avatar">
-                <b-img public-id="{{post.photo}}" transformation="w_40,h_40,c_fill" alt="{{post.title}}"></b-img>
+            <a class="item item-thumbnail-left" ui-sref="app.blogView({id: post._id})">
+                <b-img public-id="{{post.photo}}" transformation="w_80,h_80,c_fill" alt="{{post.title}}"></b-img>
                 <h2>{{::post.title}}</h2>
                 <p>
                     By <span>{{post.user_name}}</span> <span>{{::post.createdAt | date:'MM/dd/yyyy'}}</span>
                 </p>
-            </div>
+            </a>
             <div class="item item-text-wrap">
                 <p ng-bind-html="post.postHtml.substring(0, 200) | sanitize"></p>
                 <div class="row">
