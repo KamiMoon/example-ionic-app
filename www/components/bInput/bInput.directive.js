@@ -50,7 +50,14 @@ angular.module('preserveusMobile')
         function wrapInIonicItem(attrs, inputHtml) {
             var html = '';
 
-            html += '<label class="item item-input ';
+
+            if (attrs.type === 'file') {
+                html += '<div ';
+            } else {
+                html += '<label ';
+            }
+
+            html += 'class="item item-input ';
             if (attrs.type === 'select') {
                 html += ' item-select';
             }
@@ -73,7 +80,13 @@ angular.module('preserveusMobile')
 
             //html += '<span class="input-label">' + attrs.label + '</span>';
             html += inputHtml;
-            html += '</label>';
+
+            if (attrs.type === 'file') {
+                html += '</div>';
+            } else {
+                html += '</label>';
+            }
+
             html += getErrorHandlingHTML(attrs);
 
             return html;
