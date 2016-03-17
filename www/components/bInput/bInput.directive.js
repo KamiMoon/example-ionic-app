@@ -74,7 +74,7 @@ angular.module('preserveusMobile')
             }
             html += '>';
 
-            if (attrs.type === 'select' || attrs.type === 'file') {
+            if (attrs.inline || attrs.type === 'select' || attrs.type === 'file') {
                 html += '<span class="input-label">' + attrs.label + '</span>';
             }
 

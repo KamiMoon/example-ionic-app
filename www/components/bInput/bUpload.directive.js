@@ -55,19 +55,22 @@ angular.module('preserveusMobile')
                     var width = 500;
                     var height = 500;
 
-                    var options = {
-                        quality: quality,
-                        sourceType: Camera.PictureSourceType.CAMERA,
-                        destinationType: Camera.DestinationType.FILE_URI,
-                        targetWidth: width,
-                        targetHeight: height,
-                        encodingType: Camera.EncodingType.PNG,
-                        saveToPhotoAlbum: false,
-                        correctOrientation: true,
-                        allowEdit: false,
-                        popoverOptions: CameraPopoverOptions
+                    var options = {};
+                    if (typeof Camera !== 'undefined') {
+                        options = {
+                            quality: quality,
+                            sourceType: Camera.PictureSourceType.CAMERA,
+                            destinationType: Camera.DestinationType.FILE_URI,
+                            targetWidth: width,
+                            targetHeight: height,
+                            encodingType: Camera.EncodingType.PNG,
+                            saveToPhotoAlbum: false,
+                            correctOrientation: true,
+                            allowEdit: false,
+                            popoverOptions: CameraPopoverOptions
 
-                    };
+                        };
+                    }
 
                     var doUpload = function(fileURL) {
 

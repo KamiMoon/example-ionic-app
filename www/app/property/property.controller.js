@@ -149,13 +149,15 @@ angular.module('preserveusMobile')
         };
 
         if (action === 'edit') {
-            $scope.property = PropertyService.get({
+            PropertyService.get({
                 id: id
-            });
+            }).$promise.then(function(property) {
+                $scope.property = property;
 
-            if (!$scope.features || !$scope.features.length) {
-                setDefaultFeatures();
-            }
+                if (!$scope.property.features || !$scope.property.features.length) {
+                    setDefaultFeatures();
+                }
+            });
 
         } else {
             //add
