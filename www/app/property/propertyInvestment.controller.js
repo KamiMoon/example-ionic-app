@@ -4,8 +4,6 @@ angular.module('preserveusMobile')
     .controller('PropertyInvestmentCtrl', function($scope, $stateParams, $state, PropertyService, ValidationService, PropertyInvestmentService, Auth) {
         $scope.action = $stateParams.action;
 
-        $scope.action = 'edit';
-
         var id = $stateParams.id;
 
         if ($scope.action === 'edit' && !Auth.isAdmin()) {

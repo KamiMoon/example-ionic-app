@@ -8,6 +8,8 @@
 -Better swiping thing for images
 -Social sharing
 
+-Stripe payment
+	-auto pay
 
 
 

@@ -4,17 +4,12 @@
     </ion-nav-title>
     <ion-content>
         <div class="list">
-            <div class="item" ng-show="::Auth.isAdmin()">
-                <div ng-switch="action">
-                    <!-- <div ng-switch-when="edit">
-    <a href="/propertyInvestment/view/{{property._id}}" class="btn btn-default btn-lg" role="button">View</a>
-</div>
- -->
-                    <div ng-switch-when="view">
-                        <a href="#/app/propertyInvestment/edit/{{property._id}}" class="button button-block button-positive">Edit</a>
-                    </div>
-                </div>
-            </div>
+            <a ng-if="Auth.isAdmin() && action === 'view'" href="#/app/propertyInvestment/edit/{{property._id}}" class="item item-icon-left item-icon-right">
+                <i class="icon ion-edit"></i> Edit
+                <i class="icon ion-ios-arrow-right"></i>
+            </a>
+        </div>
+        <div class="list">
             <div class="item item-divider">Property Evaluation</div>
             <div class="item item-text-wrap">
                 <div class="table-striping">
