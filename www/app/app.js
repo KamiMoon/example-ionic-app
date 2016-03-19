@@ -6,7 +6,7 @@
 // 'preserveusMobile.services' is found in services.js
 // 'preserveusMobile.controllers' is found in controllers.js
 angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
-    'ngStorage', 'chart.js', 'uiGmapgoogle-maps', 'ngCordova'
+    'ngStorage', 'chart.js', 'uiGmapgoogle-maps', 'btford.socket-io', 'ngCordova'
 ])
 
 .constant('CONSTANTS', {
@@ -75,15 +75,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
     //             }
     //         }
     //     })
-    //     .state('tab.account', {
-    //         url: '/account',
-    //         views: {
-    //             'tab-account': {
-    //                 templateUrl: 'app/account/tab-account.html',
-    //                 controller: 'AccountCtrl'
-    //             }
-    //         }
-    //     })
+
     //     .state('tab.todo', {
     //         url: '/todo',
     //         views: {

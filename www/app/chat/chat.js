@@ -7,8 +7,10 @@ angular.module('preserveusMobile')
                 url: '/chats',
                 views: {
                     'menuContent': {
-                        templateUrl: 'app/chat/tab-chats.html',
+                        templateUrl: 'app/chat/chatList.html',
                         controller: 'ChatsCtrl'
+                            //templateUrl: 'app/chat/chat.html',
+                            //controller: 'ChatTestCtrl'
                     }
                 }
             })

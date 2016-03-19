@@ -1,19 +1,33 @@
 -Search Property
--Add/Edit features is broken etc
+	-requires backend changes
+	-disabling for now
+
 -Blog/News 
 	-Upgrade Preserve US blog first
 	-Mockup
 	-Real
 -Messages/Chat
+	-one user to another
+	-have to change server and update server in prod
+
+-Notifications
+
+
 -Better swiping thing for images
 -Social sharing
 
 -Stripe payment
 	-auto pay
 
+-Forgot passsword
+
+-Geolocation and better maps
 
 
 Done
+
+
+-Add/Edit features is broken etc
 
 
 -See if the old way actually works - for single uplaod it just works out of the box - wtf?

@@ -4,11 +4,15 @@
   "proxies": [
     {
       "path": "/api",
-      "proxyUrl": "http://localhost:9000/api"
+      "proxyUrl": "http://localhost:5000/api"
     },
     {
       "path": "/auth",
-      "proxyUrl": "http://localhost:9000/auth"
+      "proxyUrl": "http://localhost:5000/auth"
+    },
+    {
+      "path": "/socket.io-client",
+      "proxyUrl": "http://localhost:5000/socket.io-client"
     }
   ]
 }
