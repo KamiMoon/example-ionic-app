@@ -23,7 +23,7 @@ angular.module('preserveusMobile')
 
     $scope.messageText = '';
 
-    var name = 'Eric Kizaki';
+    $scope.name = 'Eric Kizaki';
 
     $scope.sendMessage = function() {
         console.log('hi');

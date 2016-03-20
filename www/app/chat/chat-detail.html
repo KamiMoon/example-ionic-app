@@ -11,16 +11,30 @@
     {{chat.lastText}}
 </p>
  -->
-        <p ng-repeat="message in chatDetail.messages">
-            {{message.name}}, {{message.time | date:'M/d/yy h:mm:ss a'}}: {{message.text}}
-        </p>
-    </ion-content>
-    <ion-footer-bar class="bar-light">
-        <form class="item item-input-inset">
-            <div class="item-input-wrapper">
-                <input type="text" placeholder="Message" size="40" ng-model="messageText">
+<div class="chat-container">
+            <div ng-repeat="message in chatDetail.messages" class="chat-message" ng-class="{'chat-message-sent': message.sent, 'chat-message-received': !message.sent}">
+                <div class="chat-message-container">
+                    <div class="chat-inline">
+                        <div class="chat-message-avatar">
+                            <img ng-src="{{message.face}}" class="chat-message-avatar-img">
+                        </div>
+                        <div class="chat-message-bubble">
+                            <div class="chat-message-text">{{message.text}}</div>
+                        </div>
+                    </div>
+                    <div class="chat-message-footer">
+                        {{message.time | date:'M/d/yy h:mm:ss a'}}
+                    </div>
+                </div>
             </div>
-            <button style="display: none;" ng-click="sendMessage()">Send</button>
+        </div>
+    </ion-content>
+    <ion-footer-bar class="bar-light ">
+        <form class="item item-input-inset ">
+            <div class="item-input-wrapper ">
+                <input type="text " placeholder="Message " size="40 " ng-model="messageText ">
+            </div>
+            <button style="display: none; " ng-click="sendMessage() ">Send</button>
         </form>
     </ion-footer-bar>
 </ion-view>

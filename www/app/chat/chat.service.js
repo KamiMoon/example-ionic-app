@@ -35,17 +35,37 @@ angular.module('preserveusMobile')
         chat_id: 0,
         messages: [{
             name: 'Ben Sparrow',
+            face: 'img/ben.png',
             text: 'hi',
             time: 1458354319,
+            sent: false
         }, {
             name: 'Ben Sparrow',
+            face: 'img/ben.png',
             text: 'sup',
-            time: 1458354333
+            time: 1458354333,
+            sent: false
 
         }, {
             name: 'Eric Kizaki',
+            face: 'img/mike.png',
             text: 'what?',
-            time: 1458354333
+            time: 1458354333,
+            sent: true
+
+        }, {
+            name: 'Ben Sparrow',
+            face: 'img/ben.png',
+            text: 'asdf af saf af af af sdf fdsf df  f fffffff  asdffff asd fs df  ff sdf ds dfs sdf fa  asfas dsfsf sf fa safsafss',
+            time: 1458354333,
+            sent: false
+
+        }, {
+            name: 'Eric Kizaki',
+            face: 'img/mike.png',
+            text: 'asdfasfs fafs df sadfsd f sfs fsd dssf as fas fsa f safds fas fds fas f s sfs df asdf asf sd fs f sfas fs',
+            time: 1458354333,
+            sent: true
 
         }]
     }];
