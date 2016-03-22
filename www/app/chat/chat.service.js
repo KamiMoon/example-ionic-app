@@ -1,6 +1,6 @@
 angular.module('preserveusMobile')
 
-.factory('Chats', function($http, CONSTANTS) {
+.factory('Chats', function($http, $q, CONSTANTS) {
     // Might use a resource here that returns a JSON array
 
     // Some fake testing data
@@ -70,6 +70,18 @@ angular.module('preserveusMobile')
         }]
     }];
 
+    function filterChat(myUserId, chat) {
+        var chatObj = {
+            _id: chat._id,
+            lastMessage: chat.lastMessage,
+            users: chat.users.filter(function(user) {
+                return user.user_id !== myUserId;
+            })
+        };
+
+        return chatObj;
+    }
+
     return {
         all: function() {
             return chats;
@@ -107,7 +119,30 @@ angular.module('preserveusMobile')
             return $http.post(CONSTANTS.DOMAIN + '/api/chats/create', chat);
         },
         forUser: function(userId) {
-            return $http.get(CONSTANTS.DOMAIN + '/api/chats/foruser/' + userId);
+            var deferred = $q.defer();
+
+            $http.get(CONSTANTS.DOMAIN + '/api/chats/foruser/' + userId).then(
+                function(response) {
+                    var chats = response.data;
+                    var filteredChat = chats.map(function(chat) {
+                        var chatObj = {
+                            _id: chat._id,
+                            lastMessage: chat.lastMessage,
+                            users: chat.users.filter(function(user) {
+                                return user.user_id !== userId;
+                            })
+                        };
+
+                        return chatObj;
+                    });
+
+                    deferred.resolve(filteredChat);
+                },
+                function(error) {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
         }
     };
 });

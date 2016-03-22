@@ -14,28 +14,9 @@ angular.module('preserveusMobile')
                 console.log('I am not logged in - cant');
             }
 
-
-            Chats.forUser(myUserId).then(function(response) {
-                var chats = response.data;
-
-                //we need to filter out our own info
+            Chats.forUser(myUserId).then(function(chats) {
                 console.log(chats);
-
-                var filteredChat = chats.map(function(chat) {
-                    var chatObj = {
-                        _id: chat._id,
-                        lastMessage: chat.lastMessage,
-                        users: chat.users.filter(function(user) {
-                            return user.user_id !== myUserId;
-                        })
-                    };
-
-                    return chatObj;
-                });
-
-                console.log(filteredChat);
-
-                $scope.chats = filteredChat;
+                $scope.chats = chats;
             });
 
             $scope.remove = function(chat) {
