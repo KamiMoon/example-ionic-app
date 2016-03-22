@@ -31,7 +31,7 @@ angular.module('preserveusMobile')
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
     $scope.chat = Chats.get($stateParams.chatId);
 
-    $scope.chatDetail = Chats.getChatDetail($stateParams.chatId);
+    $scope.chatDetail = Chats.getDetail($stateParams.chatId);
 
     $scope.messageText = '';
 

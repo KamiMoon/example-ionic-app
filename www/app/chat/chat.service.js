@@ -70,18 +70,6 @@ angular.module('preserveusMobile')
         }]
     }];
 
-    function filterChat(myUserId, chat) {
-        var chatObj = {
-            _id: chat._id,
-            lastMessage: chat.lastMessage,
-            users: chat.users.filter(function(user) {
-                return user.user_id !== myUserId;
-            })
-        };
-
-        return chatObj;
-    }
-
     return {
         all: function() {
             return chats;
@@ -137,6 +125,23 @@ angular.module('preserveusMobile')
                     });
 
                     deferred.resolve(filteredChat);
+                },
+                function(error) {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        },
+        getDetail: function(id) {
+            var deferred = $q.defer();
+
+            $http.get(CONSTANTS.DOMAIN + '/api/chats/detail/' + id).then(
+                function(response) {
+                    var chat = response.data;
+
+                    console.log(chat);
+
+                    deferred.resolve(chat);
                 },
                 function(error) {
                     deferred.reject(error);
