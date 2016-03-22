@@ -162,8 +162,6 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
         $rootScope.logout();
     });
 
-
-
 });
 
 /* Globals */

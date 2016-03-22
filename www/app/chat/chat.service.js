@@ -1,6 +1,6 @@
 angular.module('preserveusMobile')
 
-.factory('Chats', function() {
+.factory('Chats', function($http, CONSTANTS) {
     // Might use a resource here that returns a JSON array
 
     // Some fake testing data
@@ -93,6 +93,21 @@ angular.module('preserveusMobile')
                 }
             }
             return null;
+        },
+        create: function(userIds) {
+            var chat = {
+                users: userIds.map(function(userId) {
+                    return {
+                        user_id: userId
+                    };
+                }),
+                messages: []
+            };
+
+            return $http.post(CONSTANTS.DOMAIN + '/api/chats/create', chat);
+        },
+        forUser: function(userId) {
+            return $http.get(CONSTANTS.DOMAIN + '/api/chats/foruser/' + userId);
         }
     };
 });
