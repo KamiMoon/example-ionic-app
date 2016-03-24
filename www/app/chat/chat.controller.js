@@ -28,10 +28,15 @@ angular.module('preserveusMobile')
 
     })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, Auth, Chats) {
+    var currentUser = Auth.getCurrentUser();
+
     $scope.chat = Chats.get($stateParams.chatId);
 
-    $scope.chatDetail = Chats.getDetail($stateParams.chatId);
+    Chats.getDetail($stateParams.chatId).then(function(chat) {
+        $scope.chatDetail = chat;
+        //socket.syncUpdates('chatDetail', $scope.chatDetail.messages);
+    });
 
     $scope.messageText = '';
 
@@ -42,15 +47,24 @@ angular.module('preserveusMobile')
 
         if ($scope.messageText.length > 0) {
 
-            $scope.chatDetail.messages.push({
-                name: name,
-                time: new Date().getTime(),
+            var newMessage = {
+                user_id: currentUser._id,
                 text: $scope.messageText
-            });
+            };
 
-            $scope.messageText = '';
+            Chats.sendMessage($scope.chatDetail._id, newMessage).then(
+                function(response) {
+                    console.log(response.data);
+
+                    $scope.chatDetail.messages.push(newMessage);
+                    $scope.messageText = '';
+                },
+                function() {
+                    //TODO
+                });
         }
     };
+
 })
 
 .controller('ChatCreateCtrl', function($scope, $stateParams, Auth, Chats) {

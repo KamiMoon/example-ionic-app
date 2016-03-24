@@ -104,6 +104,7 @@ angular.module('preserveusMobile')
                 return currentUser;
             },
 
+
             /**
              * Check if a user is logged in
              *

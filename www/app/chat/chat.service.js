@@ -148,6 +148,15 @@ angular.module('preserveusMobile')
                 });
 
             return deferred.promise;
+        },
+        sendMessage: function(chatId, messageObj) {
+
+            var payload = {
+                chatId: chatId,
+                messageObj: messageObj
+            };
+
+            return $http.post(CONSTANTS.DOMAIN + '/api/chats/sendMessage', payload);
         }
     };
 });
