@@ -9,10 +9,6 @@
     {
       "path": "/auth",
       "proxyUrl": "http://localhost:5000/auth"
-    },
-    {
-      "path": "/socket.io-client",
-      "proxyUrl": "http://localhost:5000/socket.io-client"
     }
   ]
 }

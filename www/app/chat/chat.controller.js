@@ -28,15 +28,36 @@ angular.module('preserveusMobile')
 
     })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Auth, Chats) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, Auth, Chats, SocketService) {
     var currentUser = Auth.getCurrentUser();
 
-    $scope.chat = Chats.get($stateParams.chatId);
+    //$scope.chat = Chats.get($stateParams.chatId);
+
+    var onSaveEvent = function(item) {
+        console.log('reveived event');
+
+        if (item) {
+            if (item.chatId === $scope.chatDetail._id) {
+                console.log('message is for this chat');
+                console.log(item);
+
+                $scope.chatDetail.messages.push(item.messageObj);
+            }
+        }
+    };
+
 
     Chats.getDetail($stateParams.chatId).then(function(chat) {
         $scope.chatDetail = chat;
         //socket.syncUpdates('chatDetail', $scope.chatDetail.messages);
+
+        SocketService.getSocket().then(function(socket) {
+            socket.on('chatDetail:save', function(item) {
+                onSaveEvent(item);
+            });
+        });
     });
+
 
     $scope.messageText = '';
 
@@ -56,7 +77,7 @@ angular.module('preserveusMobile')
                 function(response) {
                     console.log(response.data);
 
-                    $scope.chatDetail.messages.push(newMessage);
+                    //$scope.chatDetail.messages.push(newMessage);
                     $scope.messageText = '';
                 },
                 function() {
@@ -107,12 +128,12 @@ angular.module('preserveusMobile')
     */
 })
 
-.controller('ChatTestCtrl', function($scope, $http, socket, CONSTANTS) {
+.controller('ChatTestCtrl', function($scope, $http, SocketService, CONSTANTS) {
     $scope.awesomeThings = [];
 
     $http.get(CONSTANTS.DOMAIN + '/api/things').success(function(awesomeThings) {
         $scope.awesomeThings = awesomeThings;
-        socket.syncUpdates('thing', $scope.awesomeThings);
+        SocketService.syncUpdates('thing', $scope.awesomeThings);
     });
 
     $scope.addThing = function() {
@@ -128,6 +149,6 @@ angular.module('preserveusMobile')
     };
 
     $scope.$on('$destroy', function() {
-        socket.unsyncUpdates('thing');
+        SocketService.unsyncUpdates('thing');
     });
 });

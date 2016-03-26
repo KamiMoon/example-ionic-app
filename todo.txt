@@ -1,3 +1,11 @@
+index.html - localhost - done
+server - event multiple calls?
+show bottom message - scroll
+notification on ui - flash
+
+
+
+
 -Search Property
 	-requires backend changes
 	-disabling for now

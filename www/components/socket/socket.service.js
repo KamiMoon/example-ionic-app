@@ -2,21 +2,38 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .factory('socket', function(socketFactory, CONSTANTS) {
+    .factory('SocketService', function(angularLoad, $q, socketFactory, Auth, CONSTANTS) {
 
-        // socket.io now auto-configures its connection when we ommit a connection url
-        var ioSocket = io(CONSTANTS.DOMAIN, {
-            // Send auth token on connection, you will need to DI the Auth service above
-            // 'query': 'token=' + Auth.getToken()
-            path: '/socket.io-client'
-        });
-
-        var socket = socketFactory({
-            ioSocket: ioSocket
-        });
+        var socket = null;
 
         return {
-            socket: socket,
+            getSocket: function() {
+                var deferred = $q.defer();
+
+                if (!socket) {
+                    angularLoad.loadScript(CONSTANTS.SOCKET_IO_URL + '/socket.io-client/socket.io.js').then(function() {
+                        // socket.io now auto-configures its connection when we ommit a connection url
+                        var ioSocket = io(CONSTANTS.SOCKET_IO_URL, {
+                            // Send auth token on connection, you will need to DI the Auth service above
+                            'query': 'token=' + Auth.getToken(),
+                            path: '/socket.io-client'
+                        });
+
+                        socket = socketFactory({
+                            ioSocket: ioSocket
+                        });
+
+                        deferred.resolve(socket);
+
+                    }).catch(function() {
+                        deferred.reject('error');
+                    });
+                } else {
+                    deferred.resolve(socket);
+                }
+
+                return deferred.promise;
+            },
 
             /**
              * Register listeners to sync an array with updates on a model
@@ -31,34 +48,38 @@ angular.module('preserveusMobile')
             syncUpdates: function(modelName, array, cb) {
                 cb = cb || angular.noop;
 
-                /**
-                 * Syncs item creation/updates on 'model:save'
-                 */
-                socket.on(modelName + ':save', function(item) {
-                    var oldItem = _.find(array, { _id: item._id });
-                    var index = array.indexOf(oldItem);
-                    var event = 'created';
+                this.getSocket().then(function(socket) {
+                    /**
+                     * Syncs item creation/updates on 'model:save'
+                     */
 
-                    // replace oldItem if it exists
-                    // otherwise just add item to the collection
-                    if (oldItem) {
-                        array.splice(index, 1, item);
-                        event = 'updated';
-                    } else {
-                        array.push(item);
-                    }
+                    socket.on(modelName + ':save', function(item) {
+                        var oldItem = _.find(array, { _id: item._id });
+                        var index = array.indexOf(oldItem);
+                        var event = 'created';
 
-                    cb(event, item, array);
+                        // replace oldItem if it exists
+                        // otherwise just add item to the collection
+                        if (oldItem) {
+                            array.splice(index, 1, item);
+                            event = 'updated';
+                        } else {
+                            array.push(item);
+                        }
+
+                        cb(event, item, array);
+                    });
+
+                    /**
+                     * Syncs removed items on 'model:remove'
+                     */
+                    socket.on(modelName + ':remove', function(item) {
+                        var event = 'deleted';
+                        _.remove(array, { _id: item._id });
+                        cb(event, item, array);
+                    });
                 });
 
-                /**
-                 * Syncs removed items on 'model:remove'
-                 */
-                socket.on(modelName + ':remove', function(item) {
-                    var event = 'deleted';
-                    _.remove(array, { _id: item._id });
-                    cb(event, item, array);
-                });
             },
 
             /**
@@ -66,9 +87,13 @@ angular.module('preserveusMobile')
              *
              * @param modelName
              */
+
             unsyncUpdates: function(modelName) {
-                socket.removeAllListeners(modelName + ':save');
-                socket.removeAllListeners(modelName + ':remove');
+                this.getSocket().then(function(socket) {
+                    socket.removeAllListeners(modelName + ':save');
+                    socket.removeAllListeners(modelName + ':remove');
+                });
+
             }
         };
     });

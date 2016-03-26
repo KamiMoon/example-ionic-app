@@ -22,13 +22,27 @@ angular.module('preserveusMobile')
                         controller: 'ChatDetailCtrl'
                     }
                 }
-            }).state('app.chatCreate', {
-                url: '/chats/create/:user_id',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'app/chat/chat-detail.html',
-                        controller: 'ChatCreateCtrl'
-                    }
+            })
+
+
+        // .state('app.chat-detail', {
+        //     url: '/chats/:chatId',
+        //     views: {
+        //         'menuContent': {
+        //             templateUrl: 'app/chat/chat.html',
+        //             controller: 'ChatTestCtrl'
+        //         }
+        //     }
+        // })
+
+
+        .state('app.chatCreate', {
+            url: '/chats/create/:user_id',
+            views: {
+                'menuContent': {
+                    templateUrl: 'app/chat/chat-detail.html',
+                    controller: 'ChatCreateCtrl'
                 }
-            });
+            }
+        });
     });
