@@ -60,7 +60,7 @@ angular.module('preserveusMobile')
 
         };
 
-    }).controller('UserProfileCtrl', function($scope, $stateParams, User, ValidationService) {
+    }).controller('UserProfileCtrl', function($scope, $stateParams, User, Chats, $state, Auth, ValidationService) {
         var id = $stateParams.id;
 
         if (!id) {
@@ -83,6 +83,10 @@ angular.module('preserveusMobile')
             }
         };
 
-
+        $scope.createChat = function() {
+            Chats.create([Auth.getCurrentUser()._id, id]).then(function(response) {
+                $state.go('app.chat-detail', { chatId: response.data._id });
+            });
+        };
 
     });

@@ -1,9 +1,19 @@
-index.html - localhost - done
-server - event multiple calls?
-show bottom message - scroll
-notification on ui - flash
 
+-offline
+	-localstorage
+		-mark and save all items
 
+-test with three users
+
+-delete - query is broken - research MongoDB match or something
+
+-show bottom message - scroll
+-notification on ui - flash
+-marked as read
+
+-Autoprefixer - how to get?
+
+-chat - image send
 
 
 -Search Property
@@ -34,6 +44,10 @@ notification on ui - flash
 
 Done
 
+--ui by user
+
+index.html - localhost - done
+server - event multiple calls? - done - that is just how it is
 
 -Add/Edit features is broken etc
 

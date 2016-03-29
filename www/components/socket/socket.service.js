@@ -94,6 +94,17 @@ angular.module('preserveusMobile')
                     socket.removeAllListeners(modelName + ':remove');
                 });
 
+            },
+
+            init: function() {
+                //listen to all app events.
+
+                //TODO - forward
+                // this.getSocket().then(function(socket) {
+                //     socket.on('chatDetail:save', function(item) {
+                //         //onSaveEvent(item);
+                //     });
+                // });
             }
         };
     });

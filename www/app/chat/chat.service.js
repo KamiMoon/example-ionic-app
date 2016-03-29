@@ -157,6 +157,23 @@ angular.module('preserveusMobile')
             };
 
             return $http.post(CONSTANTS.DOMAIN + '/api/chats/sendMessage', payload);
+        },
+        markChatDeletedForUser: function(chatId, userId) {
+
+            var deferred = $q.defer();
+
+            $http.put(CONSTANTS.DOMAIN + '/api/chats/markChatDeletedForUser/' + chatId + '/' + userId, {}).then(
+                function(response) {
+
+                    console.log(response.data);
+
+                    deferred.resolve(response.data);
+                },
+                function(error) {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
         }
     };
 });

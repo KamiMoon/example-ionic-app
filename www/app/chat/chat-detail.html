@@ -16,25 +16,33 @@
                 <div class="chat-message-container">
                     <div class="chat-inline">
                         <div class="chat-message-avatar">
-                            <img ng-src="{{message.face}}" class="chat-message-avatar-img">
+                            <a ui-sref="app.userView({id: message.user_id})">
+                                <b-img public-id="{{message.photo}}" transformation="w_40,h_40,c_thumb,g_face" alt="Pic" class="chat-message-avatar-img"></b-img>
+                            </a>
                         </div>
                         <div class="chat-message-bubble">
+                            <!-- TODO if not multiple don't show this -->
+                            <div class="chat-message-name">{{message.name}}:</div>
                             <div class="chat-message-text">{{message.text}}</div>
                         </div>
                     </div>
                     <div class="chat-message-footer">
-                        {{message.time | date:'M/d/yy h:mm:ss a'}}
+                        {{message.createdAt | date:'M/d/yy h:mm:ss a'}}
                     </div>
                 </div>
             </div>
         </div>
     </ion-content>
-    <ion-footer-bar class="bar-light ">
-        <form class="item item-input-inset ">
-            <div class="item-input-wrapper ">
-                <input type="text " placeholder="Message " size="40 " ng-model="messageText ">
+    <ion-footer-bar class="bar-light">
+        <form class="item item-input-inset" id="chat-footer-wrapper">
+            <!-- todo:  image picker - we only send the text of the image url
+             -->
+            <!--  <b-input type="file" model="user.photo" transformation="w_100,h_100,c_thumb,g_face"></b-input> -->
+            <div class="item-input-wrapper">
+                <!-- TODO image -->
+                <input type="text" placeholder="Message" id="chat-footer-text-input" ng-model="messageText">
             </div>
-            <button ng-click="sendMessage() ">Send</button>
+            <button class="button button-small button-stable" ng-click="sendMessage() ">Send</button>
         </form>
     </ion-footer-bar>
 </ion-view>

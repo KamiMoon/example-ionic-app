@@ -22,7 +22,8 @@ angular.module('preserveusMobile')
                         controller: 'ChatDetailCtrl'
                     }
                 }
-            })
+            });
+
 
 
         // .state('app.chat-detail', {
@@ -36,13 +37,13 @@ angular.module('preserveusMobile')
         // })
 
 
-        .state('app.chatCreate', {
-            url: '/chats/create/:user_id',
-            views: {
-                'menuContent': {
-                    templateUrl: 'app/chat/chat-detail.html',
-                    controller: 'ChatCreateCtrl'
-                }
-            }
-        });
+        // .state('app.chatCreate', {
+        //     url: '/chats/create/:user_id',
+        //     views: {
+        //         'menuContent': {
+        //             templateUrl: 'app/chat/chat-detail.html',
+        //             controller: 'ChatCreateCtrl'
+        //         }
+        //     }
+        // });
     });

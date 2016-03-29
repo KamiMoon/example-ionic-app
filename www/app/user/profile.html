@@ -45,7 +45,7 @@
                 <i class="icon ion-calendar"></i> Rents
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
-            <a ng-if="!Auth.isMine(user._id)" ui-sref="app.chatCreate({user_id: user._id})" class="item item-icon-left item-icon-right">
+            <a ng-if="!Auth.isMine(user._id)" ng-click="createChat()" class="item item-icon-left item-icon-right">
                 <i class="icon ion-ios-chatboxes-outline"></i> Chat
                 <i class="icon ion-ios-arrow-right"></i>
             </a>

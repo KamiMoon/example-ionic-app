@@ -2,7 +2,7 @@
     <ion-content>
         <ion-list>
             <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/app/chats/{{chat._id}}">
-                <img ng-src="{{chat.face}}">
+                <b-img public-id="{{chat.users[0].photo}}" transformation="w_40,h_40,c_thumb,g_face" alt="Pic" class="chat-message-avatar-img"></b-img>
                 <h2 ng-repeat="user in chat.users">{{user.name}}</h2>
                 <p>{{chat.lastMessage}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>

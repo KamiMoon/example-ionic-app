@@ -7,20 +7,18 @@ angular.module('preserveusMobile')
         //
         $scope.$on('$ionicView.enter', function(e) {
 
-            var myUserId = Auth.getCurrentUser()._id;
-
-            if (!myUserId) {
-                //TODO redirect to login
-                console.log('I am not logged in - cant');
-            }
-
-            Chats.forUser(myUserId).then(function(chats) {
+            Chats.forUser(Auth.getCurrentUser()._id).then(function(chats) {
                 console.log(chats);
                 $scope.chats = chats;
+
+                //TODO set photo
             });
 
             $scope.remove = function(chat) {
-                Chats.remove(chat);
+
+                Chats.markChatDeletedForUser(chat._id, Auth.getCurrentUser()._id);
+
+                $scope.chats.splice($scope.chats.indexOf(chat), 1);
             };
 
         });
@@ -28,8 +26,25 @@ angular.module('preserveusMobile')
 
     })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Auth, Chats, SocketService) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, Auth, Chats, SocketService, $timeout) {
     var currentUser = Auth.getCurrentUser();
+
+    var userMap = {};
+
+    var setupMessageForRender = function(message) {
+
+        //mark any with my user id as sent
+        if (message.user_id === currentUser._id) {
+            message.sent = true;
+        }
+
+        var messageUser = userMap[message.user_id];
+        if (messageUser) {
+            //copy over the user photo and name
+            message.photo = messageUser.photo;
+            message.name = messageUser.name;
+        }
+    };
 
     //$scope.chat = Chats.get($stateParams.chatId);
 
@@ -39,7 +54,10 @@ angular.module('preserveusMobile')
         if (item) {
             if (item.chatId === $scope.chatDetail._id) {
                 console.log('message is for this chat');
-                console.log(item);
+                //console.log(item);
+
+                setupMessageForRender(item.messageObj);
+                console.log(item.messageObj);
 
                 $scope.chatDetail.messages.push(item.messageObj);
             }
@@ -48,9 +66,29 @@ angular.module('preserveusMobile')
 
 
     Chats.getDetail($stateParams.chatId).then(function(chat) {
+
+        for (var j = 0; j < chat.users.length; j++) {
+            var user = chat.users[j];
+            userMap[user.user_id] = user;
+        }
+
+        for (var i = 0; i < chat.messages.length; i++) {
+            setupMessageForRender(chat.messages[i]);
+        }
+
         $scope.chatDetail = chat;
+
+        //scroll to bottom of the chat
+        $timeout(function() {
+            $timeout(function() {
+                $('chat-message').last();
+                //TODO - scroll into view
+            });
+        });
+
         //socket.syncUpdates('chatDetail', $scope.chatDetail.messages);
 
+        //todo - not here - forward
         SocketService.getSocket().then(function(socket) {
             socket.on('chatDetail:save', function(item) {
                 onSaveEvent(item);
@@ -59,7 +97,7 @@ angular.module('preserveusMobile')
     });
 
 
-    $scope.messageText = '';
+    $scope.messageText = ''; //'<img public-id="preserveus/spqex9kfea7thuploy6j" transformation="w_40,h_40,c_thumb,g_face" alt="Pic" class="img-thumbnail" ng-src="http://res.cloudinary.com/ddovrks1z/image/upload/w_40,h_40,c_thumb,g_face/preserveus/spqex9kfea7thuploy6j.jpg" src="http://res.cloudinary.com/ddovrks1z/image/upload/w_40,h_40,c_thumb,g_face/preserveus/spqex9kfea7thuploy6j.jpg">';
 
     $scope.name = 'Eric Kizaki';
 
@@ -77,7 +115,6 @@ angular.module('preserveusMobile')
                 function(response) {
                     console.log(response.data);
 
-                    //$scope.chatDetail.messages.push(newMessage);
                     $scope.messageText = '';
                 },
                 function() {
@@ -88,45 +125,16 @@ angular.module('preserveusMobile')
 
 })
 
-.controller('ChatCreateCtrl', function($scope, $stateParams, Auth, Chats) {
+// .controller('ChatCreateCtrl', function($scope, $state, $stateParams, Auth, Chats) {
 
-    var otherUser = $stateParams.user_id;
-    var myUserId = Auth.getCurrentUser()._id;
+//     var otherUser = $stateParams.user_id;
 
-    if (!myUserId) {
-        //TODO redirect to login
-        console.log('I am not logged in - cant');
-    }
+//     Chats.create([Auth.getCurrentUser()._id, otherUser]).then(function(response) {
+//         console.log(response.data);
 
-    Chats.create([myUserId, otherUser]).then(function(response) {
-        console.log(response.data);
-    });
-
-    /*
-    $scope.chat = Chats.get($stateParams.chatId);
-
-    $scope.chatDetail = Chats.getChatDetail($stateParams.chatId);
-
-    $scope.messageText = '';
-
-    $scope.name = 'Eric Kizaki';
-
-    $scope.sendMessage = function() {
-        console.log('hi');
-
-        if ($scope.messageText.length > 0) {
-
-            $scope.chatDetail.messages.push({
-                name: name,
-                time: new Date().getTime(),
-                text: $scope.messageText
-            });
-
-            $scope.messageText = '';
-        }
-    };
-    */
-})
+//         $state.go('app.chat-detail', { chatId: response.data._id });
+//     });
+// })
 
 .controller('ChatTestCtrl', function($scope, $http, SocketService, CONSTANTS) {
     $scope.awesomeThings = [];
