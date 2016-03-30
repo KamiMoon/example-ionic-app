@@ -18,7 +18,7 @@ angular.module('preserveusMobile')
                 url: '/chats/:chatId',
                 views: {
                     'menuContent': {
-                        templateUrl: 'app/chat/chat-detail.html',
+                        templateUrl: 'app/chat/chatDetail.html',
                         controller: 'ChatDetailCtrl'
                     }
                 }
@@ -41,7 +41,7 @@ angular.module('preserveusMobile')
         //     url: '/chats/create/:user_id',
         //     views: {
         //         'menuContent': {
-        //             templateUrl: 'app/chat/chat-detail.html',
+        //             templateUrl: 'app/chat/chatDetail.html',
         //             controller: 'ChatCreateCtrl'
         //         }
         //     }

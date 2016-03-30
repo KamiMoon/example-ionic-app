@@ -20,7 +20,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
     'LOCAL_TOKEN_KEY': 'preserveusMobile_token',
     'EVENTS': {
         'NOT_AUTHENTICATED': 'NOT_AUTHENTICATED',
-        'NOT_AUTHORIZED': 'NOT_AUTHORIZED',
+        'NOT_AUTHORIZED': 'NOT_AUTHORIZED'
     },
     'CLOUDINARY_IMAGE_URL': 'http://res.cloudinary.com/ddovrks1z/image/upload/',
     'CLOUDINARY_UPLOAD_URL': 'https://api.cloudinary.com/v1_1/ddovrks1z/upload',
@@ -72,7 +72,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
     //         url: '/chats/:chatId',
     //         views: {
     //             'tab-chats': {
-    //                 templateUrl: 'app/chat/chat-detail.html',
+    //                 templateUrl: 'app/chat/chatDetail.html',
     //                 controller: 'ChatDetailCtrl'
     //             }
     //         }
