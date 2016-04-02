@@ -1,6 +1,5 @@
 .chat-message {
     display: -webkit-flex;
-    display: -moz-box;
     display: -ms-flexbox;
     display: flex;
     margin-bottom: 10px;
@@ -8,18 +7,14 @@
 
 .chat-message-sent {
     -webkit-flex-direction: row-reverse;
-    -moz-box-orient: horizontal;
-    -moz-box-direction: reverse;
-    -ms-flex-direction: row-reverse;
-    flex-direction: row-reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
 }
 
 .chat-message-received {
     -webkit-flex-direction: row;
-    -moz-box-orient: horizontal;
-    -moz-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
 }
 
 .chat-message-avatar-img {
@@ -48,19 +43,20 @@
 .chat-inline {
     /* TODO - autoprefixer */
     display: -webkit-flex;
-    display: -moz-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-flex-direction: row;
-    -moz-box-orient: horizontal;
-    -moz-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    align-items: center;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .chat-message-sent .chat-inline {
-    flex-direction: row-reverse;
+    -webkit-flex-direction: row-reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
 }
 
 .chat-message-received .chat-message-bubble {
@@ -83,14 +79,15 @@
     line-height: 18px;
     color: #8899a6;
     display: -webkit-flex;
-    display: -moz-box;
     display: -ms-flexbox;
     display: flex;
     margin: 0 50px;
 }
 
 .chat-message-sent .chat-message-footer {
-    flex-direction: row-reverse;
+    -webkit-flex-direction: row-reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
 }
 
 .chat-message-name {
