@@ -1,7 +1,7 @@
 /**
  * Created by erickizaki on 3/29/16.
  */
-angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope, $stateParams, Auth, Chats, SocketService, $timeout) {
+angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope, $stateParams, Auth, Chats, SocketService, $timeout, $ionicScrollDelegate) {
     var currentUser = Auth.getCurrentUser();
 
     var userMap = {};
@@ -33,6 +33,8 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope
                 console.log(item.messageObj);
 
                 $scope.chatDetail.messages.push(item.messageObj);
+
+                $ionicScrollDelegate.scrollBottom(true);
             }
         }
     };
@@ -51,14 +53,11 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope
         $scope.chatDetail = chat;
 
         //scroll to bottom of the chat
-        $timeout(function () {
-            $timeout(function () {
-                $('chat-message').last();
-                //TODO - scroll into view
+        $timeout(function(){
+            $timeout(function(){
+                $ionicScrollDelegate.scrollBottom(true);
             });
         });
-
-        //socket.syncUpdates('chatDetail', $scope.chatDetail.messages);
 
         //todo - not here - forward
         SocketService.getSocket().then(function (socket) {
@@ -87,11 +86,15 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope
                     console.log(response.data);
 
                     $scope.messageText = '';
+
+                    $ionicScrollDelegate.scrollBottom(true);
                 },
                 function () {
                     //TODO
                 });
         }
     };
+
+
 
 });
