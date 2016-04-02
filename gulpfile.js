@@ -6,6 +6,8 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var autoprefixer = require('gulp-autoprefixer');
+
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -48,4 +50,15 @@ gulp.task('git-check', function(done) {
     process.exit(1);
   }
   done();
+});
+
+var cssFiles = ['./www/app/chat/chat3.css'];
+
+gulp.task('autoprefixer', function () {
+    return gulp.src(cssFiles)
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: true
+        }))
+        .pipe(gulp.dest('./www/app/chat/css'));
 });

@@ -1,5 +1,9 @@
 angular.module('preserveusMobile')
-    .controller('ChatsCtrl', function($scope, Chats, Auth) {
+    .controller('ChatsCtrl', function($rootScope, $scope, Chats, Auth) {
+
+        //reset messageCount
+        $rootScope.newMessageCount = 0;
+
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
         // To listen for when this page is active (for example, to refresh data),
@@ -24,32 +28,28 @@ angular.module('preserveusMobile')
 
         });
 
+        var onSaveEvent = function (item) {
+            if (item && $scope.chats) {
 
-    })
+                for (var i = 0; i < $scope.chats.length; i++) {
+                    var chat = $scope.chats[i];
+
+                    if (item.chatId === chat._id) {
+                        if(!chat.newMessageCount){
+                            chat.newMessageCount = 0;
+                        }
+                        chat.newMessageCount++;
+                        chat.lastMessage = item.messageObj.text;
+                    }
+                }
+            }
+        };
+
+        $scope.$on('chatDetail:save', function (ev, data) {
+            onSaveEvent(data);
+        });
 
 
 
-.controller('ChatTestCtrl', function($scope, $http, SocketService, CONSTANTS) {
-    $scope.awesomeThings = [];
 
-    $http.get(CONSTANTS.DOMAIN + '/api/things').success(function(awesomeThings) {
-        $scope.awesomeThings = awesomeThings;
-        SocketService.syncUpdates('thing', $scope.awesomeThings);
     });
-
-    $scope.addThing = function() {
-        if ($scope.newThing === '') {
-            return;
-        }
-        $http.post(CONSTANTS.DOMAIN + '/api/things', { name: $scope.newThing });
-        $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-        $http.delete(CONSTANTS.DOMAIN + '/api/things/' + thing._id);
-    };
-
-    $scope.$on('$destroy', function() {
-        SocketService.unsyncUpdates('thing');
-    });
-});

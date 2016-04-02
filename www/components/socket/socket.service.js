@@ -20,7 +20,8 @@ angular.module('preserveusMobile')
                         });
 
                         socket = socketFactory({
-                            ioSocket: ioSocket
+                            ioSocket: ioSocket,
+                            prefix: ''
                         });
 
                         deferred.resolve(socket);
@@ -99,12 +100,12 @@ angular.module('preserveusMobile')
             init: function() {
                 //listen to all app events.
 
-                //TODO - forward
-                // this.getSocket().then(function(socket) {
-                //     socket.on('chatDetail:save', function(item) {
-                //         //onSaveEvent(item);
-                //     });
-                // });
+                var events = ['chatDetail:save'];
+
+                this.getSocket().then(function(socket){
+                    socket.forward(events);
+                });
+
             }
         };
     });

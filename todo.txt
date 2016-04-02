@@ -1,17 +1,13 @@
-
 -offline
 	-localstorage
 		-mark and save all items
 
 -test with three users
 
--delete - query is broken - research MongoDB match or something
 
--show bottom message - scroll
 -notification on ui - flash
 -marked as read
 
--Autoprefixer - how to get?
 
 -chat - image send
 
@@ -20,7 +16,7 @@
 	-requires backend changes
 	-disabling for now
 
--Blog/News 
+-Blog/News
 	-Upgrade Preserve US blog first
 	-Mockup
 	-Real
@@ -42,7 +38,21 @@
 -Geolocation and better maps
 
 
+
+
+
+
+
 Done
+-Autoprefixer - how to get?
+
+-show bottom message - scroll
+
+-if any user sends a messsage - mark it not deleted for all users
+
+
+-delete - query is broken - research MongoDB match or something
+
 
 --ui by user
 
@@ -54,7 +64,7 @@ server - event multiple calls? - done - that is just how it is
 
 -See if the old way actually works - for single uplaod it just works out of the box - wtf?
 
--Image Picker 
+-Image Picker
 -Uplaod refactor
 
 -Image Upload
@@ -72,7 +82,7 @@ server - event multiple calls? - done - that is just how it is
 
 
 Login
-	Authentication 
+	Authentication
 	Authorization
 
 

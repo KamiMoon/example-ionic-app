@@ -117,9 +117,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
     //$urlRouterProvider.otherwise('/camera');
     $urlRouterProvider.otherwise('/app/property');
 
-})
-
-.run(function($ionicPlatform, $rootScope, Auth, $timeout, $state, CONSTANTS) {
+}).run(function ($ionicPlatform, $rootScope, Auth, $timeout, $state, CONSTANTS, SocketService) {
     $rootScope.Auth = Auth;
     $rootScope.CONSTANTS = CONSTANTS;
 
@@ -135,8 +133,12 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
             // org.apache.cordova.statusbar required
             window.StatusBar.styleDefault();
         }
+
+        //listen to app events
+        SocketService.init();
     });
 
+        
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, next, toParams, fromState, fromParams) {
         Auth.isLoggedInAsync(function(loggedIn) {
@@ -154,6 +156,16 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
             }
         });
     });
+    
+    $rootScope.$on('chatDetail:save', function (ev, data) {
+
+        if (!$rootScope.newMessageCount) {
+            $rootScope.newMessageCount = 0;
+        }
+        $rootScope.newMessageCount++;
+
+
+    });
 
     $rootScope.logout = function() {
         Auth.logout();
@@ -163,7 +175,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
     $rootScope.$on(CONSTANTS.EVENTS.NOT_AUTHENTICATED, function() {
         $rootScope.logout();
     });
-
+    
 });
 
 /* Globals */

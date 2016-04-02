@@ -43,6 +43,7 @@
                 <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.chats">
                     <i class="icon ion-ios-chatboxes-outline"></i>
                     <h2 class="menu-text">Messages</h2>
+                    <span ng-if="newMessageCount" class="badge badge-assertive">{{newMessageCount}}</span>
                 </ion-item>
                 <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.settings">
                     <i class="icon ion-gear-a"></i>

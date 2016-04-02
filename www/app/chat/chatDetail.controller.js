@@ -24,10 +24,9 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope
     var onSaveEvent = function (item) {
         console.log('reveived event');
 
-        if (item) {
+        if (item && $scope.chatDetail) {
             if (item.chatId === $scope.chatDetail._id) {
                 console.log('message is for this chat');
-                //console.log(item);
 
                 setupMessageForRender(item.messageObj);
                 console.log(item.messageObj);
@@ -38,6 +37,10 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope
             }
         }
     };
+
+    $scope.$on('chatDetail:save', function (ev, data) {
+        onSaveEvent(data);
+    });
 
     Chats.getDetail($stateParams.chatId).then(function (chat) {
 
@@ -56,13 +59,6 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope
         $timeout(function(){
             $timeout(function(){
                 $ionicScrollDelegate.scrollBottom(true);
-            });
-        });
-
-        //todo - not here - forward
-        SocketService.getSocket().then(function (socket) {
-            socket.on('chatDetail:save', function (item) {
-                onSaveEvent(item);
             });
         });
     });
