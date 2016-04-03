@@ -10,9 +10,19 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
 ])
 
 .constant('CONSTANTS', {
-    //'DOMAIN': 'https://www.preservedfw.com',
-    'DOMAIN': '',
-    'SOCKET_IO_URL': 'http://localhost:5000',
+
+    //prod
+    'DOMAIN': 'https://www.preservedfw.com',
+    'SOCKET_IO_URL': 'https://preserveus.herokuapp.com',
+
+    //local
+    //'DOMAIN': '',
+    //'SOCKET_IO_URL': 'http://localhost:5000',
+
+    //finch
+    //'DOMAIN': 'https://clever-beef.usefinch.io/',
+    //'SOCKET_IO_URL': 'https://clever-beef.usefinch.io/',
+
 
     //'REST_API_URL': '/api',
     //'REST_API_URL': 'https://www.preservedfw.com/api',
@@ -117,7 +127,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
     //$urlRouterProvider.otherwise('/camera');
     $urlRouterProvider.otherwise('/app/property');
 
-}).run(function ($ionicPlatform, $rootScope, Auth, $timeout, $state, CONSTANTS, SocketService) {
+}).run(function($ionicPlatform, $rootScope, Auth, $timeout, $state, CONSTANTS, SocketService) {
     $rootScope.Auth = Auth;
     $rootScope.CONSTANTS = CONSTANTS;
 
@@ -138,7 +148,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
         SocketService.init();
     });
 
-        
+
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, next, toParams, fromState, fromParams) {
         Auth.isLoggedInAsync(function(loggedIn) {
@@ -156,15 +166,13 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
             }
         });
     });
-    
-    $rootScope.$on('chatDetail:save', function (ev, data) {
+
+    $rootScope.$on('chatDetail:save', function(ev, data) {
 
         if (!$rootScope.newMessageCount) {
             $rootScope.newMessageCount = 0;
         }
         $rootScope.newMessageCount++;
-
-
     });
 
     $rootScope.logout = function() {
@@ -175,7 +183,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
     $rootScope.$on(CONSTANTS.EVENTS.NOT_AUTHENTICATED, function() {
         $rootScope.logout();
     });
-    
+
 });
 
 /* Globals */

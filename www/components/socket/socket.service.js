@@ -2,38 +2,22 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .factory('SocketService', function(angularLoad, $q, socketFactory, Auth, CONSTANTS) {
+    .factory('SocketService', function($q, socketFactory, Auth, CONSTANTS) {
 
-        var socket = null;
+        var ioSocket = io(CONSTANTS.SOCKET_IO_URL, {
+            // Send auth token on connection, you will need to DI the Auth service above
+            'query': 'token=' + Auth.getToken(),
+            path: '/socket.io-client'
+        });
+
+        var socket = socketFactory({
+            ioSocket: ioSocket,
+            prefix: ''
+        });
 
         return {
             getSocket: function() {
-                var deferred = $q.defer();
-
-                if (!socket) {
-                    angularLoad.loadScript(CONSTANTS.SOCKET_IO_URL + '/socket.io-client/socket.io.js').then(function() {
-                        // socket.io now auto-configures its connection when we ommit a connection url
-                        var ioSocket = io(CONSTANTS.SOCKET_IO_URL, {
-                            // Send auth token on connection, you will need to DI the Auth service above
-                            'query': 'token=' + Auth.getToken(),
-                            path: '/socket.io-client'
-                        });
-
-                        socket = socketFactory({
-                            ioSocket: ioSocket,
-                            prefix: ''
-                        });
-
-                        deferred.resolve(socket);
-
-                    }).catch(function() {
-                        deferred.reject('error');
-                    });
-                } else {
-                    deferred.resolve(socket);
-                }
-
-                return deferred.promise;
+                return socket;
             },
 
             /**
@@ -99,13 +83,10 @@ angular.module('preserveusMobile')
 
             init: function() {
                 //listen to all app events.
-
                 var events = ['chatDetail:save'];
 
-                this.getSocket().then(function(socket){
-                    socket.forward(events);
-                });
-
+                console.log('socket service initialized');
+                socket.forward(events);
             }
         };
     });

@@ -28,14 +28,14 @@ angular.module('preserveusMobile')
 
         });
 
-        var onSaveEvent = function (item) {
+        var onSaveEvent = function(item) {
             if (item && $scope.chats) {
 
                 for (var i = 0; i < $scope.chats.length; i++) {
                     var chat = $scope.chats[i];
 
                     if (item.chatId === chat._id) {
-                        if(!chat.newMessageCount){
+                        if (!chat.newMessageCount) {
                             chat.newMessageCount = 0;
                         }
                         chat.newMessageCount++;
@@ -45,11 +45,8 @@ angular.module('preserveusMobile')
             }
         };
 
-        $scope.$on('chatDetail:save', function (ev, data) {
+        $scope.$on('chatDetail:save', function(ev, data) {
             onSaveEvent(data);
         });
-
-
-
 
     });

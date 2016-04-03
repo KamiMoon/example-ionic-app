@@ -1,12 +1,12 @@
 /**
  * Created by erickizaki on 3/29/16.
  */
-angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope, $stateParams, Auth, Chats, SocketService, $timeout, $ionicScrollDelegate) {
+angular.module('preserveusMobile').controller('ChatDetailCtrl', function($scope, $stateParams, Auth, Chats, $timeout, $ionicScrollDelegate) {
     var currentUser = Auth.getCurrentUser();
 
     var userMap = {};
 
-    var setupMessageForRender = function (message) {
+    var setupMessageForRender = function(message) {
 
         //mark any with my user id as sent
         if (message.user_id === currentUser._id) {
@@ -21,8 +21,9 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope
         }
     };
 
-    var onSaveEvent = function (item) {
-        console.log('reveived event');
+    var onSaveEvent = function(item) {
+        console.log
+('reveived event');
 
         if (item && $scope.chatDetail) {
             if (item.chatId === $scope.chatDetail._id) {
@@ -38,11 +39,11 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope
         }
     };
 
-    $scope.$on('chatDetail:save', function (ev, data) {
+    $scope.$on('chatDetail:save', function(ev, data) {
         onSaveEvent(data);
     });
 
-    Chats.getDetail($stateParams.chatId).then(function (chat) {
+    Chats.getDetail($stateParams.chatId).then(function(chat) {
 
         for (var j = 0; j < chat.users.length; j++) {
             var user = chat.users[j];
@@ -56,8 +57,8 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope
         $scope.chatDetail = chat;
 
         //scroll to bottom of the chat
-        $timeout(function(){
-            $timeout(function(){
+        $timeout(function() {
+            $timeout(function() {
                 $ionicScrollDelegate.scrollBottom(true);
             });
         });
@@ -67,8 +68,7 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope
     $scope.messageText = '';
     $scope.name = 'Eric Kizaki';
 
-    $scope.sendMessage = function () {
-        console.log('hi');
+    $scope.sendMessage = function() {
 
         if ($scope.messageText.length > 0) {
 
@@ -78,14 +78,12 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function ($scope
             };
 
             Chats.sendMessage($scope.chatDetail._id, newMessage).then(
-                function (response) {
-                    console.log(response.data);
-
+                function(response) {
                     $scope.messageText = '';
 
                     $ionicScrollDelegate.scrollBottom(true);
                 },
-                function () {
+                function() {
                     //TODO
                 });
         }

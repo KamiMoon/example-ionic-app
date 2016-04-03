@@ -1,7 +1,7 @@
 angular.module('preserveusMobile')
 
 .factory('Chats', function($http, $q, CONSTANTS) {
-    
+
     return {
 
         create: function(userIds) {
@@ -47,11 +47,7 @@ angular.module('preserveusMobile')
 
             $http.get(CONSTANTS.DOMAIN + '/api/chats/detail/' + id).then(
                 function(response) {
-                    var chat = response.data;
-
-                    console.log(chat);
-
-                    deferred.resolve(chat);
+                    deferred.resolve(response.data);
                 },
                 function(error) {
                     deferred.reject(error);
