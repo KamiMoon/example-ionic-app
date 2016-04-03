@@ -16,7 +16,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
     'SOCKET_IO_URL': 'https://preserveus.herokuapp.com',
 
     //local
-    //'DOMAIN': '',
+    ///'DOMAIN': '',
     //'SOCKET_IO_URL': 'http://localhost:5000',
 
     //finch
@@ -135,7 +135,7 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            //cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             cordova.plugins.Keyboard.disableScroll(true);
 
         }

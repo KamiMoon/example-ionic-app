@@ -70,9 +70,6 @@ angular.module('preserveusMobile')
 
             $http.put(CONSTANTS.DOMAIN + '/api/chats/markChatDeletedForUser/' + chatId + '/' + userId, {}).then(
                 function(response) {
-
-                    console.log(response.data);
-
                     deferred.resolve(response.data);
                 },
                 function(error) {

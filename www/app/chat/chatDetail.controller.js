@@ -22,8 +22,7 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function($scope,
     };
 
     var onSaveEvent = function(item) {
-        console.log
-('reveived event');
+        console.log('reveived event');
 
         if (item && $scope.chatDetail) {
             if (item.chatId === $scope.chatDetail._id) {
@@ -76,6 +75,12 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function($scope,
                 user_id: currentUser._id,
                 text: $scope.messageText
             };
+
+            //close keyboard
+
+            if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.close();
+            }
 
             Chats.sendMessage($scope.chatDetail._id, newMessage).then(
                 function(response) {
