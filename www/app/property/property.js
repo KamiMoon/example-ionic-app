@@ -18,13 +18,14 @@ angular.module('preserveusMobile')
             url: '/propertyMap/:id',
             views: {
                 'menuContent': {
-                    templateUrl: 'app/property/propertyMap.html',
+                    templateUrl: 'app/property/propertyMapNative.html',
                     controller: 'PropertyMapCtrl',
                 }
             },
             params: {
                 searchParams: {}
-            }
+            },
+            hideSideMenu: true
         }).state('app.propertyFilter', {
             url: '/propertyFilter',
             views: {

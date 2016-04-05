@@ -7,6 +7,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var autoprefixer = require('gulp-autoprefixer');
+var gulpNgConfig = require('gulp-ng-config');
 
 
 var paths = {
@@ -61,4 +62,11 @@ gulp.task('autoprefixer', function () {
             cascade: true
         }))
         .pipe(gulp.dest('./www/app/chat/css'));
+});
+
+
+gulp.task('config', function () {
+    gulp.src('./wwww/app/config/config.json')
+        .pipe(gulpNgConfig('myApp.config'))
+        .pipe(gulp.dest('.'));
 });

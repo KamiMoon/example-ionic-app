@@ -1,0 +1,13 @@
+{
+    "DOMAIN": "https://www.preservedfw.com",
+    "SOCKET_IO_URL": "https://preserveus.herokuapp.com",
+    "LOCAL_TOKEN_KEY": "preserveusMobile_token",
+    "EVENTS": {
+        "NOT_AUTHENTICATED": "NOT_AUTHENTICATED",
+        "NOT_AUTHORIZED": "NOT_AUTHORIZED"
+    },
+    "CLOUDINARY_IMAGE_URL": "http://res.cloudinary.com/ddovrks1z/image/upload/",
+    "CLOUDINARY_UPLOAD_URL": "https://api.cloudinary.com/v1_1/ddovrks1z/upload",
+    "CLOUDINARY_UPLOAD_PRESET": "saogp2ap",
+    "GOOGLEMAPS_KEY": "AIzaSyAH097-AkYDvIY7AAU42AlvFbxmUs69CRM"
+}

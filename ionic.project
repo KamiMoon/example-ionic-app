@@ -1,6 +1,9 @@
 {
   "name": "app2",
   "app_id": "edcb704d",
+  "gulpStartupTasks": [
+    "hi"
+  ],
   "proxies": [
     {
       "path": "/api",

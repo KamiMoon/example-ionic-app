@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .controller('PropertyMapCtrl', function($scope, $state, $stateParams, PropertyService, uiGmapGoogleMapApi) {
+    .controller('PropertyMapCtrl', function ($scope, $state, $stateParams, PropertyService, uiGmapGoogleMapApi, $ionicPlatform, $cordovaGeolocation, $ionicHistory) {
 
         $scope.searchParams = $stateParams.searchParams;
 
@@ -74,16 +74,92 @@ angular.module('preserveusMobile')
             PropertyService.query($scope.searchParams).$promise.then(function(properties) {
                 $scope.properties = properties;
 
-                uiGmapGoogleMapApi.then(function(maps) {
-                    buildMap();
-                });
+                //uiGmapGoogleMapApi.then(function(maps) {
+                //buildMap();
+                buildNativeMap();
+                //});
             });
 
         };
 
         $scope.search();
 
-    }).controller('PropertySearchCtrl', function($scope, $state, $stateParams, PropertyService) {
+        function buildNativeMap() {
+            $ionicPlatform.ready(function () {
+
+
+                console.log('buildNativeMap');
+                var div = document.getElementById("map_canvas");
+
+
+                var firstProperty = $scope.properties[0].geoLocation;
+
+                var STARTING_LOCATION = new plugin.google.maps.LatLng(firstProperty.lat, firstProperty.lng);
+
+                // Initialize the map view
+                var map = plugin.google.maps.Map.getMap(div, {
+                    'camera': {
+                        'latLng': STARTING_LOCATION,
+                        'zoom': 14
+                    }
+                });
+
+                //add markers
+
+
+                function addNativeMarker(property) {
+
+                    console.log('addNativeMarker');
+                    map.addMarker({
+                        'position': new plugin.google.maps.LatLng(property.geoLocation.lat, property.geoLocation.lng),
+                        'title': property.name,
+                        'snippet': property.fullAddress
+                    }, function (marker) {
+
+                        marker.showInfoWindow();
+
+                        marker.addEventListener(plugin.google.maps.event.INFO_CLICK, function () {
+
+                            $ionicHistory.nextViewOptions({
+                                disableAnimate: true
+                            });
+                            $state.go('app.propertyView', {id: property._id});
+
+                        });
+
+                    });
+                }
+
+
+                map.addEventListener(plugin.google.maps.event.MAP_READY, function () {
+                    console.log('map ready');
+
+                    for (var i = 0; i < $scope.properties.length; i++) {
+                        addNativeMarker($scope.properties[i]);
+                    }
+
+                });
+
+
+            });
+        }
+
+
+        var posOptions = {timeout: 10000, enableHighAccuracy: false};
+        $cordovaGeolocation
+            .getCurrentPosition(posOptions)
+            .then(function (position) {
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+
+                console.log('using goelocation');
+                console.log(lat);
+                console.log(long);
+            }, function (err) {
+                console.error(err);
+            });
+
+    }).controller('PropertySearchCtrl', function ($scope, $ionicHistory, $state, $stateParams, PropertyService) {
 
         $scope.searchParams = $stateParams.searchParams;
 
@@ -103,6 +179,10 @@ angular.module('preserveusMobile')
         };
 
         $scope.map = function() {
+
+            $ionicHistory.nextViewOptions({
+                disableAnimate: true
+            });
             $state.go('app.propertyMap', { searchParams: $scope.searchParams });
         };
 
@@ -209,7 +289,7 @@ angular.module('preserveusMobile')
             $scope.property.photoRows = _.chunk($scope.property.photos, 2);
         });
 
-        //TODO 
+    //TODO
         $scope.delete = function() {
             ControllerUtil.delete(id, PropertyService, '/property');
         };
