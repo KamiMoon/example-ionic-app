@@ -151,6 +151,9 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
         SocketService.init();
     });
 
+    $rootScope.sideMenuStyle = {
+        "visibility": "visible"
+    };
 
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, next, toParams, fromState, fromParams) {
@@ -171,13 +174,23 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
 
         if (next.hideSideMenu) {
             //hide the side menu
-            document.getElementById('side-menu').style.visibility = "hidden";
+            //document.getElementById('side-menu').style.visibility = "hidden";
+            //$rootScope.hideSideMenu = true;
+
+            $rootScope.sideMenuStyle = {
+                "visibility": "hidden"
+            };
+
             $ionicHistory.nextViewOptions({
                 disableAnimate: true
             });
 
         } else {
-            document.getElementById('side-menu').style.visibility = "visible";
+            //document.getElementById('side-menu').style.visibility = "visible";
+            //$rootScope.hideSideMenu = false;
+            $rootScope.sideMenuStyle = {
+                "visibility": "visible"
+            };
         }
     });
 

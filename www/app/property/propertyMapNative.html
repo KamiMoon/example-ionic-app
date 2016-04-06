@@ -1,5 +1,11 @@
 <ion-view title="Dashboard">
-    <ion-content scroll="false" padding="true" data-tap-disabled="true">
+    <ion-content scroll="false" padding="true">
+        <div>
+            <button ng-if="currentProperty" class="button button-small button-assertive" ng-click="directions()">
+                Directions
+            </button>
+            {{currentProperty.fullAddress}}
+        </div>
         <div style="width:100%;height:100%" id="map_canvas"></div>
     </ion-content>
 </ion-view>

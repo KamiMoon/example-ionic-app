@@ -1,3 +1,8 @@
+Directions button
+-map directions
+
+Socket is broken reopening app later - can't initialize only on run i think
+
 test on device
 
 

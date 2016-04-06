@@ -74,6 +74,7 @@ angular.module('preserveusMobile')
             PropertyService.query($scope.searchParams).$promise.then(function(properties) {
                 $scope.properties = properties;
 
+                $scope.currentProperty = $scope.properties[0];
                 //uiGmapGoogleMapApi.then(function(maps) {
                 //buildMap();
                 buildNativeMap();
@@ -83,6 +84,36 @@ angular.module('preserveusMobile')
         };
 
         $scope.search();
+
+
+        $scope.directions = function () {
+            console.log('directions');
+
+            if (typeof plugin !== 'undefined' && $scope.currentProperty) {
+
+                var posOptions = {timeout: 10000, enableHighAccuracy: false};
+                $cordovaGeolocation
+                    .getCurrentPosition(posOptions)
+                    .then(function (position) {
+                        var lat = position.coords.latitude;
+                        var long = position.coords.longitude;
+
+                        console.log('found my position at ' + lat + ', ' + long);
+
+                        plugin.google.maps.external.launchNavigation({
+                            "from": new plugin.google.maps.LatLng(lat, long),
+                            "to": new plugin.google.maps.LatLng($scope.currentProperty.geoLocation.lat, $scope.currentProperty.geoLocation.lng)
+                        });
+
+                    }, function (err) {
+                        console.error(err);
+                    });
+
+
+            }
+
+
+        };
 
         function buildNativeMap() {
             $ionicPlatform.ready(function () {
@@ -94,70 +125,67 @@ angular.module('preserveusMobile')
 
                 var firstProperty = $scope.properties[0].geoLocation;
 
-                var STARTING_LOCATION = new plugin.google.maps.LatLng(firstProperty.lat, firstProperty.lng);
+                if (typeof plugin !== 'undefined') {
 
-                // Initialize the map view
-                var map = plugin.google.maps.Map.getMap(div, {
-                    'camera': {
-                        'latLng': STARTING_LOCATION,
-                        'zoom': 14
-                    }
-                });
+                    var STARTING_LOCATION = new plugin.google.maps.LatLng(firstProperty.lat, firstProperty.lng);
 
-                //add markers
+                    // Initialize the map view
+                    var map = plugin.google.maps.Map.getMap(div, {
+                        'camera': {
+                            'latLng': STARTING_LOCATION,
+                            'zoom': 14
+                        }
+                    });
+
+                    //add markers
 
 
-                function addNativeMarker(property) {
+                    var addNativeMarker = function (property) {
 
-                    console.log('addNativeMarker');
-                    map.addMarker({
-                        'position': new plugin.google.maps.LatLng(property.geoLocation.lat, property.geoLocation.lng),
-                        'title': property.name,
-                        'snippet': property.fullAddress
-                    }, function (marker) {
+                        console.log('addNativeMarker');
+                        map.addMarker({
+                            'position': new plugin.google.maps.LatLng(property.geoLocation.lat, property.geoLocation.lng),
+                            'title': property.name,
+                            'snippet': property.fullAddress
+                        }, function (marker) {
 
-                        marker.showInfoWindow();
+                            marker.showInfoWindow();
 
-                        marker.addEventListener(plugin.google.maps.event.INFO_CLICK, function () {
+                            marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function () {
 
-                            $ionicHistory.nextViewOptions({
-                                disableAnimate: true
+                                $scope.$apply(function () {
+                                    $scope.currentProperty = property;
+                                });
+                                
                             });
-                            $state.go('app.propertyView', {id: property._id});
+
+
+                            marker.addEventListener(plugin.google.maps.event.INFO_CLICK, function () {
+
+                                $ionicHistory.nextViewOptions({
+                                    disableAnimate: true
+                                });
+                                $state.go('app.propertyView', {id: property._id});
+                            });
 
                         });
-
-                    });
-                }
-
-
-                map.addEventListener(plugin.google.maps.event.MAP_READY, function () {
-                    console.log('map ready');
-
-                    for (var i = 0; i < $scope.properties.length; i++) {
-                        addNativeMarker($scope.properties[i]);
                     }
 
-                });
 
+                    map.addEventListener(plugin.google.maps.event.MAP_READY, function () {
+                        console.log('map ready');
+
+                        for (var i = 0; i < $scope.properties.length; i++) {
+                            addNativeMarker($scope.properties[i]);
+                        }
+
+                    });
+
+                }
 
             });
         }
 
-
-        var posOptions = {timeout: 10000, enableHighAccuracy: false};
-        $cordovaGeolocation
-            .getCurrentPosition(posOptions)
-            .then(function (position) {
-                var lat = position.coords.latitude;
-                var long = position.coords.longitude;
-
-                console.log('using goelocation');
-                console.log(lat);
-                console.log(long);
-            }, function (err) {
-                console.error(err);
-            });
 
     }).controller('PropertySearchCtrl', function ($scope, $ionicHistory, $state, $stateParams, PropertyService) {
 
