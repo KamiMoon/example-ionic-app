@@ -68,6 +68,12 @@
                     <i class="icon ion-pie-graph"></i>
                     <h2 class="menu-text">All Property Income</h2>
                 </ion-item>
+
+                <ion-item ng-if="Auth.isAdmin()" class="item-icon-left" nav-clear menu-close ui-sref="app.debug">
+                    <i class="icon ion-bug"></i>
+                    <h2 class="menu-text">Debug</h2>
+                </ion-item>
+
             </ion-list>
         </ion-content>
     </ion-side-menu>

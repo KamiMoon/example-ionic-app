@@ -1,0 +1,11 @@
+<ion-view view-title="Debug">
+    <ion-content>
+        <h1>Debug</h1>
+
+        <p ng-repeat="debugStatement in debugStatements">
+            {{debugStatement}}
+        </p>
+
+        <button class="button button-assertive" ng-click="clear()">Clear</button>
+    </ion-content>
+</ion-view>

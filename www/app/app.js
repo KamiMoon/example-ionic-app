@@ -55,52 +55,6 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
         libraries: 'weather,geometry,visualization'
     });
 
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
-
-    // setup an abstract state for the tabs directive
-
-    // $stateProvider
-    //     .state('tab', {
-    //         url: '/tab',
-    //         abstract: true,
-    //         templateUrl: 'components/navbar/tabs.html'
-    //     })
-
-    // // Each tab has its own nav history stack:
-
-
-    // .state('tab.chats', {
-    //         url: '/chats',
-    //         views: {
-    //             'tab-chats': {
-    //                 templateUrl: 'app/chat/tab-chats.html',
-    //                 controller: 'ChatsCtrl'
-    //             }
-    //         }
-    //     })
-    //     .state('tab.chat-detail', {
-    //         url: '/chats/:chatId',
-    //         views: {
-    //             'tab-chats': {
-    //                 templateUrl: 'app/chat/chatDetail.html',
-    //                 controller: 'ChatDetailCtrl'
-    //             }
-    //         }
-    //     })
-
-    //     .state('tab.todo', {
-    //         url: '/todo',
-    //         views: {
-    //             'tab-todo': {
-    //                 templateUrl: 'app/todo/tab-todo.html',
-    //                 controller: 'TodoCtrl'
-    //             }
-    //         }
-    //     })
-
 
     $stateProvider.state('app', {
             url: "/app",
@@ -122,6 +76,15 @@ angular.module('preserveusMobile', ['ionic', 'ngResource', 'ngFileUpload',
             url: "/camera",
             controller: 'CameraCtrl',
             templateUrl: "components/ionic/camera/camera.html"
+        })
+        .state('app.debug', {
+            url: '/debug',
+            views: {
+                'menuContent': {
+                    templateUrl: 'app/debug/debug.html',
+                    controller: 'DebugCtrl'
+                }
+            }
         });
 
 

@@ -39,7 +39,9 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function($scope,
     };
 
     $scope.$on('chatDetail:save', function(ev, data) {
-        onSaveEvent(data);
+        safeApply($scope, function () {
+            onSaveEvent(data);
+        });
     });
 
     Chats.getDetail($stateParams.chatId).then(function(chat) {

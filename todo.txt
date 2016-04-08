@@ -1,5 +1,3 @@
-Directions button
--map directions
 
 Socket is broken reopening app later - can't initialize only on run i think
 
@@ -43,7 +41,6 @@ test on device
 
 -Forgot passsword
 
--Geolocation and better maps
 
 
 
@@ -52,6 +49,14 @@ test on device
 
 
 Done
+
+-Geolocation and better maps
+
+
+Directions button
+-map directions
+
+
 -Autoprefixer - how to get?
 
 -show bottom message - scroll

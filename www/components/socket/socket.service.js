@@ -2,91 +2,83 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .factory('SocketService', function($q, socketFactory, Auth, CONSTANTS) {
+    .factory('SocketService', function ($rootScope, $q, socketFactory, Auth, CONSTANTS, DebugService) {
 
-        var ioSocket = io(CONSTANTS.SOCKET_IO_URL, {
-            // Send auth token on connection, you will need to DI the Auth service above
-            'query': 'token=' + Auth.getToken(),
-            path: '/socket.io-client'
-        });
+        window.localStorage.debug = '*';
 
-        var socket = socketFactory({
-            ioSocket: ioSocket,
-            prefix: ''
-        });
+        var hasBeenInitialized = false;
+        var socket = null;
 
         return {
-            getSocket: function() {
-                return socket;
-            },
-
-            /**
-             * Register listeners to sync an array with updates on a model
-             *
-             * Takes the array we want to sync, the model name that socket updates are sent from,
-             * and an optional callback function after new items are updated.
-             *
-             * @param {String} modelName
-             * @param {Array} array
-             * @param {Function} cb
-             */
-            syncUpdates: function(modelName, array, cb) {
-                cb = cb || angular.noop;
-
-                this.getSocket().then(function(socket) {
-                    /**
-                     * Syncs item creation/updates on 'model:save'
-                     */
-
-                    socket.on(modelName + ':save', function(item) {
-                        var oldItem = _.find(array, { _id: item._id });
-                        var index = array.indexOf(oldItem);
-                        var event = 'created';
-
-                        // replace oldItem if it exists
-                        // otherwise just add item to the collection
-                        if (oldItem) {
-                            array.splice(index, 1, item);
-                            event = 'updated';
-                        } else {
-                            array.push(item);
-                        }
-
-                        cb(event, item, array);
-                    });
-
-                    /**
-                     * Syncs removed items on 'model:remove'
-                     */
-                    socket.on(modelName + ':remove', function(item) {
-                        var event = 'deleted';
-                        _.remove(array, { _id: item._id });
-                        cb(event, item, array);
-                    });
+            createSocket: function () {
+                socket = io(CONSTANTS.SOCKET_IO_URL, {
+                    // Send auth token on connection, you will need to DI the Auth service above
+                    'query': 'token=' + Auth.getToken(),
+                    path: '/socket.io-client'
                 });
 
-            },
+                //console.log(ioSocket);
 
-            /**
-             * Removes listeners for a models updates on the socket
-             *
-             * @param modelName
-             */
+                //Don't use the AngularJS crap
 
-            unsyncUpdates: function(modelName) {
-                this.getSocket().then(function(socket) {
-                    socket.removeAllListeners(modelName + ':save');
-                    socket.removeAllListeners(modelName + ':remove');
+                //socket = socketFactory({
+                //    ioSocket: ioSocket,
+                //    prefix: ''
+                //});
+
+                DebugService.log('SocketService - socket created');
+
+                socket.on("error", function (error) {
+                    if (error.type === "UnauthorizedError" || error.code === "invalid_token") {
+                        // redirect user to login page perhaps?
+                        DebugService.log("User's token has expired -- logging out");
+
+                        $rootScope.logout();
+                    }
+
+                    DebugService.log(error);
+                });
+
+                socket.on("connect", function () {
+                    DebugService.log('connected');
+                });
+
+                socket.on("reconnect", function () {
+                    DebugService.log('reconnect');
+                });
+
+                socket.on("reconnect", function () {
+                    DebugService.log('reconnect');
+                });
+
+                socket.on("reconnect_failed", function () {
+                    DebugService.log('reconnect_failed');
+                });
+
+                socket.on("disconnect", function () {
+                    DebugService.log('disconnect');
                 });
 
             },
 
             init: function() {
-                //listen to all app events.
-                var events = ['chatDetail:save'];
 
-                console.log('socket service initialized');
-                socket.forward(events);
+                if (!hasBeenInitialized) {
+                    hasBeenInitialized = true;
+                    DebugService.log('socket service init');
+
+                    this.createSocket();
+
+                    //listen to all app events.
+                    //var events = ['chatDetail:save'];
+
+                    //socket.forward(events);
+
+                    socket.on('chatDetail:save', function (data) {
+                        $rootScope.$broadcast('chatDetail:save', data);
+                    });
+                }
+
             }
         };
     });
