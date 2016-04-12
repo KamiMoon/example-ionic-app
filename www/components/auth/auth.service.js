@@ -28,6 +28,9 @@ angular.module('preserveusMobile')
                 success(function(data) {
                     window.localStorage.setItem(CONSTANTS.LOCAL_TOKEN_KEY, data.token);
                     currentUser = User.get();
+
+                    $rootScope.$broadcast(CONSTANTS.EVENTS.LOGIN);
+
                     deferred.resolve(data);
                     return cb();
                 }).
@@ -47,7 +50,10 @@ angular.module('preserveusMobile')
              */
             logout: function() {
                 window.localStorage.removeItem(CONSTANTS.LOCAL_TOKEN_KEY);
+
                 currentUser = {};
+
+                $rootScope.$broadcast(CONSTANTS.EVENTS.LOGOUT);
             },
 
             /**

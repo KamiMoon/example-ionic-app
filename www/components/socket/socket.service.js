@@ -2,33 +2,25 @@
 'use strict';
 
 angular.module('preserveusMobile')
-    .factory('SocketService', function ($rootScope, $q, socketFactory, Auth, CONSTANTS, DebugService) {
+    .factory('SocketService', function($rootScope, $q, Auth, CONSTANTS, DebugService) {
 
-        window.localStorage.debug = '*';
+        //window.localStorage.debug = '*';
 
-        var hasBeenInitialized = false;
+        window.localStorage.removeItem('debug');
+
         var socket = null;
 
         return {
-            createSocket: function () {
+            createSocket: function() {
                 socket = io(CONSTANTS.SOCKET_IO_URL, {
                     // Send auth token on connection, you will need to DI the Auth service above
                     'query': 'token=' + Auth.getToken(),
                     path: '/socket.io-client'
                 });
 
-                //console.log(ioSocket);
-
-                //Don't use the AngularJS crap
-
-                //socket = socketFactory({
-                //    ioSocket: ioSocket,
-                //    prefix: ''
-                //});
-
                 DebugService.log('SocketService - socket created');
 
-                socket.on("error", function (error) {
+                socket.on("error", function(error) {
                     if (error.type === "UnauthorizedError" || error.code === "invalid_token") {
                         // redirect user to login page perhaps?
                         DebugService.log("User's token has expired -- logging out");
@@ -39,23 +31,23 @@ angular.module('preserveusMobile')
                     DebugService.log(error);
                 });
 
-                socket.on("connect", function () {
+                socket.on("connect", function() {
                     DebugService.log('connected');
                 });
 
-                socket.on("reconnect", function () {
+                socket.on("reconnect", function() {
                     DebugService.log('reconnect');
                 });
 
-                socket.on("reconnect", function () {
+                socket.on("reconnect", function() {
                     DebugService.log('reconnect');
                 });
 
-                socket.on("reconnect_failed", function () {
+                socket.on("reconnect_failed", function() {
                     DebugService.log('reconnect_failed');
                 });
 
-                socket.on("disconnect", function () {
+                socket.on("disconnect", function() {
                     DebugService.log('disconnect');
                 });
 
@@ -63,22 +55,34 @@ angular.module('preserveusMobile')
 
             init: function() {
 
-                if (!hasBeenInitialized) {
-                    hasBeenInitialized = true;
-                    DebugService.log('socket service init');
+                this.close();
 
-                    this.createSocket();
+                DebugService.log('socket service init');
 
-                    //listen to all app events.
-                    //var events = ['chatDetail:save'];
+                this.createSocket();
 
-                    //socket.forward(events);
+                socket.on('chatDetail:save', function(data) {
+                    $rootScope.$broadcast('chatDetail:save', data);
+                });
+            },
 
-                    socket.on('chatDetail:save', function (data) {
-                        $rootScope.$broadcast('chatDetail:save', data);
-                    });
+            isConnected: function() {
+                return socket !== null ? socket.connected : false;
+            },
+
+            close: function() {
+                //cleanup any existing socket
+                if (socket) {
+                    DebugService.log('cleaning up existing socket');
+                    socket.close();
+                    socket = null;
                 }
+            },
 
+            getSocket: function() {
+                return socket;
             }
+
+
         };
     });

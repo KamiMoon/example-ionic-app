@@ -1,8 +1,12 @@
-<ion-view view-title="Debug">
+<ion-view cache-view="false" view-title="Debug">
     <ion-content>
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
         <h1>Debug</h1>
 
-        <p ng-repeat="debugStatement in debugStatements">
+        <p ng-repeat="debugStatement in debugStatements track by $index">
             {{debugStatement}}
         </p>
 

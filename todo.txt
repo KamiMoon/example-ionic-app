@@ -1,3 +1,9 @@
+IONic push
+Ionic deploy
+
+offline sync?  Not needed?
+
+
 
 Socket is broken reopening app later - can't initialize only on run i think
 

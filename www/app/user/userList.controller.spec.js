@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: UserCtrl', function() {
+describe('Controller: UserListCtrl', function() {
 
     // load the controller's module
     beforeEach(module('preserveusMobile'));
@@ -10,7 +10,7 @@ describe('Controller: UserCtrl', function() {
     // Initialize the controller and a mock scope
     beforeEach(inject(function($controller, $rootScope) {
         scope = $rootScope.$new();
-        UserCtrl = $controller('UserCtrl', {
+        UserCtrl = $controller('UserListCtrl', {
             $scope: scope
         });
     }));

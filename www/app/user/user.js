@@ -8,7 +8,7 @@ angular.module('preserveusMobile')
                 views: {
                     'menuContent': {
                         templateUrl: 'app/user/userList.html',
-                        controller: 'UserCtrl',
+                        controller: 'UserListCtrl',
                     }
                 },
                 roles: ['admin']
@@ -25,8 +25,8 @@ angular.module('preserveusMobile')
                 cache: false,
                 views: {
                     'menuContent': {
-                        templateUrl: 'app/user/profile.html',
-                        controller: 'UserProfileCtrl'
+                        templateUrl: 'app/user/userView.html',
+                        controller: 'UserViewCtrl'
                     }
                 }
             }).state('app.userInvest', {
@@ -34,7 +34,7 @@ angular.module('preserveusMobile')
                 views: {
                     'menuContent': {
                         templateUrl: 'app/user/userInvestment.html',
-                        controller: 'UserProfileCtrl'
+                        controller: 'UserViewCtrl'
                     }
                 }
             }).state('app.userRent', {
@@ -42,7 +42,7 @@ angular.module('preserveusMobile')
                 views: {
                     'menuContent': {
                         templateUrl: 'app/user/userRent.html',
-                        controller: 'UserProfileCtrl'
+                        controller: 'UserViewCtrl'
                     }
                 }
             });

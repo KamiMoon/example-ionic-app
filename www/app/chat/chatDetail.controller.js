@@ -1,7 +1,7 @@
 /**
  * Created by erickizaki on 3/29/16.
  */
-angular.module('preserveusMobile').controller('ChatDetailCtrl', function($scope, $stateParams, Auth, Chats, $timeout, $ionicScrollDelegate) {
+angular.module('preserveusMobile').controller('ChatDetailCtrl', function($scope, $stateParams, Auth, Chats, $timeout, $ionicScrollDelegate, SocketService) {
     var currentUser = Auth.getCurrentUser();
 
     var userMap = {};
@@ -39,7 +39,7 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function($scope,
     };
 
     $scope.$on('chatDetail:save', function(ev, data) {
-        safeApply($scope, function () {
+        safeApply($scope, function() {
             onSaveEvent(data);
         });
     });
@@ -89,13 +89,16 @@ angular.module('preserveusMobile').controller('ChatDetailCtrl', function($scope,
                     $scope.messageText = '';
 
                     $ionicScrollDelegate.scrollBottom(true);
+
+                    //console.log(response);
+                    //emit
+                    SocketService.getSocket().emit('chatDetail:save', response.data);
+
                 },
                 function() {
                     //TODO
                 });
         }
     };
-
-
 
 });
