@@ -8,7 +8,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyList.html',
-                    controller: 'PropertySearchCtrl',
+                    controller: 'PropertySearchCtrl'
                 }
             },
             params: {
@@ -19,7 +19,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyMapNative.html',
-                    controller: 'PropertyMapCtrl',
+                    controller: 'PropertyMapCtrl'
                 }
             },
             params: {
@@ -31,7 +31,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyFilter.html',
-                    controller: 'PropertyFilterCtrl',
+                    controller: 'PropertyFilterCtrl'
                 }
             },
             params: {
@@ -42,7 +42,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyAdd.html',
-                    controller: 'PropertyAddEditCtrl',
+                    controller: 'PropertyAddEditCtrl'
                 }
             },
             roles: ['admin']
@@ -51,7 +51,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyAddEditFeatures.html',
-                    controller: 'PropertyAddEditCtrl',
+                    controller: 'PropertyAddEditCtrl'
                 }
             },
             roles: ['admin']
@@ -60,7 +60,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyAddEditGallery.html',
-                    controller: 'PropertyAddEditCtrl',
+                    controller: 'PropertyAddEditCtrl'
                 }
             },
             roles: ['admin']
@@ -71,6 +71,7 @@ angular.module('preserveusMobile')
                 'menuContent': {
                     templateUrl: 'app/property/propertyView.html',
                     controller: 'PropertyViewCtrl',
+                    controllerAs: 'vm'
                 }
             }
         }).state('app.propertyInvestment', {
@@ -79,7 +80,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyInvestment.html',
-                    controller: 'PropertyInvestmentCtrl',
+                    controller: 'PropertyInvestmentCtrl'
                 }
             }
         }).state('app.propertyRent', {
@@ -87,7 +88,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyRent.html',
-                    controller: 'PropertyRentCtrl',
+                    controller: 'PropertyRentCtrl'
                 }
             }
         }).state('app.propertyInvest', {
@@ -95,7 +96,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyInvest.html',
-                    controller: 'PropertyRentCtrl',
+                    controller: 'PropertyRentCtrl'
                 }
             }
         }).state('app.propertyFeatures', {
@@ -104,7 +105,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyFeatures.html',
-                    controller: 'PropertyViewCtrl',
+                    controller: 'PropertyViewCtrl'
                 }
             }
         }).state('app.propertyGallery', {
@@ -113,7 +114,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyGallery.html',
-                    controller: 'PropertyViewCtrl',
+                    controller: 'PropertyViewCtrl'
                 }
             }
         }).state('app.propertyIncomeReport', {
@@ -121,7 +122,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyIncomeReport.html',
-                    controller: 'PropertyIncomeReportCtrl',
+                    controller: 'PropertyIncomeReportCtrl'
                 }
             },
             roles: ['admin']
@@ -130,7 +131,7 @@ angular.module('preserveusMobile')
             views: {
                 'menuContent': {
                     templateUrl: 'app/property/propertyTotalReport.html',
-                    controller: 'PropertyTotalReportCtrl',
+                    controller: 'PropertyTotalReportCtrl'
                 }
             },
             roles: ['admin']

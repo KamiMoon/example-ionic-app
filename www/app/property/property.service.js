@@ -6,8 +6,7 @@ angular.module('preserveusMobile')
             id: '@_id'
         }, {
             update: {
-                method: 'PUT',
-
+                method: 'PUT'
             },
             getIncomeReport: {
                 method: 'GET',

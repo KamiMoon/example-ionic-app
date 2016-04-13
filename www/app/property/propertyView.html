@@ -1,40 +1,54 @@
 <ion-view>
     <ion-nav-title>
-        <span>{{::property.name}}</span>
+        <span>{{::vm.property.name}}</span>
     </ion-nav-title>
     <ion-content>
         <div class="card">
             <div class="item item-divider">
-                <h2>{{::property.fullAddress}}</h2>
+                <h2>{{::vm.property.fullAddress}}</h2>
             </div>
             <div class="item item-image">
-                <b-img public-id="{{property.photo}}" transformation="w_400,h_400,c_fill" alt="{{property.name}}"></b-img>
+                <b-img public-id="{{vm.property.photo}}" transformation="w_400,h_400,c_fill"
+                       alt="{{vm.property.name}}"></b-img>
             </div>
-            <a class="item item-icon-right" href="#/app/propertyFeatures/{{property._id}}">
-                <h3><span ng-if="property.beds">{{::property.beds}} beds,</span> <span ng-if="property.baths">{{::property.baths}} baths,</span> <span ng-if="property.sqft">{{::property.sqft}} sqft</span></h3>
+            <a class="item item-icon-right" ui-sref="app.propertyFeatures({id: vm.property._id})">
+                <h3>
+                    <span ng-if="vm.property.beds">{{::vm.property.beds}} beds,</span>
+                    <span ng-if="vm.property.baths">{{::vm.property.baths}} baths,</span>
+                    <span ng-if="vm.property.sqft">{{::vm.property.sqft}} sqft</span>
+                </h3>
                 <p>
-                    {{::property.description}}
+                    {{::vm.property.description}}
                 </p>
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
-            <a class="item item-icon-right" href="#/app/propertyInvestment/view/{{property._id}}">
-                <h2 ng-if="property.cost">Cost:  {{::property.cost | currency:"$"}}</h2>
-                <h3 ng-if="property.mortgagePrinciple">Est. Mortgage: {{::property.mortgagePrinciple | currency:"$"}}</h3>
+            <a class="item item-icon-right" ui-sref="app.propertyInvestment({action: 'view', id: vm.property._id})">
+                <h2 ng-if="vm.property.cost">Cost: {{::vm.property.cost | currency:"$"}}</h2>
+                <h3 ng-if="vm.property.mortgagePrinciple">Est. Mortgage: {{::vm.property.mortgagePrinciple |
+                    currency:"$"}}</h3>
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
-            <a href="#/app/propertyGallery/{{property._id}}" class="item item-icon-left item-icon-right">
+            <a class="item item-icon-left item-icon-right" ui-sref="app.propertyGallery({id: vm.property._id})">
                 <i class="icon ion-images"></i> Gallery
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
-            <a ng-if="property.allowInvest" class="item item-icon-left item-icon-right" href="#/app/propertyInvest/{{property._id}}">
+            <a ng-if="vm.property.allowInvest" class="item item-icon-left item-icon-right"
+               ui-sref="app.propertyInvest({id: vm.property._id})"
+            >
                 <i class="icon ion-stats-bars"></i> Invest
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
-            <a ng-if="property.allowRent && property.projectedMonthlyRentalRevenue" href="#/app/propertyRent/{{property._id}}" class="item item-icon-left item-icon-right">
+            <a ng-if="vm.property.allowRent && vm.property.projectedMonthlyRentalRevenue"
+               class="item item-icon-left item-icon-right"
+               ui-sref="app.propertyRent({id: vm.property._id})"
+            >
                 <i class="icon ion-calendar"></i> Pay Rent
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
-            <a ng-if="Auth.isAdmin()" href="#/app/property/edit/{{property._id}}" class="item item-icon-left item-icon-right">
+            <a ng-if="Auth.isAdmin()"
+               class="item item-icon-left item-icon-right"
+               ui-sref="app.propertyAddEdit({action: 'edit', id: vm.property._id})"
+            >
                 <i class="icon ion-edit"></i> Edit
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
